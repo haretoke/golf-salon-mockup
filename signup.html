@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規登録 - Golf Salon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/signup.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-box">
+            <div class="signup-header">
+                <h1 class="signup-logo">Golf Salon</h1>
+                <p class="signup-subtitle">ゴルフ上達のための<span class="gold-accent">特別な学習空間</span>に参加</p>
+            </div>
+            
+            <div class="plan-selection">
+                <h3>プランを選択</h3>
+                <div class="plan-options">
+                    <div class="plan-card plan-basic">
+                        <h4>プランA</h4>
+                        <div class="plan-price">
+                            <span class="price">¥2,200</span>
+                            <span class="period">/月</span>
+                        </div>
+                        <ul class="plan-features">
+                            <li>動画・画像・つぶやき閲覧</li>
+                        </ul>
+                    </div>
+                    <div class="plan-card plan-standard active">
+                        <div class="recommended-badge">おすすめ</div>
+                        <h4>プランB</h4>
+                        <div class="plan-price">
+                            <span class="price">¥6,600</span>
+                            <span class="period">/月</span>
+                        </div>
+                        <ul class="plan-features">
+                            <li>全コンテンツ閲覧</li>
+                            <li>オンラインレッスン月1回</li>
+                        </ul>
+                    </div>
+                    <div class="plan-card plan-premium">
+                        <h4>プランC</h4>
+                        <div class="plan-price">
+                            <span class="price">¥9,900</span>
+                            <span class="period">/月</span>
+                        </div>
+                        <ul class="plan-features">
+                            <li>全コンテンツ閲覧</li>
+                            <li>オンラインレッスン月2回</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <form class="signup-form">
+                <div class="form-group">
+                    <label for="name" class="form-label">お名前</label>
+                    <input type="text" id="name" class="form-input" placeholder="山田 太郎" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender" class="form-label">性別</label>
+                    <select id="gender" class="form-input" required>
+                        <option value="">選択してください</option>
+                        <option value="male">男性</option>
+                        <option value="female">女性</option>
+                        <option value="other">その他</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="prefecture" class="form-label">都道府県</label>
+                    <select id="prefecture" class="form-input" required>
+                        <option value="">選択してください</option>
+                        <option value="hokkaido">北海道</option>
+                        <option value="aomori">青森県</option>
+                        <option value="iwate">岩手県</option>
+                        <option value="miyagi">宮城県</option>
+                        <option value="akita">秋田県</option>
+                        <option value="yamagata">山形県</option>
+                        <option value="fukushima">福島県</option>
+                        <option value="ibaraki">茨城県</option>
+                        <option value="tochigi">栃木県</option>
+                        <option value="gunma">群馬県</option>
+                        <option value="saitama">埼玉県</option>
+                        <option value="chiba">千葉県</option>
+                        <option value="tokyo">東京都</option>
+                        <option value="kanagawa">神奈川県</option>
+                        <option value="niigata">新潟県</option>
+                        <option value="toyama">富山県</option>
+                        <option value="ishikawa">石川県</option>
+                        <option value="fukui">福井県</option>
+                        <option value="yamanashi">山梨県</option>
+                        <option value="nagano">長野県</option>
+                        <option value="gifu">岐阜県</option>
+                        <option value="shizuoka">静岡県</option>
+                        <option value="aichi">愛知県</option>
+                        <option value="mie">三重県</option>
+                        <option value="shiga">滋賀県</option>
+                        <option value="kyoto">京都府</option>
+                        <option value="osaka">大阪府</option>
+                        <option value="hyogo">兵庫県</option>
+                        <option value="nara">奈良県</option>
+                        <option value="wakayama">和歌山県</option>
+                        <option value="tottori">鳥取県</option>
+                        <option value="shimane">島根県</option>
+                        <option value="okayama">岡山県</option>
+                        <option value="hiroshima">広島県</option>
+                        <option value="yamaguchi">山口県</option>
+                        <option value="tokushima">徳島県</option>
+                        <option value="kagawa">香川県</option>
+                        <option value="ehime">愛媛県</option>
+                        <option value="kochi">高知県</option>
+                        <option value="fukuoka">福岡県</option>
+                        <option value="saga">佐賀県</option>
+                        <option value="nagasaki">長崎県</option>
+                        <option value="kumamoto">熊本県</option>
+                        <option value="oita">大分県</option>
+                        <option value="miyazaki">宮崎県</option>
+                        <option value="kagoshima">鹿児島県</option>
+                        <option value="okinawa">沖縄県</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="level" class="form-label">ゴルフレベル</label>
+                    <select id="level" class="form-input" required>
+                        <option value="">選択してください</option>
+                        <option value="beginner">初心者</option>
+                        <option value="intermediate">中上級者</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">メールアドレス</label>
+                    <input type="email" id="email" class="form-input" placeholder="your@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">パスワード</label>
+                    <input type="password" id="password" class="form-input" placeholder="8文字以上で入力" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password-confirm" class="form-label">パスワード確認</label>
+                    <input type="password" id="password-confirm" class="form-input" placeholder="パスワードを再入力" required>
+                </div>
+                
+                <div class="form-note">
+                    <p><small>アカウント登録により、<a href="legal.html#terms" class="link">利用規約</a>および<a href="legal.html#privacy" class="link">プライバシーポリシー</a>に同意したものとみなします。</small></p>
+                </div>
+                
+                <button type="submit" class="btn btn-gold btn-full signup-btn">
+                    プランBに登録する
+                </button>
+                
+                <div class="security-info">
+                    <p><i data-lucide="shield-check" style="width: 16px; height: 16px; margin-right: 0.5rem; color: var(--primary-green);"></i>SSL暗号化通信で安全に保護されています</p>
+                    <p><i data-lucide="credit-card" style="width: 16px; height: 16px; margin-right: 0.5rem; color: var(--primary-green);"></i>安全な決済システムで処理されます</p>
+                </div>
+            </form>
+            
+            <div class="signup-footer">
+                <p>すでにアカウントをお持ちの方は <a href="login.html" class="login-link">ログイン</a></p>
+            </div>
+        </div>
+        
+        <div class="signup-image">
+            <div class="image-overlay">
+                <h2 class="image-title">上達への近道</h2>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <span class="benefit-icon"><i data-lucide="target" style="width: 20px; height: 20px; color: var(--gold);"></i></span>
+                        <span>レベル別の体系的学習</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon"><i data-lucide="trending-up" style="width: 20px; height: 20px; color: var(--gold);"></i></span>
+                        <span>確実なスコア向上</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon"><i data-lucide="trophy" style="width: 20px; height: 20px; color: var(--gold);"></i></span>
+                        <span>初心者から上級者まで対応</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // プラン選択
+        const planCards = document.querySelectorAll('.plan-card');
+        const signupBtn = document.querySelector('.signup-btn');
+        
+        planCards.forEach(card => {
+            card.addEventListener('click', () => {
+                planCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                
+                if (card.classList.contains('plan-basic')) {
+                    signupBtn.textContent = 'プランAに登録する';
+                    signupBtn.className = 'btn btn-primary btn-full signup-btn';
+                } else if (card.classList.contains('plan-standard')) {
+                    signupBtn.textContent = 'プランBに登録する';
+                    signupBtn.className = 'btn btn-gold btn-full signup-btn';
+                } else if (card.classList.contains('plan-premium')) {
+                    signupBtn.textContent = 'プランCに登録する';
+                    signupBtn.className = 'btn btn-gold btn-full signup-btn';
+                }
+            });
+        });
+        
+        // Lucide Icons初期化
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ホーム - Golf Salon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard-v2.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <header class="header-v2">
+        <div class="header-content">
+            <h1 class="header-logo">Golf Salon</h1>
+            <nav class="header-nav">
+                <a href="dashboard.html" class="nav-icon active">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </a>
+                <a href="billing.html" class="nav-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="2" y1="9" x2="22" y2="9"></line>
+                    </svg>
+                </a>
+                <a href="mypage.html" class="nav-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- 検索バー -->
+        <section class="search-section">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="動画、画像、テキストを検索..." id="searchInput">
+                <button class="search-btn" onclick="performSearch()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+                <button class="filter-btn" onclick="toggleFilters()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"></polygon>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- フィルターパネル（初期は非表示） -->
+            <div class="filter-panel" id="filterPanel">
+                <div class="filter-group">
+                    <label>コンテンツタイプ:</label>
+                    <div class="filter-options">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" checked data-type="video"> 動画
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" checked data-type="image"> 画像
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" checked data-type="text"> テキスト
+                        </label>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label>並び順:</label>
+                    <select class="sort-select" id="sortOrder">
+                        <option value="newest">新着順</option>
+                        <option value="popular">人気順</option>
+                        <option value="duration">再生時間順</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- カテゴリ固定部分 -->
+        <section class="category-section">
+            <div class="category-header">
+                <h2>カテゴリー</h2>
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="circle" title="円形アイコン表示">
+                        <i data-lucide="circle" style="width: 16px; height: 16px;"></i>
+                    </button>
+                    <button class="view-btn" data-view="tab" title="タブ表示">
+                        <i data-lucide="folder" style="width: 16px; height: 16px;"></i>
+                    </button>
+                    <button class="view-btn" data-view="tile" title="タイル表示">
+                        <i data-lucide="grid" style="width: 16px; height: 16px;"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 円形アイコン表示 -->
+            <div class="category-container-fixed" id="categoryCircle">
+                <div class="category-item active" data-category="all">
+                    <div class="category-circle">
+                        <i data-lucide="grid-3x3" class="category-icon"></i>
+                    </div>
+                    <span class="category-name">すべて</span>
+                </div>
+                <div class="category-item" data-category="video">
+                    <div class="category-circle">
+                        <i data-lucide="video" class="category-icon"></i>
+                    </div>
+                    <span class="category-name">動画</span>
+                </div>
+                <div class="category-item" data-category="image">
+                    <div class="category-circle">
+                        <i data-lucide="image" class="category-icon"></i>
+                    </div>
+                    <span class="category-name">画像</span>
+                </div>
+                <div class="category-item" data-category="text">
+                    <div class="category-circle">
+                        <i data-lucide="file-text" class="category-icon"></i>
+                    </div>
+                    <span class="category-name">テキスト</span>
+                </div>
+            </div>
+            
+            <!-- タブ表示 -->
+            <div class="category-tabs" id="categoryTabs" style="display: none;">
+                <button class="tab-btn active" data-category="all">
+                    <i data-lucide="grid-3x3" style="width: 16px; height: 16px; margin-right: 0.5rem;"></i>
+                    すべて
+                </button>
+                <button class="tab-btn" data-category="video">
+                    <i data-lucide="video" style="width: 16px; height: 16px; margin-right: 0.5rem;"></i>
+                    動画
+                </button>
+                <button class="tab-btn" data-category="image">
+                    <i data-lucide="image" style="width: 16px; height: 16px; margin-right: 0.5rem;"></i>
+                    画像
+                </button>
+                <button class="tab-btn" data-category="text">
+                    <i data-lucide="file-text" style="width: 16px; height: 16px; margin-right: 0.5rem;"></i>
+                    テキスト
+                </button>
+            </div>
+            
+            <!-- タイル表示 -->
+            <div class="category-tiles" id="categoryTiles" style="display: none;">
+                <div class="tile-btn active" data-category="all">
+                    <i data-lucide="grid-3x3" class="tile-icon"></i>
+                    <span class="tile-label">すべて</span>
+                </div>
+                <div class="tile-btn" data-category="video">
+                    <i data-lucide="video" class="tile-icon"></i>
+                    <span class="tile-label">動画</span>
+                </div>
+                <div class="tile-btn" data-category="image">
+                    <i data-lucide="image" class="tile-icon"></i>
+                    <span class="tile-label">画像</span>
+                </div>
+                <div class="tile-btn" data-category="text">
+                    <i data-lucide="file-text" class="tile-icon"></i>
+                    <span class="tile-label">テキスト</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 検索結果表示 -->
+        <div class="search-results" id="searchResults" style="display: none;">
+            <div class="results-header">
+                <h3 id="resultsCount">0件の検索結果</h3>
+                <button class="clear-search" onclick="clearSearch()">検索をクリア</button>
+            </div>
+        </div>
+
+        <!-- コンテンツグリッド -->
+        <section class="content-grid" id="contentGrid">
+            <article class="content-item" data-type="video" data-title="飛距離を20ヤード伸ばすドライバーテクニック" data-category="テクニック" data-tags="ドライバー,飛距離,スイング">
+                <div class="content-thumbnail">
+                    <div class="content-type-badge video">動画</div>
+                    <div class="content-duration">12:34</div>
+                </div>
+                <h3 class="content-title">飛距離を20ヤード伸ばすドライバーテクニック</h3>
+                <div class="content-meta">
+                    <span class="content-tags">#ドライバー #飛距離 #スイング</span>
+                </div>
+            </article>
+
+            <article class="content-item" data-type="image" data-title="正しいグリップの握り方（解説図付き）" data-category="テクニック" data-tags="グリップ,基本,解説">
+                <div class="content-thumbnail image-type">
+                    <div class="content-type-badge image">画像</div>
+                </div>
+                <h3 class="content-title">正しいグリップの握り方（解説図付き）</h3>
+                <div class="content-meta">
+                    <span class="content-tags">#グリップ #基本 #解説</span>
+                </div>
+            </article>
+
+            <article class="content-item" data-type="text" data-title="バンカーショットの新しい発見" data-category="テキスト" data-tags="バンカー,ショット,コツ">
+                <div class="content-thumbnail tweet-type">
+                    <div class="content-type-badge tweet">テキスト</div>
+                    <p class="tweet-preview">今日のラウンドで気づいたことがあります。バンカーショットでは...</p>
+                </div>
+                <h3 class="content-title">バンカーショットの新しい発見</h3>
+                <div class="content-meta">
+                    <span class="content-tags">#バンカー #ショット #コツ</span>
+                </div>
+            </article>
+
+            <article class="content-item" data-type="video" data-title="アプローチの距離感を掴む練習方法" data-category="テクニック" data-tags="アプローチ,距離感,練習">
+                <div class="content-thumbnail">
+                    <div class="content-type-badge video">動画</div>
+                    <div class="content-duration">8:45</div>
+                </div>
+                <h3 class="content-title">アプローチの距離感を掴む練習方法</h3>
+                <div class="content-meta">
+                    <span class="content-tags">#アプローチ #距離感 #練習</span>
+                </div>
+            </article>
+
+            <article class="content-item" data-type="image" data-title="パッティングライン読み方ガイド" data-category="テクニック" data-tags="パッティング,ライン,読み方">
+                <div class="content-thumbnail image-type">
+                    <div class="content-type-badge image">画像</div>
+                </div>
+                <h3 class="content-title">パッティングライン読み方ガイド</h3>
+                <div class="content-meta">
+                    <span class="content-tags">#パッティング #ライン #読み方</span>
+                </div>
+            </article>
+
+            <article class="content-item" data-type="video" data-title="メンタルトレーニング実践編" data-category="メンタル" data-tags="メンタル,トレーニング,実践">
+                <div class="content-thumbnail">
+                    <div class="content-type-badge video">動画</div>
+                    <div class="content-duration">15:20</div>
+                </div>
+                <h3 class="content-title">メンタルトレーニング実践編</h3>
+                <div class="content-meta">
+                    <span class="content-tags">#メンタル #トレーニング #実践</span>
+                </div>
+            </article>
+
+            <article class="content-item" data-type="video" data-title="コース攻略：風の読み方" data-category="コース攻略" data-tags="風,読み方,攻略">
+                <div class="content-thumbnail">
+                    <div class="content-type-badge video">動画</div>
+                    <div class="content-duration">10:15</div>
+                </div>
+                <h3 class="content-title">コース攻略：風の読み方</h3>
+                <div class="content-meta">
+                    <span class="content-tags">#風 #読み方 #攻略</span>
+                </div>
+            </article>
+
+            <article class="content-item" data-type="text" data-title="今日の練習メモ" data-category="テキスト" data-tags="練習,メモ,気づき">
+                <div class="content-thumbnail tweet-type">
+                    <div class="content-type-badge tweet">テキスト</div>
+                    <p class="tweet-preview">練習場で新しいスイングを試してみました。体重移動のタイミングが...</p>
+                </div>
+                <h3 class="content-title">今日の練習メモ</h3>
+                <div class="content-meta">
+                    <span class="content-tags">#練習 #メモ #気づき</span>
+                </div>
+            </article>
+
+            <article class="content-item" data-type="video" data-title="筋力トレーニング基礎編" data-category="トレーニング" data-tags="筋トレ,基礎,体作り">
+                <div class="content-thumbnail">
+                    <div class="content-type-badge video">動画</div>
+                    <div class="content-duration">18:30</div>
+                </div>
+                <h3 class="content-title">筋力トレーニング基礎編</h3>
+                <div class="content-meta">
+                    <span class="content-tags">#筋トレ #基礎 #体作り</span>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script>
+        let allContent = [];
+        let currentSearch = '';
+        let activeFilters = {
+            video: true,
+            image: true,
+            text: true
+        };
+
+        // 初期化時にコンテンツを取得
+        document.addEventListener('DOMContentLoaded', function() {
+            allContent = Array.from(document.querySelectorAll('.content-item'));
+        });
+
+        // 検索機能
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            currentSearch = searchTerm;
+            filterContent();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            currentSearch = '';
+            document.getElementById('searchResults').style.display = 'none';
+            
+            // カテゴリを「すべて」に戻す
+            const categoryItems = document.querySelectorAll('.category-item');
+            categoryItems.forEach(cat => cat.classList.remove('active'));
+            categoryItems[0].classList.add('active'); // 最初の項目（「すべて」）をアクティブに
+            
+            filterContent();
+        }
+
+        // エンターキーで検索
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // フィルター表示切り替え
+        function toggleFilters() {
+            const filterPanel = document.getElementById('filterPanel');
+            filterPanel.style.display = filterPanel.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // コンテンツフィルタリング
+        function filterContent() {
+            const searchResults = document.getElementById('searchResults');
+            const resultsCount = document.getElementById('resultsCount');
+            let visibleCount = 0;
+
+            allContent.forEach(item => {
+                const type = item.dataset.type;
+                const title = item.dataset.title.toLowerCase();
+                const category = item.dataset.category.toLowerCase();
+                const tags = item.dataset.tags.toLowerCase();
+                
+                // タイプフィルタチェック
+                const typeVisible = activeFilters[type];
+                
+                // 検索キーワードチェック
+                let searchVisible = true;
+                if (currentSearch) {
+                    searchVisible = title.includes(currentSearch) || 
+                                  category.includes(currentSearch) || 
+                                  tags.includes(currentSearch);
+                }
+
+                if (typeVisible && searchVisible) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // 検索結果表示
+            if (currentSearch) {
+                searchResults.style.display = 'block';
+                resultsCount.textContent = `${visibleCount}件の検索結果「${currentSearch}」`;
+            } else {
+                searchResults.style.display = 'none';
+            }
+        }
+
+        // フィルターチェックボックスの変更
+        document.addEventListener('change', function(e) {
+            if (e.target.type === 'checkbox' && e.target.dataset.type) {
+                activeFilters[e.target.dataset.type] = e.target.checked;
+                filterContent();
+            }
+        });
+
+
+        // カテゴリフィルタリング
+        function setupCategoryFiltering() {
+            const categoryItems = document.querySelectorAll('.category-item, .tab-btn, .tile-btn');
+            categoryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // 現在アクティブなビューの要素のみ処理
+                    const currentView = document.querySelector('.view-btn.active').dataset.view;
+                    let containerSelector;
+                    
+                    if (currentView === 'circle') {
+                        containerSelector = '.category-item';
+                    } else if (currentView === 'tab') {
+                        containerSelector = '.tab-btn';
+                    } else if (currentView === 'tile') {
+                        containerSelector = '.tile-btn';
+                    }
+                    
+                    // アクティブクラスを移動
+                    const siblingItems = document.querySelectorAll(containerSelector);
+                    siblingItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    
+                    const category = item.dataset.category;
+                    filterContentByCategory(category);
+                });
+            });
+        }
+        
+        function filterContentByCategory(category) {
+            if (category === 'all') {
+                activeFilters = { video: true, image: true, text: true };
+            } else if (category === 'video') {
+                activeFilters = { video: true, image: false, text: false };
+            } else if (category === 'image') {
+                activeFilters = { video: false, image: true, text: false };
+            } else if (category === 'text') {
+                activeFilters = { video: false, image: false, text: true };
+            }
+            
+            document.getElementById('searchInput').value = '';
+            currentSearch = '';
+            
+            // フィルターチェックボックスの状態を更新
+            document.querySelector('[data-type="video"]').checked = activeFilters.video;
+            document.querySelector('[data-type="image"]').checked = activeFilters.image;
+            document.querySelector('[data-type="text"]').checked = activeFilters.text;
+            filterContent();
+        }
+        
+        // ビュー切り替え
+        const viewBtns = document.querySelectorAll('.view-btn');
+        viewBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // アクティブボタンを切り替え
+                viewBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const view = btn.dataset.view;
+                
+                // 表示を切り替え
+                document.getElementById('categoryCircle').style.display = view === 'circle' ? 'flex' : 'none';
+                document.getElementById('categoryTabs').style.display = view === 'tab' ? 'flex' : 'none';
+                document.getElementById('categoryTiles').style.display = view === 'tile' ? 'flex' : 'none';
+                
+                // 現在のフィルターを維持
+                const activeCategory = document.querySelector('.category-item.active, .tab-btn.active, .tile-btn.active')?.dataset.category || 'all';
+                
+                // 新しいビューでアクティブ状態を設定
+                setTimeout(() => {
+                    let newActiveItem;
+                    if (view === 'circle') {
+                        newActiveItem = document.querySelector(`.category-item[data-category="${activeCategory}"]`);
+                    } else if (view === 'tab') {
+                        newActiveItem = document.querySelector(`.tab-btn[data-category="${activeCategory}"]`);
+                    } else if (view === 'tile') {
+                        newActiveItem = document.querySelector(`.tile-btn[data-category="${activeCategory}"]`);
+                    }
+                    
+                    if (newActiveItem) {
+                        // すべてのアクティブ状態をクリア
+                        document.querySelectorAll('.category-item, .tab-btn, .tile-btn').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        newActiveItem.classList.add('active');
+                    }
+                }, 50);
+            });
+        });
+        
+        setupCategoryFiltering();
+
+        // Lucide Icons初期化
+        lucide.createIcons();
+        
+        // ページロード時にイベントリスナーを再設定
+        setupCategoryFiltering();
+    </script>
+</body>
+</html>

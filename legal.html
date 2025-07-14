@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特定商取引法に基づく表記 - Golf Salon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/legal.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <header class="header-v2">
+        <div class="header-content">
+            <h1 class="header-logo">Golf Salon</h1>
+            <nav class="header-nav">
+                <a href="dashboard.html" class="nav-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </a>
+                <a href="billing.html" class="nav-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="2" y1="9" x2="22" y2="9"></line>
+                    </svg>
+                </a>
+                <a href="mypage.html" class="nav-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="legal-main">
+        <div class="container">
+            <nav class="legal-nav">
+                <a href="#tokusho" class="legal-tab active" onclick="showTab('tokusho')">特定商取引法</a>
+                <a href="#privacy" class="legal-tab" onclick="showTab('privacy')">プライバシーポリシー</a>
+                <a href="#terms" class="legal-tab" onclick="showTab('terms')">利用規約</a>
+                <a href="#gdpr" class="legal-tab" onclick="showTab('gdpr')">GDPR対応</a>
+            </nav>
+
+            <!-- 特定商取引法 -->
+            <div id="tokusho-content" class="legal-content active">
+                <h1>特定商取引法に基づく表記</h1>
+                
+                <div class="legal-section">
+                    <h2>販売事業者</h2>
+                    <p>合同会社ゴルフサロン</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>運営統括責任者</h2>
+                    <p>代表 山田 太郎</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>所在地</h2>
+                    <p>〒460-8501<br>
+                    愛知県名古屋市中区三の丸三丁目1番2号</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>電話番号</h2>
+                    <p>052-123-456<br>
+                    <small>※お電話でのお問い合わせは平日10:00〜18:00にお願いいたします</small></p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>メールアドレス</h2>
+                    <p>support@example.com</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>サービス内容</h2>
+                    <p>オンラインゴルフサロンの運営および関連サービスの提供</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>料金</h2>
+                    <div class="price-table">
+                        <div class="price-row">
+                            <span class="plan-name">サロン閲覧のみ</span>
+                            <span class="plan-price">月額 2,200円（税込）</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="plan-name">レッスン付き（月1回）</span>
+                            <span class="plan-price">月額 6,600円（税込）</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="plan-name">レッスン付き（月2回）</span>
+                            <span class="plan-price">月額 9,900円（税込）</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="legal-section">
+                    <h2>支払方法</h2>
+                    <p>クレジットカード決済（VISA、MasterCard、JCB、American Express、Diners Club）</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>支払時期</h2>
+                    <p>月額課金：毎月の契約更新日に自動決済<br>
+                    初回決済：サービス申込み時に即時決済</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>サービス提供時期</h2>
+                    <p>決済完了後、即座にサービスをご利用いただけます</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>契約期間・更新</h2>
+                    <p>契約期間：1ヶ月間<br>
+                    自動更新：契約期間満了時に自動的に1ヶ月間更新されます</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>退会・解約</h2>
+                    <p>退会をご希望の場合は、前月10日までにマイページより退会申請を行ってください。<br>
+                    退会申請後、契約期間満了をもってサービス利用が停止されます。</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>返金・キャンセル</h2>
+                    <p>デジタルコンテンツの性質上、サービス開始後の返金・キャンセルは承っておりません。<br>
+                    ただし、決済エラーや当社都合による場合はこの限りではありません。</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>動作環境</h2>
+                    <p>本サービスは以下の環境でご利用いただけます：<br>
+                    ・PC：Windows 10以降、macOS 10.15以降<br>
+                    ・ブラウザ：Chrome、Safari、Firefox、Edge（最新版）<br>
+                    ・スマートフォン：iOS 13以降、Android 8.0以降</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>免責事項</h2>
+                    <p>当社は、本サービスの利用により生じた損害について、法令上許される範囲で責任を負いません。<br>
+                    また、通信環境やデバイスの不具合によりサービスを正常にご利用いただけない場合についても同様とします。</p>
+                </div>
+            </div>
+
+            <!-- プライバシーポリシー -->
+            <div id="privacy-content" class="legal-content">
+                <h1>プライバシーポリシー</h1>
+                
+                <div class="legal-section">
+                    <h2>個人情報の取得</h2>
+                    <p>当社は、以下の個人情報を取得します：</p>
+                    <ul>
+                        <li>氏名、メールアドレス</li>
+                        <li>決済情報（クレジットカード情報は決済代行会社が管理）</li>
+                        <li>サービス利用履歴、アクセスログ</li>
+                        <li>Cookie及び類似技術による情報</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h2>利用目的</h2>
+                    <p>取得した個人情報は以下の目的で利用します：</p>
+                    <ul>
+                        <li>サービスの提供・運営</li>
+                        <li>ユーザーサポート</li>
+                        <li>料金の請求・決済処理</li>
+                        <li>サービス改善のための分析</li>
+                        <li>重要なお知らせの送信</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第三者提供</h2>
+                    <p>法令に基づく場合を除き、ご本人の同意なく個人情報を第三者に提供することはありません。<br>
+                    ただし、以下の場合は除きます：</p>
+                    <ul>
+                        <li>決済処理のための決済代行会社への提供</li>
+                        <li>サービス運営に必要な業務委託先への提供</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h2>安全管理措置</h2>
+                    <p>当社は、個人情報の漏洩、滅失、毀損の防止その他個人情報の安全管理のため、必要かつ適切な措置を講じます。</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>個人情報の開示・訂正等</h2>
+                    <p>ご本人からの個人情報の開示、訂正、利用停止等の請求については、本人確認を行った上で、法令に従って対応いたします。<br>
+                    お問い合わせ先：support@example.com</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>Cookie等の取り扱い</h2>
+                    <p>当社では、サービス向上のためCookieを使用しています。<br>
+                    Cookieの使用を望まない場合は、ブラウザの設定で無効にすることができますが、一部機能が利用できなくなる場合があります。</p>
+                </div>
+            </div>
+
+            <!-- 利用規約 -->
+            <div id="terms-content" class="legal-content">
+                <h1>利用規約</h1>
+                
+                <div class="legal-section">
+                    <h2>第1条（適用）</h2>
+                    <p>本規約は、合同会社ゴルフサロン（以下「当社」）が提供するオンラインサロンサービス「Golf Salon」（以下「本サービス」）の利用条件を定めるものです。</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第2条（利用登録）</h2>
+                    <p>1. 本サービスの利用を希望する者は、本規約に同意の上、所定の方法で利用登録を申請するものとします。<br>
+                    2. 当社は、利用登録の申請について、当社の基準に従って、承認または不承認を決定します。</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第3条（禁止事項）</h2>
+                    <p>ユーザーは、本サービスの利用にあたり、以下の行為をしてはなりません：</p>
+                    <ul>
+                        <li>法令または公序良俗に違反する行為</li>
+                        <li>犯罪行為に関連する行為</li>
+                        <li>当社、他のユーザー、または第三者の権利を侵害する行為</li>
+                        <li>コンテンツの無断転載、複製、配布</li>
+                        <li>本サービスの運営を妨害するおそれのある行為</li>
+                        <li>その他、当社が不適切と判断する行為</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第4条（コンテンツの権利）</h2>
+                    <p>本サービスで提供されるコンテンツの著作権その他の知的財産権は、当社または正当な権利者に帰属します。<br>
+                    ユーザーは、個人的な利用の範囲内でのみコンテンツを利用することができます。</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第5条（利用制限・停止）</h2>
+                    <p>当社は、ユーザーが本規約に違反した場合、事前の通知なくサービスの利用を制限または停止することができます。</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第6条（免責・損害賠償）</h2>
+                    <p>当社は、本サービスに関してユーザーに生じた損害について、法令上許される限り責任を負いません。<br>
+                    ただし、当社の故意または重大な過失による場合はこの限りではありません。</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第7条（規約の変更）</h2>
+                    <p>当社は、必要に応じて本規約を変更することができます。<br>
+                    変更後の規約は、本サービス上に掲示した時点で効力を生じます。</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第8条（準拠法・裁判管轄）</h2>
+                    <p>本規約は日本法に準拠し、本サービスに関する紛争については東京地方裁判所を専属的合意管轄とします。</p>
+                </div>
+            </div>
+
+            <!-- GDPR対応 -->
+            <div id="gdpr-content" class="legal-content">
+                <h1>GDPR（EU一般データ保護規則）対応</h1>
+                
+                <div class="legal-section">
+                    <h2>データ管理者</h2>
+                    <p><strong>合同会社ゴルフサロン</strong><br>
+                    所在地：〒460-8501 愛知県名古屋市中区三の丸三丁目1番2号<br>
+                    連絡先：gdpr@example.com</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>処理する個人データ</h2>
+                    <div class="data-category">
+                        <h3>基本情報</h3>
+                        <ul>
+                            <li>氏名、メールアドレス</li>
+                            <li>プラン情報、決済情報</li>
+                        </ul>
+                    </div>
+                    <div class="data-category">
+                        <h3>技術データ</h3>
+                        <ul>
+                            <li>IPアドレス、Cookie情報</li>
+                            <li>デバイス情報、ブラウザ情報</li>
+                            <li>サービス利用履歴</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="legal-section">
+                    <h2>処理の法的根拠</h2>
+                    <div class="legal-basis">
+                        <h3>契約の履行（GDPR第6条1項(b)）</h3>
+                        <p>サービス提供、決済処理、顧客サポート</p>
+                    </div>
+                    <div class="legal-basis">
+                        <h3>正当な利益（GDPR第6条1項(f)）</h3>
+                        <p>サービス改善、セキュリティ確保、不正利用防止</p>
+                    </div>
+                    <div class="legal-basis">
+                        <h3>同意（GDPR第6条1項(a)）</h3>
+                        <p>マーケティング目的でのデータ処理（任意）</p>
+                    </div>
+                </div>
+
+                <div class="legal-section">
+                    <h2>データ主体の権利</h2>
+                    <p>EUにお住まいの方は、以下の権利を有します：</p>
+                    <ul>
+                        <li><strong>アクセス権：</strong>処理される個人データの確認・コピー取得</li>
+                        <li><strong>訂正権：</strong>不正確な個人データの訂正</li>
+                        <li><strong>削除権：</strong>個人データの削除（「忘れられる権利」）</li>
+                        <li><strong>処理制限権：</strong>個人データの処理の制限</li>
+                        <li><strong>データポータビリティ権：</strong>個人データの移転</li>
+                        <li><strong>異議権：</strong>個人データの処理への異議</li>
+                        <li><strong>同意撤回権：</strong>同意に基づく処理の撤回</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h2>データの国際移転</h2>
+                    <p>お客様の個人データは、サービス提供のため日本に移転され処理されます。<br>
+                    日本は欧州委員会により十分性認定を受けた国です。</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>データ保存期間</h2>
+                    <ul>
+                        <li><strong>アカウント情報：</strong>退会から3年間</li>
+                        <li><strong>決済履歴：</strong>法定保存期間（7年間）</li>
+                        <li><strong>アクセスログ：</strong>3ヶ月間</li>
+                        <li><strong>Cookie：</strong>設定に応じて最大2年間</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h2>権利行使・お問い合わせ</h2>
+                    <p>GDPR上の権利行使やデータ処理に関するお問い合わせは、以下までご連絡ください：</p>
+                    <p><strong>メール：</strong>gdpr@example.com<br>
+                    <strong>郵送：</strong>〒460-8501 愛知県名古屋市中区三の丸三丁目1番2号<br>
+                    合同会社ゴルフサロン GDPR担当宛</p>
+                    <p><small>※原則として1ヶ月以内に回答いたします</small></p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>監督機関への苦情申立て</h2>
+                    <p>データ処理に関してご不満がある場合は、お住まいの国のデータ保護監督機関に苦情を申し立てることができます。</p>
+                </div>
+
+                <div class="gdpr-notice">
+                    <h3>🇪🇺 EU居住者向け特別通知</h3>
+                    <p>本サービスはEU域外（日本）で運営されています。EUの皆様には追加の保護措置として、上記の権利保護を提供いたします。</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showTab(tabName) {
+            // すべてのタブを非表示
+            document.querySelectorAll('.legal-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.legal-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 選択されたタブを表示
+            document.getElementById(tabName + '-content').classList.add('active');
+            document.querySelector(`[onclick="showTab('${tabName}')"]`).classList.add('active');
+        }
+
+        // Lucide Icons初期化
+        lucide.createIcons();
+    </script>
+</body>
+</html>

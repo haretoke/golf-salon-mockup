@@ -1,0 +1,634 @@
+body {
+  background-color: var(--off-white);
+  margin: 0;
+  padding: 0;
+}
+
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.billing-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.billing-header h1 {
+  font-size: 2.5rem;
+  color: var(--dark-green);
+  margin-bottom: 0.5rem;
+}
+
+.billing-subtitle {
+  color: var(--gray-dark);
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+/* 現在のプランセクション */
+.current-plan-section {
+  margin-bottom: 3rem;
+}
+
+.current-plan {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+  color: var(--white);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 2rem;
+  align-items: start;
+}
+
+.plan-status {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 200px;
+}
+
+.plan-status .plan-price {
+  margin-top: 0.5rem;
+}
+
+.status-badge {
+  background: var(--gold-gradient);
+  color: var(--dark-green);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+.plan-status .plan-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.plan-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+.plan-details .price {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.current-plan .price {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.plan-details .period {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-left: 0.25rem;
+}
+
+.current-plan .period {
+  color: var(--off-white);
+  opacity: 0.9;
+}
+
+.plan-details .plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.plan-details .plan-features li {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.current-plan .plan-features li {
+  color: var(--off-white) !important;
+}
+
+.plan-details .plan-features li:before {
+  content: "✓";
+  font-weight: 600;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.current-plan .plan-features li:before {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.billing-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 200px;
+  text-align: right;
+}
+
+.billing-info p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.billing-info strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+/* プラン変更セクション */
+.plan-change-section {
+  margin-bottom: 3rem;
+}
+
+.plan-change-section h2 {
+  color: var(--dark-green);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.plan-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.plan-card {
+  background-color: var(--white);
+  border: 2px solid var(--gray-medium);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.plan-card:hover {
+  border-color: var(--primary-green);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.plan-card.current {
+  border-color: var(--gold);
+  background-color: var(--off-white);
+}
+
+.current-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold-gradient);
+  color: var(--white);
+  padding: 4px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.plan-card h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  color: var(--dark-green);
+}
+
+.plan-card .plan-price {
+  margin-bottom: 1.5rem;
+}
+
+.plan-card .price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--dark-green);
+}
+
+.plan-card .period {
+  font-size: 1rem;
+  color: var(--gray-dark);
+}
+
+.plan-card .plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  text-align: left;
+}
+
+.plan-card .plan-features li {
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+  color: var(--dark-green);
+}
+
+.plan-card .plan-features li:before {
+  content: "✓ ";
+  color: var(--dark-green);
+  font-weight: 600;
+}
+
+.change-note {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.change-note.upgrade {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+}
+
+.change-note.downgrade {
+  color: var(--gray-dark);
+}
+
+.btn-disabled {
+  background-color: var(--gray-medium);
+  color: var(--gray-dark);
+  cursor: not-allowed;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: none;
+  font-weight: 600;
+}
+
+/* 支払い方法セクション */
+.payment-method-section {
+  margin-bottom: 3rem;
+}
+
+.payment-method-section h2 {
+  color: var(--dark-green);
+  margin-bottom: 1.5rem;
+}
+
+/* 支払い方法カード */
+.payment-card {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-medium);
+  overflow: hidden;
+}
+
+.payment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background-color: var(--gray-light);
+  border-bottom: 1px solid var(--gray-medium);
+}
+
+.payment-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--dark-green);
+  font-weight: 600;
+}
+
+.payment-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.payment-status.active {
+  background-color: var(--primary-green);
+  color: var(--white);
+}
+
+.payment-content {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.card-visual {
+  flex: 1;
+}
+
+.card-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.brand-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--primary-green);
+}
+
+.brand-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--dark-green);
+  text-transform: uppercase;
+}
+
+.card-number {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  color: var(--black);
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.card-expiry,
+.card-holder {
+  font-size: 0.75rem;
+  color: var(--gray-dark);
+  font-weight: 500;
+}
+
+.payment-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.btn-danger-outline {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.btn-danger-outline:hover {
+  background-color: #ef4444;
+  color: var(--white);
+}
+
+/* 請求履歴セクション */
+.billing-history-section h2 {
+  color: var(--dark-green);
+  margin-bottom: 1.5rem;
+}
+
+.history-table {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.history-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  background-color: var(--gray-light);
+  padding: 1rem;
+  font-weight: 600;
+  color: var(--dark-green);
+  border-bottom: 1px solid var(--gray-medium);
+}
+
+.history-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 1rem;
+  border-bottom: 1px solid var(--gray-light);
+  align-items: center;
+}
+
+.history-row:last-child {
+  border-bottom: none;
+}
+
+.status-paid {
+  color: var(--primary-green);
+  font-weight: 600;
+}
+
+/* モーダル */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  width: 90%;
+  max-width: 600px;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--gray-medium);
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: var(--dark-green);
+}
+
+.modal-close {
+  font-size: 2rem;
+  color: var(--gray-dark);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: var(--black);
+}
+
+.modal-body {
+  padding: 2rem 1.5rem;
+}
+
+.important-note {
+  background-color: var(--off-white);
+  border: 1px solid var(--gray-medium);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+.important-note p {
+  margin: 0 0 0.5rem 0;
+  color: var(--dark-green);
+  font-weight: 600;
+}
+
+.important-note ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.5rem;
+}
+
+.important-note li {
+  margin-bottom: 0.5rem;
+  color: var(--black);
+  font-size: 0.875rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid var(--gray-medium);
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .current-plan {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .billing-info {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .plan-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .payment-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  
+  .payment-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1024px) {
+  .plan-options {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .current-plan {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+    padding: 1.5rem;
+    align-items: center;
+  }
+  
+  .billing-info {
+    text-align: center;
+  }
+  
+  .plan-status .plan-name {
+    font-size: 1.25rem;
+  }
+  
+  .plan-details .price {
+    font-size: 1.75rem;
+  }
+  
+  .current-plan .price {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .current-plan .period {
+    color: var(--off-white);
+  }
+  
+  .current-plan .plan-features li {
+    color: var(--off-white);
+  }
+  
+  .current-plan .plan-features li:before {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .history-header,
+  .history-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .history-header span,
+  .history-row span {
+    padding: 0.25rem 0;
+  }
+  
+  .modal-footer {
+    flex-direction: column;
+  }
+  
+  .payment-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .payment-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .payment-header {
+    padding: 1rem 1.5rem;
+  }
+}
