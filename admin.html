@@ -2,7 +2,10 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-touch-fullscreen" content="yes" />
     <title>コンテンツ管理 - Golf Salon Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -728,6 +731,15 @@
         currentSlideIndex = index;
         updateActiveTab();
         updateSliderPosition();
+        
+        // スワイプ状態を完全にリセット
+        resetTouchState();
+        
+        // タッチハンドリングとクリックハンドリングを再初期化
+        setTimeout(() => {
+          initializeTouchHandling();
+          setupCardClickHandlers();
+        }, 100);
       }
 
       function updateActiveTab() {
@@ -765,7 +777,7 @@
         slider.style.transform = `translateX(${translateX}%)`;
       }
 
-      // スワイプ機能
+      // スワイプ機能（整理版）
       let startX = 0;
       let startY = 0;
       let currentX = 0;
@@ -773,84 +785,141 @@
       let isDragging = false;
       let hasMoved = false;
       let isHorizontalSwipe = false;
-
+      let swipeStartTime = 0;
+      
       const slider = document.getElementById("contentSlider");
+      const SWIPE_THRESHOLD = 50;
+      const MAX_SWIPE_TIME = 500;
+      const MIN_MOVEMENT = 15;
 
-      // タッチイベント処理を改善
-      slider.addEventListener("touchstart", handleTouchStart, {
-        passive: false,
-      });
-      slider.addEventListener("touchmove", handleTouchMove, { 
-        passive: false 
-      });
-      slider.addEventListener("touchend", handleTouchEnd, { 
-        passive: false 
-      });
-
-      // モバイルデバイス判定を改善
+      // モバイルデバイス判定
       function isMobileDevice() {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
                ('ontouchstart' in window) || 
                (navigator.maxTouchPoints > 0);
       }
 
+      // iOS Safari判定
+      function isIOSSafari() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      }
+
+      // スワイプ状態をリセット
+      function resetTouchState() {
+        isDragging = false;
+        hasMoved = false;
+        isHorizontalSwipe = false;
+        startX = 0;
+        startY = 0;
+        currentX = 0;
+        currentY = 0;
+        swipeStartTime = 0;
+      }
+
+      // タッチイベントハンドラー
       function handleTouchStart(e) {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
+        resetTouchState();
+        
+        const touch = e.touches[0];
+        startX = touch.clientX;
+        startY = touch.clientY;
         currentX = startX;
         currentY = startY;
         isDragging = true;
-        hasMoved = false;
-        isHorizontalSwipe = false;
+        swipeStartTime = Date.now();
       }
 
       function handleTouchMove(e) {
         if (!isDragging) return;
         
-        currentX = e.touches[0].clientX;
-        currentY = e.touches[0].clientY;
+        const touch = e.touches[0];
+        currentX = touch.clientX;
+        currentY = touch.clientY;
         
         const deltaX = Math.abs(startX - currentX);
         const deltaY = Math.abs(startY - currentY);
 
-        // 最初の動きで水平スワイプか垂直スワイプかを判定
-        if (!hasMoved && (deltaX > 10 || deltaY > 10)) {
+        // 方向判定
+        if (!hasMoved && (deltaX > MIN_MOVEMENT || deltaY > MIN_MOVEMENT)) {
           isHorizontalSwipe = deltaX > deltaY;
           hasMoved = true;
         }
 
-        // 水平スワイプの場合は縦スクロールを防ぐ
-        if (isHorizontalSwipe && deltaX > 10) {
+        // 水平スワイプの場合のみpreventDefault
+        if (isHorizontalSwipe && deltaX > MIN_MOVEMENT) {
           e.preventDefault();
+          e.stopPropagation();
         }
       }
 
       function handleTouchEnd(e) {
         if (!isDragging) return;
         
+        const touchDuration = Date.now() - swipeStartTime;
+        const deltaX = startX - currentX;
+        
+        // 水平スワイプでない場合はクリック動作を許可
+        if (!isHorizontalSwipe) {
+          resetTouchState();
+          return;
+        }
+        
         e.preventDefault();
-        isDragging = false;
+        e.stopPropagation();
 
-        // 水平スワイプの場合のみタブ切り替えを実行
-        if (hasMoved && isHorizontalSwipe) {
-          const deltaX = startX - currentX;
-          const threshold = 50;
-
-          if (Math.abs(deltaX) > threshold) {
+        // スワイプ判定と実行
+        if (hasMoved && isHorizontalSwipe && touchDuration < MAX_SWIPE_TIME) {
+          if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
             if (deltaX > 0 && currentSlideIndex < contentTypes.length - 1) {
-              // 右スワイプ（次へ）
               switchToTab(currentSlideIndex + 1);
             } else if (deltaX < 0 && currentSlideIndex > 0) {
-              // 左スワイプ（前へ）
               switchToTab(currentSlideIndex - 1);
             }
           }
         }
 
-        // リセット
-        hasMoved = false;
-        isHorizontalSwipe = false;
+        resetTouchState();
       }
+
+      // タッチイベントリスナーの初期化
+      function initializeTouchHandling() {
+        if (!slider) {
+          console.error('contentSlider element not found');
+          return;
+        }
+
+        // 既存のイベントリスナーを削除
+        slider.removeEventListener("touchstart", handleTouchStart);
+        slider.removeEventListener("touchmove", handleTouchMove);
+        slider.removeEventListener("touchend", handleTouchEnd);
+        slider.removeEventListener("touchcancel", handleTouchEnd);
+
+        const eventOptions = { passive: false, capture: true };
+        
+        // スライダーにイベントリスナーを追加
+        slider.addEventListener("touchstart", handleTouchStart, eventOptions);
+        slider.addEventListener("touchmove", handleTouchMove, eventOptions);
+        slider.addEventListener("touchend", handleTouchEnd, eventOptions);
+        slider.addEventListener("touchcancel", handleTouchEnd, eventOptions);
+
+        // iOS Safari用：各セクションに直接追加
+        if (isIOSSafari()) {
+          const sections = document.querySelectorAll('.content-section');
+          sections.forEach(section => {
+            section.removeEventListener("touchstart", handleTouchStart);
+            section.removeEventListener("touchmove", handleTouchMove);
+            section.removeEventListener("touchend", handleTouchEnd);
+            section.removeEventListener("touchcancel", handleTouchEnd);
+            
+            section.addEventListener("touchstart", handleTouchStart, eventOptions);
+            section.addEventListener("touchmove", handleTouchMove, eventOptions);
+            section.addEventListener("touchend", handleTouchEnd, eventOptions);
+            section.addEventListener("touchcancel", handleTouchEnd, eventOptions);
+          });
+        }
+      }
+
+      // 初期化は管理画面が完全に読み込まれてから実行
 
       // マウスイベント（デスクトップ対応）
       if (!isMobileDevice()) {
@@ -984,9 +1053,35 @@
 
       // カード全体のクリックハンドラー設定（リスト表示専用）
       function setupCardClickHandlers() {
-        document.querySelectorAll(".content-card").forEach((card) => {
-          card.addEventListener("click", handleCardClick);
-        });
+        // イベント委譲を使用してクリックイベントを処理
+        const contentSlider = document.getElementById("contentSlider");
+        
+        // 既存のクリックハンドラーを削除
+        contentSlider.removeEventListener("click", handleCardClickDelegate);
+        
+        // 新しいクリックハンドラーを追加
+        contentSlider.addEventListener("click", handleCardClickDelegate);
+      }
+
+      // イベント委譲によるカードクリック処理を改善
+      function handleCardClickDelegate(event) {
+        // スワイプ中の場合はクリックを無効化
+        if (hasMoved || isDragging) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+        
+        // .content-cardの要素を探す
+        const card = event.target.closest(".content-card");
+        if (card && card.dataset.cardId) {
+          // 少し遅延を入れて確実にクリック処理を行う
+          setTimeout(() => {
+            if (!hasMoved && !isDragging) {
+              editContent(card.dataset.cardId);
+            }
+          }, 10);
+        }
       }
 
       // 初期化処理（非同期対応）
@@ -997,17 +1092,13 @@
         // カードクリックハンドラーを設定
         setupCardClickHandlers();
         
+        // タッチハンドリングを初期化
+        initializeTouchHandling();
+        
         // Lucideアイコンを初期化
         lucide.createIcons();
-      }
-
-      // カードクリック処理
-      function handleCardClick(event) {
-        // カード全体をクリックした場合、編集画面を開く
-        const cardId = this.dataset.cardId;
-        if (cardId) {
-          editContent(cardId);
-        }
+        
+        console.log('Admin initialization completed');
       }
 
       // 検索機能（現在のタブ内のみ）
@@ -1993,10 +2084,14 @@
         // サンプルデータを読み込み
         await loadSampleData();
         
+        console.log('Generating content for all sections...');
+        
         // 各セクションにデータを生成
         generateTweetContent(sampleData);
         generateImageContent(sampleData);
         generateVideoContent(sampleData);
+        
+        console.log('Content generation completed');
       }
 
       // つぶやきコンテンツ生成
@@ -2032,6 +2127,8 @@
       function generateImageContent(data) {
         const imageGrid = document.getElementById("imageGrid");
         const imageData = Object.entries(data).filter(([id, item]) => item.type === "image");
+        
+        console.log(`Generating ${imageData.length} image content items`);
         
         imageGrid.innerHTML = imageData.map(([id, item]) => {
           const imageCount = item.images ? item.images.length : 1;
@@ -2070,6 +2167,8 @@
       function generateVideoContent(data) {
         const videoGrid = document.getElementById("videoGrid");
         const videoData = Object.entries(data).filter(([id, item]) => item.type === "video");
+        
+        console.log(`Generating ${videoData.length} video content items`);
         
         videoGrid.innerHTML = videoData.map(([id, item]) => `
           <div class="content-card" data-type="video" data-category="${item.category}" data-status="${item.status}" data-card-id="${id}">
