@@ -21,17 +21,28 @@
                         <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                     </svg>
                 </a>
-                <a href="billing.html" class="nav-icon active">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                        <line x1="2" y1="9" x2="22" y2="9"></line>
-                    </svg>
-                </a>
-                <a href="mypage.html" class="nav-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                    </svg>
-                </a>
+                <div class="nav-dropdown">
+                    <a href="#" class="nav-icon active" id="userMenuToggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                        </svg>
+                    </a>
+                    <div class="nav-dropdown-menu" id="userDropdownMenu">
+                        <a href="mypage.html" class="nav-dropdown-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                            </svg>
+                            アカウント設定
+                        </a>
+                        <a href="billing.html" class="nav-dropdown-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="2" y1="9" x2="22" y2="9"></line>
+                            </svg>
+                            プラン管理
+                        </a>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -153,36 +164,6 @@
             </div>
         </section>
 
-        <!-- 請求履歴 -->
-        <section class="billing-history-section">
-            <h2>請求履歴</h2>
-            <div class="history-table">
-                <div class="history-header">
-                    <span>請求日</span>
-                    <span>プラン</span>
-                    <span>金額</span>
-                    <span>ステータス</span>
-                </div>
-                <div class="history-row">
-                    <span>2024/07/01</span>
-                    <span>プランB</span>
-                    <span>¥6,600</span>
-                    <span class="status-paid">支払い済み</span>
-                </div>
-                <div class="history-row">
-                    <span>2024/06/01</span>
-                    <span>プランB</span>
-                    <span>¥6,600</span>
-                    <span class="status-paid">支払い済み</span>
-                </div>
-                <div class="history-row">
-                    <span>2024/05/01</span>
-                    <span>プランA</span>
-                    <span>¥2,200</span>
-                    <span class="status-paid">支払い済み</span>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- プラン変更確認モーダル -->
@@ -285,6 +266,24 @@
 
         // Lucide Icons初期化
         lucide.createIcons();
+        
+        // ドロップダウンメニューの制御
+        const userMenuToggle = document.getElementById('userMenuToggle');
+        const userDropdownMenu = document.getElementById('userDropdownMenu');
+        
+        if (userMenuToggle && userDropdownMenu) {
+            userMenuToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                userDropdownMenu.classList.toggle('show');
+            });
+            
+            // ドロップダウンメニュー外をクリックした時に閉じる
+            document.addEventListener('click', function(e) {
+                if (!userMenuToggle.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+                    userDropdownMenu.classList.remove('show');
+                }
+            });
+        }
     </script>
 </body>
 </html>
