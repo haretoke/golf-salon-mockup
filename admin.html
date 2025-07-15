@@ -767,54 +767,72 @@
 
       // スワイプ機能
       let startX = 0;
+      let startY = 0;
       let currentX = 0;
+      let currentY = 0;
       let isDragging = false;
-      let hasMoved = false; // スワイプ動作があったかを追跡
+      let hasMoved = false;
+      let isHorizontalSwipe = false;
 
       const slider = document.getElementById("contentSlider");
 
+      // タッチイベント処理を改善
       slider.addEventListener("touchstart", handleTouchStart, {
-        passive: true,
+        passive: false,
       });
-      slider.addEventListener("touchmove", handleTouchMove, { passive: true });
-      slider.addEventListener("touchend", handleTouchEnd, { passive: true });
+      slider.addEventListener("touchmove", handleTouchMove, { 
+        passive: false 
+      });
+      slider.addEventListener("touchend", handleTouchEnd, { 
+        passive: false 
+      });
 
-      // マウスイベント（デスクトップ対応）- PC表示では無効化
+      // モバイルデバイス判定を改善
       function isMobileDevice() {
-        return window.innerWidth <= 1024;
-      }
-
-      // PC表示ではマウススワイプを無効化
-      if (isMobileDevice()) {
-        slider.addEventListener("mousedown", handleMouseStart);
-        slider.addEventListener("mousemove", handleMouseMove);
-        slider.addEventListener("mouseup", handleMouseEnd);
-        slider.addEventListener("mouseleave", handleMouseEnd);
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+               ('ontouchstart' in window) || 
+               (navigator.maxTouchPoints > 0);
       }
 
       function handleTouchStart(e) {
         startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        currentX = startX;
+        currentY = startY;
         isDragging = true;
         hasMoved = false;
+        isHorizontalSwipe = false;
       }
 
       function handleTouchMove(e) {
         if (!isDragging) return;
+        
         currentX = e.touches[0].clientX;
+        currentY = e.touches[0].clientY;
+        
         const deltaX = Math.abs(startX - currentX);
+        const deltaY = Math.abs(startY - currentY);
 
-        // 5px以上動いたらスワイプ動作と判定
-        if (deltaX > 5) {
+        // 最初の動きで水平スワイプか垂直スワイプかを判定
+        if (!hasMoved && (deltaX > 10 || deltaY > 10)) {
+          isHorizontalSwipe = deltaX > deltaY;
           hasMoved = true;
+        }
+
+        // 水平スワイプの場合は縦スクロールを防ぐ
+        if (isHorizontalSwipe && deltaX > 10) {
+          e.preventDefault();
         }
       }
 
-      function handleTouchEnd() {
+      function handleTouchEnd(e) {
         if (!isDragging) return;
+        
+        e.preventDefault();
         isDragging = false;
 
-        // スワイプ動作があった場合のみタブ切り替えを実行
-        if (hasMoved) {
+        // 水平スワイプの場合のみタブ切り替えを実行
+        if (hasMoved && isHorizontalSwipe) {
           const deltaX = startX - currentX;
           const threshold = 50;
 
@@ -829,34 +847,42 @@
           }
         }
 
+        // リセット
         hasMoved = false;
+        isHorizontalSwipe = false;
+      }
+
+      // マウスイベント（デスクトップ対応）
+      if (!isMobileDevice()) {
+        slider.addEventListener("mousedown", handleMouseStart);
+        slider.addEventListener("mousemove", handleMouseMove);
+        slider.addEventListener("mouseup", handleMouseEnd);
+        slider.addEventListener("mouseleave", handleMouseEnd);
       }
 
       function handleMouseStart(e) {
-        if (!isMobileDevice()) return; // PC表示では無効
         startX = e.clientX;
         isDragging = true;
         hasMoved = false;
         slider.style.cursor = "grabbing";
+        e.preventDefault();
       }
 
       function handleMouseMove(e) {
-        if (!isDragging || !isMobileDevice()) return; // PC表示では無効
+        if (!isDragging) return;
         currentX = e.clientX;
         const deltaX = Math.abs(startX - currentX);
 
-        // 5px以上動いたらドラッグ動作と判定
         if (deltaX > 5) {
           hasMoved = true;
         }
       }
 
-      function handleMouseEnd() {
-        if (!isDragging || !isMobileDevice()) return; // PC表示では無効
+      function handleMouseEnd(e) {
+        if (!isDragging) return;
         isDragging = false;
         slider.style.cursor = "grab";
 
-        // ドラッグ動作があった場合のみタブ切り替えを実行
         if (hasMoved) {
           const deltaX = startX - currentX;
           const threshold = 50;
