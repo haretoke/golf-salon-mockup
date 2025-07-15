@@ -965,6 +965,15 @@
         isDragging = true;
         hasMoved = false;
         slider.style.cursor = "grabbing";
+        
+        // ドラッグ開始時点でクリックを一時的に無効化
+        preventNextClick = true;
+        setTimeout(() => {
+          if (!hasMoved) {
+            preventNextClick = false; // 実際にドラッグしなかった場合はクリックを許可
+          }
+        }, 50);
+        
         e.preventDefault();
       }
 
@@ -988,11 +997,19 @@
           const threshold = 50;
 
           if (Math.abs(deltaX) > threshold) {
+            // スワイプが実行された場合、短時間クリックを無効化
+            clickDisabledUntil = Date.now() + 300; // 300ms間クリック無効
+            preventNextClick = true; // 次のクリックを確実に無効化
+            
             if (deltaX > 0 && currentSlideIndex < contentTypes.length - 1) {
               switchToTab(currentSlideIndex + 1);
             } else if (deltaX < 0 && currentSlideIndex > 0) {
               switchToTab(currentSlideIndex - 1);
             }
+          } else if (hasMoved) {
+            // ドラッグの意図があったが閾値に届かなかった場合も短時間クリックを無効化
+            clickDisabledUntil = Date.now() + 150; // 150ms間クリック無効
+            preventNextClick = true;
           }
         }
 
