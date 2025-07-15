@@ -2,9 +2,15 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
     <meta name="apple-touch-fullscreen" content="yes" />
     <title>コンテンツ管理 - Golf Salon Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -221,12 +227,16 @@
         </button>
         <h2 id="editTitle">コンテンツ編集</h2>
         <div class="edit-actions">
-          <button class="btn btn-primary btn-sm" id="saveButton" onclick="saveContent()" disabled>
+          <button
+            class="btn btn-primary btn-sm"
+            id="saveButton"
+            onclick="saveContent()"
+            disabled
+          >
             保存
           </button>
         </div>
       </div>
-
 
       <div class="edit-content">
         <!-- つぶやき用セクション -->
@@ -360,7 +370,9 @@
             <div class="settings-item" onclick="openSettingsDetail('publish')">
               <div class="settings-item-content">
                 <div class="settings-item-label">公開設定</div>
-                <div class="settings-item-value" id="publishValue-video">下書き</div>
+                <div class="settings-item-value" id="publishValue-video">
+                  下書き
+                </div>
               </div>
               <i data-lucide="chevron-right" class="settings-item-arrow"></i>
             </div>
@@ -731,10 +743,10 @@
         currentSlideIndex = index;
         updateActiveTab();
         updateSliderPosition();
-        
+
         // スワイプ状態を完全にリセット
         resetTouchState();
-        
+
         // タッチハンドリングとクリックハンドリングを再初期化
         setTimeout(() => {
           initializeTouchHandling();
@@ -786,7 +798,7 @@
       let hasMoved = false;
       let isHorizontalSwipe = false;
       let swipeStartTime = 0;
-      
+
       const slider = document.getElementById("contentSlider");
       const SWIPE_THRESHOLD = 50;
       const MAX_SWIPE_TIME = 500;
@@ -794,9 +806,13 @@
 
       // モバイルデバイス判定
       function isMobileDevice() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-               ('ontouchstart' in window) || 
-               (navigator.maxTouchPoints > 0);
+        return (
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          ) ||
+          "ontouchstart" in window ||
+          navigator.maxTouchPoints > 0
+        );
       }
 
       // iOS Safari判定
@@ -819,7 +835,7 @@
       // タッチイベントハンドラー
       function handleTouchStart(e) {
         resetTouchState();
-        
+
         const touch = e.touches[0];
         startX = touch.clientX;
         startY = touch.clientY;
@@ -831,11 +847,11 @@
 
       function handleTouchMove(e) {
         if (!isDragging) return;
-        
+
         const touch = e.touches[0];
         currentX = touch.clientX;
         currentY = touch.clientY;
-        
+
         const deltaX = Math.abs(startX - currentX);
         const deltaY = Math.abs(startY - currentY);
 
@@ -854,22 +870,25 @@
 
       function handleTouchEnd(e) {
         if (!isDragging) return;
-        
+
         const touchDuration = Date.now() - swipeStartTime;
         const deltaX = startX - currentX;
-        
+
         // 水平スワイプでない場合はクリック動作を許可
         if (!isHorizontalSwipe) {
           resetTouchState();
           return;
         }
-        
+
         e.preventDefault();
         e.stopPropagation();
 
         // スワイプ判定と実行
         if (hasMoved && isHorizontalSwipe && touchDuration < MAX_SWIPE_TIME) {
           if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
+            // スワイプが実行された場合、短時間クリックを無効化
+            clickDisabledUntil = Date.now() + 300; // 300ms間クリック無効
+
             if (deltaX > 0 && currentSlideIndex < contentTypes.length - 1) {
               switchToTab(currentSlideIndex + 1);
             } else if (deltaX < 0 && currentSlideIndex > 0) {
@@ -884,7 +903,7 @@
       // タッチイベントリスナーの初期化
       function initializeTouchHandling() {
         if (!slider) {
-          console.error('contentSlider element not found');
+          console.error("contentSlider element not found");
           return;
         }
 
@@ -895,7 +914,7 @@
         slider.removeEventListener("touchcancel", handleTouchEnd);
 
         const eventOptions = { passive: false, capture: true };
-        
+
         // スライダーにイベントリスナーを追加
         slider.addEventListener("touchstart", handleTouchStart, eventOptions);
         slider.addEventListener("touchmove", handleTouchMove, eventOptions);
@@ -904,17 +923,29 @@
 
         // iOS Safari用：各セクションに直接追加
         if (isIOSSafari()) {
-          const sections = document.querySelectorAll('.content-section');
-          sections.forEach(section => {
+          const sections = document.querySelectorAll(".content-section");
+          sections.forEach((section) => {
             section.removeEventListener("touchstart", handleTouchStart);
             section.removeEventListener("touchmove", handleTouchMove);
             section.removeEventListener("touchend", handleTouchEnd);
             section.removeEventListener("touchcancel", handleTouchEnd);
-            
-            section.addEventListener("touchstart", handleTouchStart, eventOptions);
-            section.addEventListener("touchmove", handleTouchMove, eventOptions);
+
+            section.addEventListener(
+              "touchstart",
+              handleTouchStart,
+              eventOptions
+            );
+            section.addEventListener(
+              "touchmove",
+              handleTouchMove,
+              eventOptions
+            );
             section.addEventListener("touchend", handleTouchEnd, eventOptions);
-            section.addEventListener("touchcancel", handleTouchEnd, eventOptions);
+            section.addEventListener(
+              "touchcancel",
+              handleTouchEnd,
+              eventOptions
+            );
           });
         }
       }
@@ -1055,29 +1086,34 @@
       function setupCardClickHandlers() {
         // イベント委譲を使用してクリックイベントを処理
         const contentSlider = document.getElementById("contentSlider");
-        
+
         // 既存のクリックハンドラーを削除
         contentSlider.removeEventListener("click", handleCardClickDelegate);
-        
+
         // 新しいクリックハンドラーを追加
         contentSlider.addEventListener("click", handleCardClickDelegate);
       }
 
+      // スワイプ完了後の短時間クリック無効化用
+      let clickDisabledUntil = 0;
+
       // イベント委譲によるカードクリック処理を改善
       function handleCardClickDelegate(event) {
-        // スワイプ中の場合はクリックを無効化
-        if (hasMoved || isDragging) {
+        const now = Date.now();
+
+        // スワイプ中またはスワイプ完了直後の場合はクリックを無効化
+        if (hasMoved || isDragging || now < clickDisabledUntil) {
           event.preventDefault();
           event.stopPropagation();
           return;
         }
-        
+
         // .content-cardの要素を探す
         const card = event.target.closest(".content-card");
         if (card && card.dataset.cardId) {
           // 少し遅延を入れて確実にクリック処理を行う
           setTimeout(() => {
-            if (!hasMoved && !isDragging) {
+            if (!hasMoved && !isDragging && Date.now() >= clickDisabledUntil) {
               editContent(card.dataset.cardId);
             }
           }, 10);
@@ -1088,17 +1124,17 @@
       async function initializeAdmin() {
         // 初期コンテンツを生成
         await generateInitialContent();
-        
+
         // カードクリックハンドラーを設定
         setupCardClickHandlers();
-        
+
         // タッチハンドリングを初期化
         initializeTouchHandling();
-        
+
         // Lucideアイコンを初期化
         lucide.createIcons();
-        
-        console.log('Admin initialization completed');
+
+        console.log("Admin initialization completed");
       }
 
       // 検索機能（現在のタブ内のみ）
@@ -1233,6 +1269,89 @@
         video.load();
       }
 
+      // 共通: 文字数カウント更新関数
+      function updateCharacterCount(text) {
+        const characterCount = document.getElementById("characterCount");
+        if (characterCount) {
+          const count = text.length;
+          characterCount.textContent = count;
+
+          // 文字数による色分け（親要素のcharacter-countクラスを制御）
+          const characterCountContainer = characterCount.parentElement;
+          characterCountContainer.className = "character-count";
+          if (count > 450) {
+            characterCountContainer.classList.add("warning");
+          }
+          if (count > 500) {
+            characterCountContainer.classList.add("error");
+          }
+        }
+      }
+
+      // 共通: ステータステキスト変換関数
+      function getStatusText(status) {
+        const statusMap = {
+          published: "公開",
+          draft: "下書き",
+          scheduled: "予約投稿",
+        };
+        return statusMap[status] || "下書き";
+      }
+
+      // 共通: DOM要素安全取得・設定関数
+      function setElementText(elementId, text) {
+        const element = document.getElementById(elementId);
+        if (element) {
+          element.textContent = text;
+        }
+      }
+
+      function setElementValue(elementId, value) {
+        const element = document.getElementById(elementId);
+        if (element) {
+          element.value = value;
+        }
+      }
+
+      // 共通: タイプ別設定値リセット関数
+      function resetSettingsForType(type) {
+        const settings = {
+          tweet: {
+            category: "tweetCategoryValue",
+            publish: "tweetPublishValue",
+            defaults: { category: "スイング", publish: "下書き" },
+          },
+          image: {
+            category: "categoryValue-image",
+            description: "descriptionValue-image",
+            publish: "publishValue-image",
+            defaults: {
+              category: "スイング",
+              description: "説明を追加...",
+              publish: "下書き",
+            },
+          },
+          video: {
+            category: "categoryValue-video",
+            description: "descriptionValue-video",
+            publish: "publishValue-video",
+            defaults: {
+              category: "スイング",
+              description: "説明を追加...",
+              publish: "下書き",
+            },
+          },
+        };
+
+        const typeSettings = settings[type];
+        if (typeSettings) {
+          Object.keys(typeSettings.defaults).forEach((key) => {
+            const elementId = typeSettings[key];
+            setElementText(elementId, typeSettings.defaults[key]);
+          });
+        }
+      }
+
       function openEditScreenForType(
         type,
         videoFile = null,
@@ -1242,7 +1361,7 @@
         isEditMode = false;
 
         // コンテンツタイプを設定
-        document.getElementById("contentType").value = type;
+        setElementValue("contentType", type);
 
         // タイトルを設定
         const titleMap = {
@@ -1250,7 +1369,7 @@
           image: "新規画像作成",
           video: "新規動画作成",
         };
-        document.getElementById("editTitle").textContent = titleMap[type];
+        setElementText("editTitle", titleMap[type]);
 
         document.getElementById("contentForm").reset();
         document.getElementById("deleteSection").style.display = "none";
@@ -1260,12 +1379,9 @@
           const tweetEditor = document.getElementById("tweetEditor");
           const characterCount = document.getElementById("characterCount");
           if (tweetEditor) tweetEditor.textContent = "";
-          if (characterCount) characterCount.textContent = "0";
-
-          // 設定値をリセット
-          document.getElementById("tweetCategoryValue").textContent =
-            "スイング";
-          document.getElementById("tweetPublishValue").textContent = "下書き";
+          if (characterCount) {
+            updateCharacterCount("");
+          }
         } else if (type === "image") {
           const inlineTitle = document.getElementById("inlineTitle-image");
 
@@ -1275,16 +1391,9 @@
 
           if (inlineTitle) inlineTitle.textContent = "";
 
-          // 設定値をリセット
-          document.getElementById("categoryValue-image").textContent =
-            "スイング";
-          document.getElementById("descriptionValue-image").textContent =
-            "説明を追加...";
-          document.getElementById("publishValue-image").textContent = "下書き";
-
           // インライン編集機能を設定
           setupInlineTitleEdit();
-          
+
           // 初期状態では保存ボタンを無効化
           resetChangeState();
         } else if (type === "video") {
@@ -1304,17 +1413,14 @@
             // ファイル情報を保存
             selectedVideoFile = videoFile;
           }
-
-          // 設定値をリセット
-          document.getElementById("descriptionValue-video").textContent =
-            "説明を追加...";
-          document.getElementById("categoryValue-video").textContent = "スイング";
-          document.getElementById("publishValue-video").textContent = "下書き";
         }
+
+        // 設定値をリセット
+        resetSettingsForType(type);
 
         showEditScreen();
         handleTypeChange();
-        
+
         // 初期状態では保存ボタンを無効化
         resetChangeState();
       }
@@ -1405,7 +1511,7 @@
 
         // 画像データをリセット
         selectedImages = [];
-        
+
         // 変更フラグをリセット
         resetChangeState();
       }
@@ -1434,7 +1540,7 @@
             data.description || "";
           document.getElementById("publishStatus").value =
             data.status || "draft";
-          
+
           // 予約投稿の場合は公開日時も設定
           if (data.status === "scheduled" && data.scheduleDate) {
             document.getElementById("scheduleDate").value = data.scheduleDate;
@@ -1445,40 +1551,27 @@
 
           // タイプ別の設定値を適用
           if (data.type === "tweet") {
-            document.getElementById("tweetCategoryValue").textContent =
-              data.category;
-            const statusTextTweet = {
-              published: "公開",
-              draft: "下書き",
-              scheduled: "予約投稿"
-            };
-            document.getElementById("tweetPublishValue").textContent = statusTextTweet[data.status] || "下書き";
+            setElementText("tweetCategoryValue", data.category);
+            setElementText("tweetPublishValue", getStatusText(data.status));
 
             // つぶやき内容を設定
             const tweetEditor = document.getElementById("tweetEditor");
             if (tweetEditor) {
               tweetEditor.textContent = data.content;
               // 文字数カウントを更新
-              const characterCount = document.getElementById("characterCount");
-              if (characterCount) {
-                characterCount.textContent = data.content.length;
-              }
+              updateCharacterCount(data.content);
             }
           } else if (data.type === "image") {
             const inlineTitle = document.getElementById("inlineTitle-image");
             if (inlineTitle) {
               inlineTitle.textContent = data.title || "";
             }
-            document.getElementById("categoryValue-image").textContent =
-              data.category;
-            document.getElementById("descriptionValue-image").textContent =
-              data.description || "説明を追加...";
-            const statusTextImage = {
-              published: "公開",
-              draft: "下書き",
-              scheduled: "予約投稿"
-            };
-            document.getElementById("publishValue-image").textContent = statusTextImage[data.status] || "下書き";
+            setElementText("categoryValue-image", data.category);
+            setElementText(
+              "descriptionValue-image",
+              data.description || "説明を追加..."
+            );
+            setElementText("publishValue-image", getStatusText(data.status));
 
             // 既存画像のサンプルデータ読み込み（同期実行）
             // data-images属性からサンプル画像を取得
@@ -1495,36 +1588,37 @@
             setupInlineTitleEdit();
           } else if (data.type === "video") {
             // 動画編集インターフェースのセットアップ
-            const videoInlineTitle = document.getElementById("inlineTitle-video");
+            const videoInlineTitle =
+              document.getElementById("inlineTitle-video");
             if (videoInlineTitle) {
               videoInlineTitle.textContent = data.title || "";
             }
 
-            document.getElementById("descriptionValue-video").textContent =
-              data.description || "説明を追加...";
-            document.getElementById("categoryValue-video").textContent =
-              data.category;
-            const statusText = {
-              published: "公開",
-              draft: "下書き",
-              scheduled: "予約投稿"
-            };
-            let displayText = statusText[data.status] || "下書き";
-            
+            setElementText(
+              "descriptionValue-video",
+              data.description || "説明を追加..."
+            );
+            setElementText("categoryValue-video", data.category);
+
+            let displayText = getStatusText(data.status);
+
             // 予約投稿で日時が設定されている場合は日時も表示
             if (data.status === "scheduled" && data.scheduleDate) {
               const scheduleDateTime = new Date(data.scheduleDate);
-              const formattedDate = scheduleDateTime.toLocaleDateString('ja-JP', {
-                year: 'numeric',
-                month: 'numeric', 
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-              });
+              const formattedDate = scheduleDateTime.toLocaleDateString(
+                "ja-JP",
+                {
+                  year: "numeric",
+                  month: "numeric",
+                  day: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                }
+              );
               displayText = `予約投稿 (${formattedDate})`;
             }
-            
-            document.getElementById("publishValue-video").textContent = displayText;
+
+            setElementText("publishValue-video", displayText);
 
             // 既存動画の場合はサンプル画像を表示
             const thumbnailContainer = document.getElementById(
@@ -1547,12 +1641,15 @@
               const img = document.createElement("img");
               img.src = data.thumbnail;
               img.alt = "Video thumbnail";
-              thumbnailContainer.insertBefore(img, thumbnailContainer.firstChild);
+              thumbnailContainer.insertBefore(
+                img,
+                thumbnailContainer.firstChild
+              );
             }
 
             setupVideoInlineTitleEdit();
           }
-          
+
           // データの準備が完了してからUIを表示
           handleTypeChange();
         }
@@ -1614,7 +1711,7 @@
         sections.forEach((id) => {
           const element = document.getElementById(id);
           if (element) {
-            const shouldShow = 
+            const shouldShow =
               (type === "tweet" && id === "editSection-tweet") ||
               (type === "image" && id === "editSection-image") ||
               (type === "video" && id === "editSection-video");
@@ -1625,7 +1722,7 @@
         settingsLists.forEach((id) => {
           const element = document.getElementById(id);
           if (element) {
-            const shouldShow = 
+            const shouldShow =
               (type === "tweet" && id === "tweetSettingsList") ||
               (type === "image" && id === "settingsList-image") ||
               (type === "video" && id === "settingsList-video");
@@ -1705,7 +1802,7 @@
         if (!hasChanges) {
           return; // 変更がない場合は何もしない
         }
-        
+
         const publishStatus = document.getElementById("publishStatus").value;
         let statusText = "";
 
@@ -1728,7 +1825,7 @@
         } else {
           alert(`新しいコンテンツが${statusText}作成されました`);
         }
-        
+
         // 保存後は変更フラグをリセット
         resetChangeState();
         hideEditScreen();
@@ -1785,7 +1882,7 @@
               );
 
               lucide.createIcons();
-              
+
               // 変更フラグを立てる
               markAsChanged();
             };
@@ -1912,7 +2009,7 @@
       function updatePublishSetting(status) {
         // 現在のコンテンツタイプを取得
         const contentType = document.getElementById("contentType").value;
-        
+
         // 公開設定を更新
         document.getElementById("publishStatus").value = status;
         const statusText = {
@@ -1920,22 +2017,25 @@
           published: "公開",
           scheduled: "予約投稿",
         };
-        
+
         // タイプごとに適切な表示要素を更新
         let publishElement;
         if (contentType === "tweet") {
           publishElement = document.getElementById("tweetPublishValue");
         } else {
-          publishElement = document.getElementById(`publishValue-${contentType}`);
+          publishElement = document.getElementById(
+            `publishValue-${contentType}`
+          );
         }
-        
+
         if (publishElement) {
           let displayText = statusText[status];
-          
+
           if (status === "scheduled") {
-            const scheduleDate = document.getElementById("scheduleDateTime").value;
+            const scheduleDate =
+              document.getElementById("scheduleDateTime").value;
             let finalScheduleDate;
-            
+
             if (scheduleDate) {
               document.getElementById("scheduleDate").value = scheduleDate;
               finalScheduleDate = scheduleDate;
@@ -1946,60 +2046,64 @@
               now.setHours(now.getHours() + 1);
               // ユーザーのタイムゾーンに合わせてフォーマット
               const year = now.getFullYear();
-              const month = String(now.getMonth() + 1).padStart(2, '0');
-              const day = String(now.getDate()).padStart(2, '0');
-              const hours = String(now.getHours()).padStart(2, '0');
-              const minutes = String(now.getMinutes()).padStart(2, '0');
+              const month = String(now.getMonth() + 1).padStart(2, "0");
+              const day = String(now.getDate()).padStart(2, "0");
+              const hours = String(now.getHours()).padStart(2, "0");
+              const minutes = String(now.getMinutes()).padStart(2, "0");
               const defaultDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
               document.getElementById("scheduleDate").value = defaultDateTime;
               finalScheduleDate = defaultDateTime;
             }
-            
+
             // 予約投稿の場合は日時も表示
             const scheduleDateTime = new Date(finalScheduleDate);
-            const formattedDate = scheduleDateTime.toLocaleDateString('ja-JP', {
-              year: 'numeric',
-              month: 'numeric', 
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit'
+            const formattedDate = scheduleDateTime.toLocaleDateString("ja-JP", {
+              year: "numeric",
+              month: "numeric",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
             });
             displayText = `予約投稿 (${formattedDate})`;
           }
-          
+
           publishElement.textContent = displayText;
         }
       }
-      
+
       function updateDescriptionSetting(description) {
         const contentType = document.getElementById("contentType").value;
-        
+
         document.getElementById("contentDescription").value = description;
-        
+
         // つぶやきには説明がないため、画像と動画のみ対応
         if (contentType !== "tweet") {
-          const descriptionElement = document.getElementById(`descriptionValue-${contentType}`);
+          const descriptionElement = document.getElementById(
+            `descriptionValue-${contentType}`
+          );
           if (descriptionElement) {
             descriptionElement.textContent = description || "説明を追加...";
           }
         }
-        
+
         markAsChanged();
       }
-      
+
       function updateCategorySetting(category) {
         const contentType = document.getElementById("contentType").value;
-        
+
         document.getElementById("contentCategory").value = category;
-        
+
         // タイプごとに適切な表示要素を更新
         let categoryElement;
         if (contentType === "tweet") {
           categoryElement = document.getElementById("tweetCategoryValue");
         } else {
-          categoryElement = document.getElementById(`categoryValue-${contentType}`);
+          categoryElement = document.getElementById(
+            `categoryValue-${contentType}`
+          );
         }
-        
+
         if (categoryElement) {
           categoryElement.textContent = category;
         }
@@ -2008,10 +2112,10 @@
 
       // 変更追跡システム
       let hasChanges = false;
-      
+
       function markAsChanged() {
         hasChanges = true;
-        const saveButton = document.getElementById('saveButton');
+        const saveButton = document.getElementById("saveButton");
         if (saveButton) {
           saveButton.disabled = false;
         }
@@ -2019,7 +2123,7 @@
 
       function resetChangeState() {
         hasChanges = false;
-        const saveButton = document.getElementById('saveButton');
+        const saveButton = document.getElementById("saveButton");
         if (saveButton) {
           saveButton.disabled = true;
         }
@@ -2041,29 +2145,29 @@
           scheduleGroup.style.display =
             status === "scheduled" ? "block" : "none";
         }
-        
+
         // 即座に設定を更新
         updatePublishSetting(status);
-        
+
         // 変更フラグを立てる
         markAsChanged();
       }
 
       // サンプルデータ格納変数
       let sampleData = {};
-      
+
       // 外部JSONからサンプルデータを読み込む
       async function loadSampleData() {
         try {
-          const response = await fetch('./data/sampleData.json');
+          const response = await fetch("./data/sampleData.json");
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
           sampleData = await response.json();
-          console.log('サンプルデータが正常に読み込まれました');
+          console.log("サンプルデータが正常に読み込まれました");
           return sampleData;
         } catch (error) {
-          console.error('サンプルデータの読み込みに失敗しました:', error);
+          console.error("サンプルデータの読み込みに失敗しました:", error);
           // フォールバック用の最小限データ
           sampleData = {
             1: {
@@ -2072,8 +2176,8 @@
               category: "その他",
               content: "サンプルデータの読み込みに失敗しました",
               status: "draft",
-              date: new Date().toLocaleDateString('ja-JP')
-            }
+              date: new Date().toLocaleDateString("ja-JP"),
+            },
           };
           return sampleData;
         }
@@ -2083,24 +2187,30 @@
       async function generateInitialContent() {
         // サンプルデータを読み込み
         await loadSampleData();
-        
-        console.log('Generating content for all sections...');
-        
+
+        console.log("Generating content for all sections...");
+
         // 各セクションにデータを生成
         generateTweetContent(sampleData);
         generateImageContent(sampleData);
         generateVideoContent(sampleData);
-        
-        console.log('Content generation completed');
+
+        console.log("Content generation completed");
       }
 
       // つぶやきコンテンツ生成
       function generateTweetContent(data) {
         const tweetGrid = document.getElementById("tweetGrid");
-        const tweetData = Object.entries(data).filter(([id, item]) => item.type === "tweet");
-        
-        tweetGrid.innerHTML = tweetData.map(([id, item]) => `
-          <div class="content-card" data-type="tweet" data-category="${item.category}" data-status="${item.status}" data-card-id="${id}">
+        const tweetData = Object.entries(data).filter(
+          ([id, item]) => item.type === "tweet"
+        );
+
+        tweetGrid.innerHTML = tweetData
+          .map(
+            ([id, item]) => `
+          <div class="content-card" data-type="tweet" data-category="${
+            item.category
+          }" data-status="${item.status}" data-card-id="${id}">
             <div class="card-content tweet-content">
               <p class="tweet-text">${item.content}</p>
               <div class="content-meta-row">
@@ -2115,30 +2225,54 @@
                   </span>
                 </div>
                 <div class="content-status">
-                  <span class="status-badge ${item.status}">${item.status === 'published' ? '公開中' : item.status === 'scheduled' ? '予約投稿' : '下書き'}</span>
+                  <span class="status-badge ${item.status}">${
+              item.status === "published"
+                ? "公開中"
+                : item.status === "scheduled"
+                ? "予約投稿"
+                : "下書き"
+            }</span>
                 </div>
               </div>
             </div>
           </div>
-        `).join('');
+        `
+          )
+          .join("");
       }
 
       // 画像コンテンツ生成
       function generateImageContent(data) {
         const imageGrid = document.getElementById("imageGrid");
-        const imageData = Object.entries(data).filter(([id, item]) => item.type === "image");
-        
+        const imageData = Object.entries(data).filter(
+          ([id, item]) => item.type === "image"
+        );
+
         console.log(`Generating ${imageData.length} image content items`);
-        
-        imageGrid.innerHTML = imageData.map(([id, item]) => {
-          const imageCount = item.images ? item.images.length : 1;
-          const primaryImage = item.images && item.images[0] ? item.images[0].dataUrl : "images/sample1.jpg";
-          
-          return `
-            <div class="content-card" data-type="image" data-category="${item.category}" data-status="${item.status}" data-card-id="${id}" data-images='${JSON.stringify(item.images || [])}'>
+
+        imageGrid.innerHTML = imageData
+          .map(([id, item]) => {
+            const imageCount = item.images ? item.images.length : 1;
+            const primaryImage =
+              item.images && item.images[0]
+                ? item.images[0].dataUrl
+                : "images/sample1.jpg";
+
+            return `
+            <div class="content-card" data-type="image" data-category="${
+              item.category
+            }" data-status="${
+              item.status
+            }" data-card-id="${id}" data-images='${JSON.stringify(
+              item.images || []
+            )}'>
               <div class="card-thumbnail">
                 <img src="${primaryImage}" alt="${item.title}" />
-                ${imageCount > 1 ? `<div class="image-count-badge">${imageCount}枚</div>` : ''}
+                ${
+                  imageCount > 1
+                    ? `<div class="image-count-badge">${imageCount}枚</div>`
+                    : ""
+                }
               </div>
               <div class="card-content">
                 <h3 class="content-title">${item.title}</h3>
@@ -2154,24 +2288,37 @@
                     </span>
                   </div>
                   <div class="content-status">
-                    <span class="status-badge ${item.status}">${item.status === 'published' ? '公開中' : item.status === 'scheduled' ? '予約投稿' : '下書き'}</span>
+                    <span class="status-badge ${item.status}">${
+              item.status === "published"
+                ? "公開中"
+                : item.status === "scheduled"
+                ? "予約投稿"
+                : "下書き"
+            }</span>
                   </div>
                 </div>
               </div>
             </div>
           `;
-        }).join('');
+          })
+          .join("");
       }
 
       // 動画コンテンツ生成
       function generateVideoContent(data) {
         const videoGrid = document.getElementById("videoGrid");
-        const videoData = Object.entries(data).filter(([id, item]) => item.type === "video");
-        
+        const videoData = Object.entries(data).filter(
+          ([id, item]) => item.type === "video"
+        );
+
         console.log(`Generating ${videoData.length} video content items`);
-        
-        videoGrid.innerHTML = videoData.map(([id, item]) => `
-          <div class="content-card" data-type="video" data-category="${item.category}" data-status="${item.status}" data-card-id="${id}">
+
+        videoGrid.innerHTML = videoData
+          .map(
+            ([id, item]) => `
+          <div class="content-card" data-type="video" data-category="${
+            item.category
+          }" data-status="${item.status}" data-card-id="${id}">
             <div class="card-thumbnail">
               <img src="${item.thumbnail}" alt="${item.title}" />
               <div class="content-duration">${item.duration}</div>
@@ -2190,12 +2337,39 @@
                   </span>
                 </div>
                 <div class="content-status">
-                  <span class="status-badge ${item.status}">${item.status === 'published' ? '公開中' : item.status === 'scheduled' ? '予約投稿' : '下書き'}</span>
+                  <span class="status-badge ${item.status}">${
+              item.status === "published"
+                ? "公開中"
+                : item.status === "scheduled"
+                ? "予約投稿"
+                : "下書き"
+            }</span>
                 </div>
               </div>
             </div>
           </div>
-        `).join('');
+        `
+          )
+          .join("");
+      }
+
+      // 共通: 文字数カウント更新関数
+      function updateCharacterCount(text) {
+        const characterCount = document.getElementById("characterCount");
+        if (characterCount) {
+          const count = text.length;
+          characterCount.textContent = count;
+
+          // 文字数による色分け（親要素のcharacter-countクラスを制御）
+          const characterCountContainer = characterCount.parentElement;
+          characterCountContainer.className = "character-count";
+          if (count > 450) {
+            characterCountContainer.classList.add("warning");
+          }
+          if (count > 500) {
+            characterCountContainer.classList.add("error");
+          }
+        }
       }
 
       // つぶやきエディター設定
@@ -2208,25 +2382,16 @@
           tweetEditor.addEventListener("input", function () {
             markAsChanged();
           });
-          
+
           // 文字数カウント機能
           tweetEditor.addEventListener("input", function () {
             const text = this.textContent || "";
-            const count = text.length;
-            characterCount.textContent = count;
-
-            // 文字数による色分け
-            characterCount.className = "character-count";
-            if (count > 450) {
-              characterCount.classList.add("warning");
-            }
-            if (count > 500) {
-              characterCount.classList.add("error");
-            }
+            updateCharacterCount(text);
           });
 
           // 初期値設定
-          characterCount.textContent = "0";
+          const initialText = tweetEditor.textContent || "";
+          updateCharacterCount(initialText);
         }
       }
 
@@ -2283,7 +2448,7 @@
 
               selectedImages.push(imageData);
               updateImageGrid();
-              
+
               // 変更フラグを立てる
               markAsChanged();
             };
@@ -2316,19 +2481,27 @@
           grid.style.display = "grid";
 
           // グリッドクラス更新（画像枚数で計算）
-          const totalItems = selectedImages.length + (selectedImages.length < maxImages ? 1 : 0);
+          const totalItems =
+            selectedImages.length + (selectedImages.length < maxImages ? 1 : 0);
           grid.className = `image-grid count-${selectedImages.length + 1}`;
 
           // 画像アイテム生成
           const imageItems = selectedImages.map(
             (image, index) => `
             <div class="image-item" data-id="${image.id}" draggable="true">
-              <img src="${image.dataUrl}" alt="${image.name.replace(/"/g, '&quot;')}" />
+              <img src="${image.dataUrl}" alt="${image.name.replace(
+              /"/g,
+              "&quot;"
+            )}" />
               <div class="image-item-overlay">
-                <button class="image-item-btn btn-preview" onclick="previewImage('${image.id}')" title="プレビュー">
+                <button class="image-item-btn btn-preview" onclick="previewImage('${
+                  image.id
+                }')" title="プレビュー">
                   <i data-lucide="eye"></i>
                 </button>
-                <button class="image-item-btn btn-delete" onclick="removeImage('${image.id}')" title="削除">
+                <button class="image-item-btn btn-delete" onclick="removeImage('${
+                  image.id
+                }')" title="削除">
                   <i data-lucide="x"></i>
                 </button>
               </div>
@@ -2462,7 +2635,7 @@
           }
 
           updateImageGrid();
-          
+
           // 変更フラグを立てる
           markAsChanged();
         }
@@ -2558,7 +2731,7 @@
           titleElement.addEventListener("click", function () {
             this.focus();
           });
-          
+
           titleElement.addEventListener("input", function () {
             markAsChanged();
           });
@@ -2586,7 +2759,7 @@
           titleElement.addEventListener("click", function () {
             this.focus();
           });
-          
+
           titleElement.addEventListener("input", function () {
             markAsChanged();
           });
@@ -2621,7 +2794,7 @@
       initializePagination();
 
       // 管理画面の初期化（非同期実行）
-      document.addEventListener('DOMContentLoaded', async function() {
+      document.addEventListener("DOMContentLoaded", async function () {
         await initializeAdmin();
       });
     </script>
