@@ -3,8 +3,8 @@
   --dark-green: #1A3A1D;
   --gold: #D4AF37;
   --gold-gradient: linear-gradient(135deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%);
-  --platinum-gradient: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 50%, #CBD5E0 100%);
-  --platinum-gradient-dark: linear-gradient(135deg, #4A5568 0%, #718096 50%, #A0AEC0 100%);
+  --platinum-gradient: linear-gradient(135deg, #E2E8F0, #F1F5F9, #FFFFFF, #F1F5F9, #E2E8F0);
+  --platinum-gradient-dark: linear-gradient(135deg, #4A5568, #64748B, #94A3B8, #64748B, #4A5568);
   --bronze: #CD7F32;
   --dark-gold: #B8941F;
   --white: #FFFFFF;
@@ -29,6 +29,37 @@
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 16px;
+}
+
+/* プラチナ金属光沢アニメーション */
+@keyframes platinumShine {
+    0% { 
+        background-position: 0% 0%;
+        transform: scale(1);
+    }
+    50% { 
+        background-position: 100% 100%;
+        transform: scale(1.005);
+    }
+    100% { 
+        background-position: 0% 0%;
+        transform: scale(1);
+    }
+}
+
+@keyframes platinumShineDark {
+    0% { 
+        background-position: 0% 0%;
+        box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.08);
+    }
+    50% { 
+        background-position: 100% 100%;
+        box-shadow: inset 0 0 25px rgba(255, 255, 255, 0.2);
+    }
+    100% { 
+        background-position: 0% 0%;
+        box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.08);
+    }
 }
 
 * {
@@ -139,13 +170,19 @@ a:hover {
 
 .btn-platinum {
   background: var(--platinum-gradient-dark);
+  background-size: 200% 200%;
   color: var(--white);
+  animation: platinumShineDark 8s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-platinum:hover {
   background: var(--platinum-gradient-dark);
+  background-size: 200% 200%;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(113, 128, 150, 0.4);
+  animation: platinumShineDark 4s ease-in-out infinite;
 }
 
 .btn-outline {
@@ -450,7 +487,6 @@ a:hover {
   background: var(--white);
   border: 2px solid var(--gold);
   color: var(--dark-green);
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
 }
 
 .plan-card.plan-gold h4,
@@ -475,14 +511,21 @@ a:hover {
 /* プラン別スタイル - プラチナ */
 .plan-card.plan-platinum {
   background: var(--platinum-gradient);
+  background-size: 200% 200%;
   border: 2px solid #718096;
   color: var(--dark-green);
+  animation: platinumShine 10s ease-in-out infinite;
+  position: relative;
 }
 
 .plan-card.plan-platinum h4,
 .plan-card.plan-platinum h5 {
   color: var(--white);
   background: var(--platinum-gradient-dark);
+  background-size: 200% 200%;
+  animation: platinumShineDark 10s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
 }
 
 .plan-card.plan-platinum .price {

@@ -83,7 +83,11 @@ body {
 
 .membership-badge.platinum {
   background: var(--platinum-gradient-dark);
+  background-size: 200% 200%;
   color: var(--white);
+  animation: platinumShineDark 8s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
 }
 
 .badge-icon {
@@ -262,15 +266,21 @@ body {
 
 .current-plan-compact.platinum {
   background: var(--platinum-gradient-dark);
+  background-size: 200% 200%;
   border: 2px solid #718096;
   box-shadow: 0 4px 15px rgba(113, 128, 150, 0.3);
+  animation: platinumShineDark 12s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
 }
 
 .current-plan-compact.platinum *:not(.status-badge-compact) {
   background: var(--platinum-gradient);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: platinumShine 12s ease-in-out infinite;
 }
 
 /* プラン別価格カラー */
@@ -280,10 +290,7 @@ body {
 }
 
 .current-plan-compact.gold .price-compact {
-  background: linear-gradient(45deg, #ffffff, #fef3c7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--white);
   font-weight: 700;
 }
 
@@ -299,10 +306,7 @@ body {
 }
 
 .current-plan-compact.gold .plan-name-compact {
-  background: linear-gradient(45deg, #ffffff, #fef3c7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--white);
   font-weight: 600;
 }
 
@@ -706,7 +710,6 @@ input:checked + .slider:before {
 /* 価格・特徴・見出しは共通スタイルを使用 */
 
 .plan-card .change-plan-btn {
-  width: 100%;
   font-size: 0.8rem;
   font-weight: 600;
 }
@@ -748,8 +751,12 @@ input:checked + .slider:before {
 
 .plan-card.plan-platinum .change-plan-btn {
   background: var(--platinum-gradient-dark);
+  background-size: 200% 200%;
   color: var(--white);
   border: none;
+  animation: platinumShineDark 8s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
 }
 
 .plan-card.plan-platinum .change-note {
@@ -759,13 +766,12 @@ input:checked + .slider:before {
 /* 現在利用中プランのスタイル */
 .plan-card.current {
   position: relative;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   padding-top: 1.5rem;
 }
 
 .plan-card.current .current-badge {
   position: absolute;
-  top: -8px;
+  top: -13px;
   left: 50%;
   transform: translateX(-50%);
   background: var(--white);
@@ -1053,7 +1059,77 @@ input:checked + .slider:before {
   box-shadow: none;
 }
 
+/* プラン切り替えプレビュー機能 */
+.plan-preview-controls {
+  margin-bottom: 2rem;
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--gray-light);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-medium);
+}
+
+.preview-note {
+  margin: 0 0 1rem 0;
+  font-size: 0.875rem;
+  color: var(--gray-dark);
+  font-style: italic;
+}
+
+.preview-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.preview-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--gray-medium);
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--gray-dark);
+  min-width: 120px;
+}
+
+.preview-btn:hover {
+  border-color: var(--primary-green);
+  background: var(--off-white);
+  transform: translateY(-1px);
+}
+
+.preview-btn.active {
+  background: var(--primary-green);
+  color: var(--white);
+  border-color: var(--primary-green);
+  box-shadow: 0 4px 8px rgba(44, 85, 48, 0.3);
+}
+
+.preview-btn.active:hover {
+  background: var(--dark-green);
+  border-color: var(--dark-green);
+}
+
 @media (max-width: 768px) {
+  .plan-preview-controls {
+    padding: 1rem;
+  }
+  
+  .preview-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .preview-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+  
   .profile-header {
     flex-direction: column;
     text-align: center;

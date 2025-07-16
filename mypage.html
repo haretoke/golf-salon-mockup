@@ -31,22 +31,31 @@
     </header>
 
     <main class="main-content">
+        <!-- プラン切り替えプレビュー機能 -->
+        <div class="plan-preview-controls">
+            <p class="preview-note">※デザイン確認用のプレビュー機能</p>
+            <div class="preview-buttons">
+                <button class="preview-btn" data-plan="standard">スタンダード</button>
+                <button class="preview-btn active" data-plan="gold">ゴールド</button>
+                <button class="preview-btn" data-plan="platinum">プラチナ</button>
+            </div>
+        </div>
+        
         <div class="profile-section">
             <div class="profile-header">
                 <div class="profile-info">
                     <h2 class="profile-name">山田 太郎</h2>
                     <p class="profile-email">yamada@example.com</p>
                     <div class="membership-badges">
-                        (全プラン表示サンプル)
-                        <div class="membership-badge standard">
+                        <div class="membership-badge standard" style="display: none;">
                             <i data-lucide="user" class="badge-icon"></i>
                             スタンダード
                         </div>
-                        <div class="membership-badge gold">
+                        <div class="membership-badge gold" style="display: inline-flex;">
                             <i data-lucide="star" class="badge-icon"></i>
                             ゴールド
                         </div>
-                        <div class="membership-badge platinum">
+                        <div class="membership-badge platinum" style="display: none;">
                             <i data-lucide="crown" class="badge-icon"></i>
                             プラチナ
                         </div>
@@ -129,9 +138,9 @@
             </section>
 
             <section class="settings-card">
-                <h3 class="card-title">サブスクリプション<br>(全プラン表示サンプル)</h3>
+                <h3 class="card-title">サブスクリプション</h3>
                 <div class="current-plan-samples">
-                    <div class="current-plan-compact standard">
+                    <div class="current-plan-compact standard" style="display: none;">
                         <div class="plan-status-compact">
                             <span class="status-badge-compact active">利用中</span>
                             <span class="plan-name-compact">スタンダード</span>
@@ -150,7 +159,7 @@
                         </div>
                     </div>
                     
-                    <div class="current-plan-compact gold">
+                    <div class="current-plan-compact gold" style="display: flex;">
                         <div class="plan-status-compact">
                             <span class="status-badge-compact active">利用中</span>
                             <span class="plan-name-compact">ゴールド</span>
@@ -170,7 +179,7 @@
                         </div>
                     </div>
                     
-                    <div class="current-plan-compact platinum">
+                    <div class="current-plan-compact platinum" style="display: none;">
                         <div class="plan-status-compact">
                             <span class="status-badge-compact active">利用中</span>
                             <span class="plan-name-compact">プラチナ</span>
@@ -221,6 +230,7 @@
                 <h3 class="card-title">プラン変更</h3>
                 <div class="plan-options">
                     <div class="plan-card plan-standard">
+                        <div class="current-badge">現在のプラン</div>
                         <h5>スタンダード</h5>
                         <div class="plan-price">
                             <span class="price">¥2,200</span>
@@ -246,12 +256,14 @@
                             <li>動画・画像・つぶやき閲覧</li>
                             <li>オンラインレッスン月1回</li>
                         </ul>
-                        <button class="btn btn-sm change-plan-btn" disabled>
+                        <button class="btn btn-sm change-plan-btn" data-plan="gold" data-price="6600" disabled>
                             現在利用中
                         </button>
+                        <p class="change-note"></p>
                     </div>
 
                     <div class="plan-card plan-platinum">
+                        <div class="current-badge">現在のプラン</div>
                         <h5>プラチナ</h5>
                         <div class="plan-price">
                             <span class="price">¥9,900</span>
@@ -702,21 +714,36 @@
             const details = document.getElementById('planChangeDetails');
             const confirmBtn = document.getElementById('confirmPlanChange');
 
+            const planOrder = { 'standard': 1, 'gold': 2, 'platinum': 3 };
+            const currentPlanType = document.querySelector('.preview-btn.active').dataset.plan;
+            const currentLevel = planOrder[currentPlanType];
+            const targetLevel = planOrder[selectedPlan];
+
             let planName = '';
             let changeType = '';
             let additionalInfo = '';
+            let btnClass = '';
 
+            // プラン名の設定
             if (selectedPlan === 'standard') {
                 planName = 'スタンダード';
-                changeType = 'ダウングレード';
-                additionalInfo = '翌月から適用されます。';
-                confirmBtn.className = 'btn btn-primary';
+                btnClass = 'btn btn-primary';
+            } else if (selectedPlan === 'gold') {
+                planName = 'ゴールド';
+                btnClass = 'btn btn-gold';
             } else if (selectedPlan === 'platinum') {
                 planName = 'プラチナ';
+                btnClass = 'btn btn-platinum';
+            }
+
+            // アップグレード/ダウングレードの判定
+            if (targetLevel > currentLevel) {
                 changeType = 'アップグレード';
                 const difference = selectedPrice - currentPrice;
                 additionalInfo = `差額¥${difference.toLocaleString()}を即時課金いたします。`;
-                confirmBtn.className = 'btn btn-platinum';
+            } else if (targetLevel < currentLevel) {
+                changeType = 'ダウングレード';
+                additionalInfo = '翌月から適用されます。';
             }
 
             details.innerHTML = `
@@ -725,6 +752,7 @@
                 <p><strong>適用時期:</strong> ${additionalInfo}</p>
             `;
 
+            confirmBtn.className = btnClass;
             modal.style.display = 'flex';
         }
 
@@ -743,6 +771,153 @@
         }
 
         // Lucide Icons初期化
+        // プラン切り替えプレビュー機能
+        const planData = {
+            standard: {
+                name: 'スタンダード',
+                price: '¥2,200',
+                features: ['動画・画像・つぶやき閲覧'],
+                badgeClass: 'standard',
+                avatarBorderColor: 'var(--primary-green)',
+                icon: 'user'
+            },
+            gold: {
+                name: 'ゴールド',
+                price: '¥6,600',
+                features: ['動画・画像・つぶやき閲覧', 'オンラインレッスン月1回'],
+                badgeClass: 'gold',
+                avatarBorderColor: 'var(--gold)',
+                icon: 'star'
+            },
+            platinum: {
+                name: 'プラチナ',
+                price: '¥9,900',
+                features: ['動画・画像・つぶやき閲覧', 'オンラインレッスン月2回'],
+                badgeClass: 'platinum',
+                avatarBorderColor: '#718096',
+                icon: 'crown'
+            }
+        };
+
+        function switchPlan(planType) {
+            const plan = planData[planType];
+            
+            // ボタンのアクティブ状態を切り替え
+            document.querySelectorAll('.preview-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-plan="${planType}"]`).classList.add('active');
+            
+            // membership-badgesの表示制御
+            document.querySelectorAll('.membership-badge').forEach(badge => {
+                badge.style.display = 'none';
+            });
+            document.querySelector(`.membership-badge.${plan.badgeClass}`).style.display = 'inline-flex';
+            
+            // current-plan-samplesの表示制御
+            document.querySelectorAll('.current-plan-compact').forEach(compact => {
+                compact.style.display = 'none';
+            });
+            document.querySelector(`.current-plan-compact.${planType}`).style.display = 'flex';
+            
+            // プラン変更セクションの現在プランマーカー移動
+            const planOrder = { 'standard': 1, 'gold': 2, 'platinum': 3 };
+            const currentPlanLevel = planOrder[planType];
+            
+            document.querySelectorAll('.plan-card').forEach(card => {
+                card.classList.remove('current');
+                const badge = card.querySelector('.current-badge');
+                if (badge) {
+                    badge.style.display = 'none';
+                }
+                const btn = card.querySelector('.change-plan-btn');
+                if (btn) {
+                    btn.disabled = false;
+                    btn.style.background = '';
+                    btn.style.color = '';
+                    btn.style.cursor = '';
+                    // ボタンテキストを「このプランに変更」に戻す
+                    btn.textContent = 'このプランに変更';
+                }
+                
+                // change-noteの更新
+                const changeNote = card.querySelector('.change-note');
+                if (changeNote) {
+                    // プランのタイプを取得
+                    let targetPlanType = null;
+                    if (card.classList.contains('plan-standard')) targetPlanType = 'standard';
+                    else if (card.classList.contains('plan-gold')) targetPlanType = 'gold';
+                    else if (card.classList.contains('plan-platinum')) targetPlanType = 'platinum';
+                    
+                    if (targetPlanType) {
+                        const targetPlanLevel = planOrder[targetPlanType];
+                        
+                        if (targetPlanLevel > currentPlanLevel) {
+                            // アップグレード
+                            const currentPlanPrice = planType === 'standard' ? 2200 : (planType === 'gold' ? 6600 : 9900);
+                            const targetPlanPrice = targetPlanType === 'standard' ? 2200 : (targetPlanType === 'gold' ? 6600 : 9900);
+                            const difference = targetPlanPrice - currentPlanPrice;
+                            changeNote.textContent = `差額¥${difference.toLocaleString()}を即時課金`;
+                            changeNote.className = 'change-note upgrade';
+                            changeNote.style.display = 'block';
+                        } else if (targetPlanLevel < currentPlanLevel) {
+                            // ダウングレード
+                            changeNote.textContent = '翌月から適用されます';
+                            changeNote.className = 'change-note downgrade';
+                            changeNote.style.display = 'block';
+                        } else {
+                            changeNote.style.display = 'none';
+                        }
+                    }
+                }
+            });
+            
+            const currentPlanCard = document.querySelector(`.plan-card.plan-${planType}`);
+            if (currentPlanCard) {
+                currentPlanCard.classList.add('current');
+                const badge = currentPlanCard.querySelector('.current-badge');
+                if (badge) {
+                    badge.style.display = 'block';
+                }
+                const btn = currentPlanCard.querySelector('.change-plan-btn');
+                if (btn) {
+                    btn.disabled = true;
+                    btn.style.background = 'var(--gray-medium)';
+                    btn.style.color = 'var(--gray-dark)';
+                    btn.style.cursor = 'not-allowed';
+                    // 現在のプランのボタンテキストを「現在利用中」に変更
+                    btn.textContent = '現在利用中';
+                }
+                // 現在のプランのchange-noteは非表示
+                const changeNote = currentPlanCard.querySelector('.change-note');
+                if (changeNote) {
+                    changeNote.style.display = 'none';
+                }
+            }
+            
+            // プラン変更モーダル用の現在価格を更新
+            if (planType === 'standard') {
+                currentPrice = 2200;
+            } else if (planType === 'gold') {
+                currentPrice = 6600;
+            } else if (planType === 'platinum') {
+                currentPrice = 9900;
+            }
+        }
+
+        // プレビューボタンのイベントリスナー
+        document.querySelectorAll('.preview-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const planType = this.getAttribute('data-plan');
+                switchPlan(planType);
+            });
+        });
+
+        // 初期状態でゴールドプランを表示
+        document.addEventListener('DOMContentLoaded', function() {
+            switchPlan('gold');
+        });
+
         lucide.createIcons();
         
     </script>
