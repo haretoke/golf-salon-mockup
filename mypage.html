@@ -21,28 +21,11 @@
                         <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                     </svg>
                 </a>
-                <div class="nav-dropdown">
-                    <a href="#" class="nav-icon active" id="userMenuToggle">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                        </svg>
-                    </a>
-                    <div class="nav-dropdown-menu" id="userDropdownMenu">
-                        <a href="mypage.html" class="nav-dropdown-item">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                            </svg>
-                            アカウント設定
-                        </a>
-                        <a href="billing.html" class="nav-dropdown-item">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                                <line x1="2" y1="9" x2="22" y2="9"></line>
-                            </svg>
-                            プラン管理
-                        </a>
-                    </div>
-                </div>
+                <a href="mypage.html" class="nav-icon active">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                </a>
             </nav>
         </div>
     </header>
@@ -53,9 +36,20 @@
                 <div class="profile-info">
                     <h2 class="profile-name">山田 太郎</h2>
                     <p class="profile-email">yamada@example.com</p>
-                    <div class="membership-badge premium">
-                        <i data-lucide="star" class="badge-icon"></i>
-                        プランBメンバー
+                    <div class="membership-badges">
+                        (全プラン表示サンプル)
+                        <div class="membership-badge standard">
+                            <i data-lucide="user" class="badge-icon"></i>
+                            スタンダード
+                        </div>
+                        <div class="membership-badge gold">
+                            <i data-lucide="star" class="badge-icon"></i>
+                            ゴールド
+                        </div>
+                        <div class="membership-badge platinum">
+                            <i data-lucide="crown" class="badge-icon"></i>
+                            プラチナ
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,7 +84,6 @@
                         <select class="edit-input" data-field="gender" style="display: none;">
                             <option value="男性">男性</option>
                             <option value="女性">女性</option>
-                            <option value="その他">その他</option>
                         </select>
                     </div>
                 </div>
@@ -136,35 +129,145 @@
             </section>
 
             <section class="settings-card">
-                <h3 class="card-title">サブスクリプション</h3>
-                <div class="current-plan-compact">
-                    <div class="plan-status-compact">
-                        <span class="status-badge-compact active">利用中</span>
-                        <span class="plan-name-compact">プランB</span>
-                        <div class="plan-price-compact">
-                            <span class="price-compact">¥6,600</span>
-                            <span class="period-compact">/月</span>
+                <h3 class="card-title">サブスクリプション<br>(全プラン表示サンプル)</h3>
+                <div class="current-plan-samples">
+                    <div class="current-plan-compact standard">
+                        <div class="plan-status-compact">
+                            <span class="status-badge-compact active">利用中</span>
+                            <span class="plan-name-compact">スタンダード</span>
+                            <div class="plan-price-compact">
+                                <span class="price-compact">¥2,200</span>
+                                <span class="period-compact">/月</span>
+                            </div>
+                        </div>
+                        <div class="plan-features-compact">
+                            <ul>
+                                <li>動画・画像・つぶやき閲覧</li>
+                            </ul>
+                        </div>
+                        <div class="billing-info-compact">
+                            <p><small>※毎月1日に自動課金されます</small></p>
                         </div>
                     </div>
-                    <div class="plan-features-compact">
-                        <ul>
-                            <li>全コンテンツ閲覧</li>
-                            <li>オンラインレッスン月1回</li>
-                        </ul>
+                    
+                    <div class="current-plan-compact gold">
+                        <div class="plan-status-compact">
+                            <span class="status-badge-compact active">利用中</span>
+                            <span class="plan-name-compact">ゴールド</span>
+                            <div class="plan-price-compact">
+                                <span class="price-compact">¥6,600</span>
+                                <span class="period-compact">/月</span>
+                            </div>
+                        </div>
+                        <div class="plan-features-compact">
+                            <ul>
+                                <li>動画・画像・つぶやき閲覧</li>
+                                <li>オンラインレッスン月1回</li>
+                            </ul>
+                        </div>
+                        <div class="billing-info-compact">
+                            <p><small>※毎月1日に自動課金されます</small></p>
+                        </div>
                     </div>
-                    <div class="billing-info-compact">
-                        <p><strong>支払い方法:</strong> ****-****-****-1234</p>
-                        <p><small>※毎月1日に自動課金されます</small></p>
+                    
+                    <div class="current-plan-compact platinum">
+                        <div class="plan-status-compact">
+                            <span class="status-badge-compact active">利用中</span>
+                            <span class="plan-name-compact">プラチナ</span>
+                            <div class="plan-price-compact">
+                                <span class="price-compact">¥9,900</span>
+                                <span class="period-compact">/月</span>
+                            </div>
+                        </div>
+                        <div class="plan-features-compact">
+                            <ul>
+                                <li>動画・画像・つぶやき閲覧</li>
+                                <li>オンラインレッスン月2回</li>
+                            </ul>
+                        </div>
+                        <div class="billing-info-compact">
+                            <p><small>※毎月1日に自動課金されます</small></p>
+                        </div>
                     </div>
-                </div>
-                <div class="subscription-actions">
-                    <button class="btn btn-outline" onclick="window.location.href='billing.html'">
-                        <i data-lucide="settings" style="width: 16px; height: 16px; margin-right: 0.5rem;"></i>
-                        プラン管理
-                    </button>
                 </div>
             </section>
 
+            <!-- クレジットカード情報詳細 -->
+            <section class="settings-card">
+                <h3 class="card-title">クレジットカード情報</h3>
+                <div class="payment-card-new">
+                    <div class="card-visual-new">
+                        <div class="card-brand-new">
+                            <i data-lucide="credit-card" class="brand-icon"></i>
+                            <span class="brand-name">Visa</span>
+                        </div>
+                        <div class="card-number-new">**** **** **** 1234</div>
+                        <div class="card-details-new">
+                            <span class="card-expiry">有効期限: 12/27</span>
+                            <span class="card-holder">YAMADA TARO</span>
+                        </div>
+                    </div>
+                    <div class="payment-actions-new">
+                        <button class="btn btn-outline btn-sm" onclick="changePaymentMethod()">
+                            <i data-lucide="edit-3"></i>
+                            変更
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- プラン変更 -->
+            <section class="settings-card">
+                <h3 class="card-title">プラン変更</h3>
+                <div class="plan-options">
+                    <div class="plan-card plan-standard">
+                        <h5>スタンダード</h5>
+                        <div class="plan-price">
+                            <span class="price">¥2,200</span>
+                            <span class="period">/月</span>
+                        </div>
+                        <ul class="plan-features">
+                            <li>動画・画像・つぶやき閲覧</li>
+                        </ul>
+                        <button class="btn btn-sm change-plan-btn" data-plan="standard" data-price="2200">
+                            このプランに変更
+                        </button>
+                        <p class="change-note downgrade">翌月から適用されます</p>
+                    </div>
+
+                    <div class="plan-card plan-gold current">
+                        <div class="current-badge">現在のプラン</div>
+                        <h5>ゴールド</h5>
+                        <div class="plan-price">
+                            <span class="price">¥6,600</span>
+                            <span class="period">/月</span>
+                        </div>
+                        <ul class="plan-features">
+                            <li>動画・画像・つぶやき閲覧</li>
+                            <li>オンラインレッスン月1回</li>
+                        </ul>
+                        <button class="btn btn-sm change-plan-btn" disabled>
+                            現在利用中
+                        </button>
+                    </div>
+
+                    <div class="plan-card plan-platinum">
+                        <h5>プラチナ</h5>
+                        <div class="plan-price">
+                            <span class="price">¥9,900</span>
+                            <span class="period">/月</span>
+                        </div>
+                        <ul class="plan-features">
+                            <li>動画・画像・つぶやき閲覧</li>
+                            <li>オンラインレッスン月2回</li>
+                        </ul>
+                        <button class="btn btn-sm change-plan-btn" data-plan="platinum" data-price="9900">
+                            このプランに変更
+                        </button>
+                        <p class="change-note upgrade">差額¥3,300を即時課金</p>
+                    </div>
+                </div>
+            </section>
 
         </div>
 
@@ -283,6 +386,31 @@
         </div>
     </div>
 
+    <!-- プラン変更確認モーダル -->
+    <div id="planChangeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>プラン変更の確認</h3>
+                <span class="modal-close" onclick="hidePlanChangeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="planChangeDetails"></div>
+                <div class="important-note" style="background-color: var(--off-white); border: 1px solid var(--gray-medium); border-radius: var(--radius-md); padding: 1rem; margin: 1rem 0;">
+                    <p style="margin: 0 0 0.5rem 0;"><strong>重要な注意事項:</strong></p>
+                    <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.875rem;">
+                        <li>アップグレード：即時反映され、月額差額を即時課金（日割りなし）</li>
+                        <li>ダウングレード：翌月から適用</li>
+                        <li>決済は安全なシステムで処理されます</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="hidePlanChangeModal()">キャンセル</button>
+                <button class="btn btn-primary" id="confirmPlanChange" onclick="confirmPlanChange()">変更する</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // 退会適用日を計算する関数
         function calculateWithdrawalDate() {
@@ -394,11 +522,14 @@
         window.onclick = function(event) {
             const withdrawModal = document.getElementById('withdrawModal');
             const contactModal = document.getElementById('contactModal');
+            const planChangeModal = document.getElementById('planChangeModal');
             
             if (event.target === withdrawModal) {
                 hideWithdrawModal();
             } else if (event.target === contactModal) {
                 hideContactModal();
+            } else if (event.target === planChangeModal) {
+                hidePlanChangeModal();
             }
         }
 
@@ -552,26 +683,68 @@
         `;
         document.head.appendChild(style);
 
+        // プラン変更機能
+        let selectedPlan = null;
+        let selectedPrice = null;
+        let currentPrice = 6600;
+
+        // プラン変更ボタンクリック
+        document.querySelectorAll('.change-plan-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                selectedPlan = this.dataset.plan;
+                selectedPrice = parseInt(this.dataset.price);
+                showPlanChangeModal();
+            });
+        });
+
+        function showPlanChangeModal() {
+            const modal = document.getElementById('planChangeModal');
+            const details = document.getElementById('planChangeDetails');
+            const confirmBtn = document.getElementById('confirmPlanChange');
+
+            let planName = '';
+            let changeType = '';
+            let additionalInfo = '';
+
+            if (selectedPlan === 'standard') {
+                planName = 'スタンダード';
+                changeType = 'ダウングレード';
+                additionalInfo = '翌月から適用されます。';
+                confirmBtn.className = 'btn btn-primary';
+            } else if (selectedPlan === 'platinum') {
+                planName = 'プラチナ';
+                changeType = 'アップグレード';
+                const difference = selectedPrice - currentPrice;
+                additionalInfo = `差額¥${difference.toLocaleString()}を即時課金いたします。`;
+                confirmBtn.className = 'btn btn-platinum';
+            }
+
+            details.innerHTML = `
+                <p><strong>変更先プラン:</strong> ${planName}（¥${selectedPrice.toLocaleString()}/月）</p>
+                <p><strong>変更タイプ:</strong> ${changeType}</p>
+                <p><strong>適用時期:</strong> ${additionalInfo}</p>
+            `;
+
+            modal.style.display = 'flex';
+        }
+
+        function hidePlanChangeModal() {
+            document.getElementById('planChangeModal').style.display = 'none';
+        }
+
+        function confirmPlanChange() {
+            // ここで実際のプラン変更処理を行う
+            alert('プラン変更を受け付けました。決済画面に移動します。');
+            hidePlanChangeModal();
+        }
+
+        function changePaymentMethod() {
+            alert('支払い方法変更画面に移動します。安全な決済画面で変更できます。');
+        }
+
         // Lucide Icons初期化
         lucide.createIcons();
         
-        // ドロップダウンメニューの制御
-        const userMenuToggle = document.getElementById('userMenuToggle');
-        const userDropdownMenu = document.getElementById('userDropdownMenu');
-        
-        if (userMenuToggle && userDropdownMenu) {
-            userMenuToggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                userDropdownMenu.classList.toggle('show');
-            });
-            
-            // ドロップダウンメニュー外をクリックした時に閉じる
-            document.addEventListener('click', function(e) {
-                if (!userMenuToggle.contains(e.target) && !userDropdownMenu.contains(e.target)) {
-                    userDropdownMenu.classList.remove('show');
-                }
-            });
-        }
     </script>
 </body>
 </html>

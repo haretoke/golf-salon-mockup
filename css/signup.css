@@ -1,18 +1,19 @@
 .signup-container {
-  display: flex;
   min-height: 100vh;
   background-color: var(--gray-light);
-}
-
-.signup-box {
-  flex: 1;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 2rem;
+}
+
+.signup-box {
+  width: 100%;
+  max-width: 600px;
   background-color: var(--white);
-  overflow-y: auto;
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  box-shadow: var(--shadow-lg);
 }
 
 .signup-header {
@@ -35,7 +36,6 @@
 }
 
 .plan-selection {
-  max-width: 500px;
   width: 100%;
   margin-bottom: 2rem;
 }
@@ -52,14 +52,12 @@
   gap: 1rem;
 }
 
+/* signup特有のplan-cardスタイル */
 .plan-card {
+  /* 共通スタイルはstyles.cssで定義 */
   border: 2px solid var(--gray-medium);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  text-align: center;
+  padding: 1.5rem; /* signupは1.5rem */
   cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
 }
 
 .plan-card:hover {
@@ -69,13 +67,31 @@
 }
 
 .plan-card.active {
+  border-width: 3px;
   border-color: var(--gold);
-  background-color: var(--off-white);
+  background-color: var(--white);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4), 0 0 0 6px rgba(212, 175, 55, 0.15);
+  transform: translateY(-4px) scale(1.02);
 }
 
-.plan-card.plan-premium.active {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--bronze) 100%);
-  color: var(--white);
+.plan-card.plan-standard.active {
+  border-color: var(--primary-green);
+  box-shadow: 0 6px 20px rgba(44, 85, 48, 0.4), 0 0 0 6px rgba(44, 85, 48, 0.15);
+}
+
+.plan-card.plan-platinum.active {
+  border-color: #718096;
+  box-shadow: 0 6px 20px rgba(113, 128, 150, 0.4), 0 0 0 6px rgba(113, 128, 150, 0.15);
+}
+
+/* 非選択状態を少し薄くする */
+.plan-card:not(.active) {
+  opacity: 0.7;
+}
+
+/* ホバー時の競合を防ぐ */
+.plan-card.active:hover {
+  transform: translateY(-4px) scale(1.02);
 }
 
 .recommended-badge {
@@ -91,18 +107,61 @@
   font-weight: 600;
 }
 
+/* 選択中バッジ */
+.selected-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-green);
+  color: var(--white);
+  padding: 4px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(44, 85, 48, 0.3);
+  display: none;
+  z-index: 10;
+}
+
+.plan-card.active .selected-badge {
+  display: block;
+}
+
+/* 選択中はおすすめバッジを非表示 */
+.plan-card.active .recommended-badge {
+  display: none;
+}
+
+/* プラン別の選択中バッジカラー */
+.plan-card.plan-standard.active .selected-badge {
+  background: var(--primary-green);
+  box-shadow: 0 2px 8px rgba(44, 85, 48, 0.3);
+}
+
+.plan-card.plan-gold.active .selected-badge {
+  background: var(--gold);
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+.plan-card.plan-platinum.active .selected-badge {
+  background: #718096;
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(113, 128, 150, 0.3);
+}
+
+/* h4の下マージンが違う */
 .plan-card h4 {
-  margin: 0 0 1rem 0;
-  font-size: 1.25rem;
+  margin-bottom: 1rem; /* signupは1rem */
 }
 
 .plan-price {
   margin-bottom: 1rem;
 }
 
-.price {
-  font-size: 2rem;
-  font-weight: 700;
+.plan-card .price {
+  font-size: 2rem; /* signupは2rem */
   color: var(--primary-green);
 }
 
@@ -110,9 +169,8 @@
   color: var(--white);
 }
 
-.period {
-  font-size: 1rem;
-  color: var(--gray-dark);
+.plan-card .period {
+  font-size: 1rem; /* signupは1rem */
 }
 
 .plan-premium.active .period {
@@ -120,15 +178,11 @@
   opacity: 0.9;
 }
 
-.plan-features {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+/* 特徴リストは共通スタイルを使用 */
 
-.plan-features li {
-  padding: 0.25rem 0;
-  font-size: 0.875rem;
+.plan-card .plan-features li {
+  padding: 0.25rem 0; /* signupはpaddingあり */
+  font-size: 0.875rem; /* signupは0.875rem */
 }
 
 .plan-features li:before {
@@ -211,56 +265,8 @@
   text-decoration: underline;
 }
 
-.signup-image {
-  flex: 1;
-  background: linear-gradient(rgba(44, 85, 48, 0.85), rgba(26, 58, 29, 0.85)), 
-              url('../images/golf-course-hero.jpg') center/cover;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
 
-.image-overlay {
-  text-align: center;
-  color: var(--white);
-  max-width: 400px;
-}
-
-.image-title {
-  font-size: 2.5rem;
-  color: var(--white);
-  margin-bottom: 2rem;
-}
-
-.benefits-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.benefit-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: 1.125rem;
-}
-
-.benefit-icon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-
-@media (max-width: 1024px) {
-  .signup-image {
-    display: none;
-  }
-  
-  .signup-box {
-    background: linear-gradient(to bottom, var(--white) 0%, var(--gray-light) 100%);
-  }
-}
+/* signup-image削除により、1024px以下の調整は不要 */
 
 @media (max-width: 900px) {
   .plan-options {
@@ -275,6 +281,14 @@
 }
 
 @media (max-width: 600px) {
+  .signup-container {
+    padding: 1rem;
+  }
+  
+  .signup-box {
+    padding: 2rem;
+  }
+  
   .signup-header {
     margin-bottom: 1.5rem;
   }
@@ -287,3 +301,21 @@
     margin-bottom: 1.5rem;
   }
 }
+
+/* プラン別スタイル */
+/* スタンダードプランのスタイルは共通を使用 */
+
+.plan-card.plan-gold {
+  /* signup特有の二重シャドウ */
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3), 0 0 0 4px rgba(212, 175, 55, 0.1);
+}
+
+/* ゴールドプランのスタイルは共通を使用 */
+
+/* プラチナのborder幅の違い */
+.plan-card.plan-platinum {
+  border: 1px solid #718096; /* signupは1px */
+}
+
+/* プラチナプランのスタイルは共通を使用 */
+

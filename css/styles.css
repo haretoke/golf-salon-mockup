@@ -3,6 +3,8 @@
   --dark-green: #1A3A1D;
   --gold: #D4AF37;
   --gold-gradient: linear-gradient(135deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%);
+  --platinum-gradient: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 50%, #CBD5E0 100%);
+  --platinum-gradient-dark: linear-gradient(135deg, #4A5568 0%, #718096 50%, #A0AEC0 100%);
   --bronze: #CD7F32;
   --dark-gold: #B8941F;
   --white: #FFFFFF;
@@ -12,6 +14,10 @@
   --gray-medium: #E0E0E0;
   --gray-dark: #666666;
   --red: #ef4444;
+  
+  /* プラン見出し用背景色 */
+  --standard-bg: rgba(44, 85, 48, 0.1);
+  --gold-bg: rgba(212, 175, 55, 0.1);
   
   --font-serif: 'Noto Serif JP', serif;
   --font-sans: 'Noto Sans JP', sans-serif;
@@ -129,6 +135,17 @@ a:hover {
   background-color: var(--dark-gold);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+}
+
+.btn-platinum {
+  background: var(--platinum-gradient-dark);
+  color: var(--white);
+}
+
+.btn-platinum:hover {
+  background: var(--platinum-gradient-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(113, 128, 150, 0.4);
 }
 
 .btn-outline {
@@ -344,6 +361,141 @@ a:hover {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1.5rem;
+}
+
+/* ============================================
+   Plan Card 共通スタイル
+============================================ */
+
+/* 基本的なカード構造 */
+.plan-card {
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* 見出しの共通スタイル（h4とh5両方対応） */
+.plan-card h4,
+.plan-card h5 {
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.025em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  padding: 0.5rem 1rem;
+}
+
+/* 価格表示 */
+.plan-card .plan-price {
+  margin-bottom: 0.75rem;
+}
+
+.plan-card .price {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.plan-card .period {
+  font-size: 0.875rem;
+}
+
+/* 特徴リスト */
+.plan-card .plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  font-size: 0.8rem;
+}
+
+.plan-card .plan-features li {
+  margin-bottom: 0.25rem;
+}
+
+.plan-card .plan-features li:before {
+  content: "✓ ";
+  color: var(--primary-green);
+  font-weight: 600;
+}
+
+/* プラン別スタイル - スタンダード */
+.plan-card.plan-standard {
+  background: var(--white);
+  border: 2px solid var(--primary-green);
+  color: var(--dark-green);
+}
+
+.plan-card.plan-standard h4,
+.plan-card.plan-standard h5 {
+  color: var(--dark-green);
+  background: var(--standard-bg);
+}
+
+.plan-card.plan-standard .price {
+  color: var(--primary-green);
+}
+
+.plan-card.plan-standard .period {
+  color: var(--gray-dark);
+}
+
+.plan-card.plan-standard .plan-features {
+  color: var(--gray-dark);
+}
+
+/* プラン別スタイル - ゴールド */
+.plan-card.plan-gold {
+  background: var(--white);
+  border: 2px solid var(--gold);
+  color: var(--dark-green);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.plan-card.plan-gold h4,
+.plan-card.plan-gold h5 {
+  color: var(--white);
+  background: var(--gold-gradient);
+}
+
+.plan-card.plan-gold .price {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.plan-card.plan-gold .period {
+  color: var(--gray-dark);
+}
+
+.plan-card.plan-gold .plan-features {
+  color: var(--gray-dark);
+}
+
+/* プラン別スタイル - プラチナ */
+.plan-card.plan-platinum {
+  background: var(--platinum-gradient);
+  border: 2px solid #718096;
+  color: var(--dark-green);
+}
+
+.plan-card.plan-platinum h4,
+.plan-card.plan-platinum h5 {
+  color: var(--white);
+  background: var(--platinum-gradient-dark);
+}
+
+.plan-card.plan-platinum .price {
+  color: #475569;
+  font-weight: 700;
+}
+
+.plan-card.plan-platinum .period {
+  color: var(--gray-dark);
+}
+
+.plan-card.plan-platinum .plan-features {
+  color: var(--gray-dark);
 }
 
 @media (max-width: 768px) {

@@ -74,11 +74,31 @@
         font-size: 1.3rem;
         margin-bottom: 0.5rem;
         color: var(--dark-green);
+        display: flex;
+        align-items: center;
       }
       .mockup-item p {
         margin-bottom: 0;
         color: var(--gray-dark);
         font-size: 1rem;
+      }
+      
+      .mockup-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 0.5rem;
+        color: var(--primary-green);
+        flex-shrink: 0;
+      }
+      
+      /* 削除済み項目のアイコンは赤色 */
+      .mockup-item[style*="cursor: not-allowed"] .mockup-icon {
+        color: #ef4444;
+      }
+      
+      /* リンクなし項目のアイコンは少し薄く */
+      .mockup-item-wrapper[data-id="common"] .mockup-icon {
+        color: var(--gray-dark);
       }
       
       /* 変更履歴スタイル */
@@ -204,6 +224,7 @@
         .mockup-item h3 {
           margin-bottom: 0.5rem;
           font-size: 1.2rem;
+          justify-content: center;
         }
         .mockup-item p {
           margin-bottom: 0;
@@ -310,7 +331,7 @@
         <div class="mockup-item-wrapper" data-id="login">
           <a href="login.html" class="mockup-item">
             <div>
-              <h3>ログイン画面</h3>
+              <h3><i data-lucide="log-in" class="mockup-icon"></i>ログイン画面</h3>
               <p>ユーザー認証とアカウント作成</p>
             </div>
             <span class="mockup-status status-pending">確認中</span>
@@ -321,7 +342,7 @@
         <div class="mockup-item-wrapper" data-id="dashboard">
           <a href="dashboard.html" class="mockup-item">
             <div>
-              <h3>ダッシュボード</h3>
+              <h3><i data-lucide="home" class="mockup-icon"></i>ダッシュボード</h3>
               <p>コンテンツ閲覧</p>
             </div>
             <span class="mockup-status status-pending">確認中</span>
@@ -332,7 +353,7 @@
         <div class="mockup-item-wrapper" data-id="signup">
           <a href="signup.html" class="mockup-item">
             <div>
-              <h3>会員登録</h3>
+              <h3><i data-lucide="user-plus" class="mockup-icon"></i>会員登録</h3>
               <p>シンプルな登録フローとプラン選択</p>
             </div>
             <span class="mockup-status status-pending">確認中</span>
@@ -343,7 +364,7 @@
         <div class="mockup-item-wrapper" data-id="mypage">
           <a href="mypage.html" class="mockup-item">
             <div>
-              <h3>マイページ</h3>
+              <h3><i data-lucide="user" class="mockup-icon"></i>マイページ</h3>
               <p>設定変更と退会機能</p>
             </div>
             <span class="mockup-status status-pending">確認中</span>
@@ -352,20 +373,20 @@
         </div>
 
         <div class="mockup-item-wrapper" data-id="billing">
-          <a href="billing.html" class="mockup-item">
+          <div class="mockup-item" style="cursor: not-allowed; opacity: 0.6;">
             <div>
-              <h3>課金画面</h3>
-              <p>プラン変更と決済管理</p>
+              <h3><i data-lucide="x-circle" class="mockup-icon"></i>課金画面</h3>
+              <p>プラン変更と決済管理（マイページに統合済み）</p>
             </div>
-            <span class="mockup-status status-pending">確認中</span>
-          </a>
+            <span class="mockup-status" style="background-color: #ef4444; color: var(--white);">削除</span>
+          </div>
           <div class="change-history"></div>
         </div>
 
         <div class="mockup-item-wrapper" data-id="admin">
           <a href="admin.html" class="mockup-item">
             <div>
-              <h3>管理者画面（コンテンツ管理）</h3>
+              <h3><i data-lucide="settings" class="mockup-icon"></i>管理者画面（コンテンツ管理）</h3>
               <p>投稿管理のみ実装済み</p>
             </div>
             <span class="mockup-status status-pending">部分実装</span>
@@ -376,7 +397,7 @@
         <div class="mockup-item-wrapper" data-id="legal">
           <a href="legal.html" class="mockup-item">
             <div>
-              <h3>法的事項</h3>
+              <h3><i data-lucide="file-text" class="mockup-icon"></i>法的事項</h3>
               <p>特商法・プライバシーポリシー・利用規約</p>
             </div>
             <span class="mockup-status status-pending">確認中</span>
@@ -387,7 +408,7 @@
         <div class="mockup-item-wrapper" data-id="common">
           <div class="mockup-item">
             <div>
-              <h3>共通項目</h3>
+              <h3><i data-lucide="cog" class="mockup-icon"></i>共通項目</h3>
               <p>全ページに適用される変更</p>
             </div>
             <span class="mockup-status status-pending">対応中</span>
@@ -443,9 +464,12 @@
             return;
           }
           
+          // 日付降順でソート（新しい順）
+          const sortedHistory = history.sort((a, b) => new Date(b.date) - new Date(a.date));
+          
           // 最初の3件を表示
-          const displayCount = Math.min(3, history.length);
-          const displayItems = history.slice(0, displayCount);
+          const displayCount = Math.min(3, sortedHistory.length);
+          const displayItems = sortedHistory.slice(0, displayCount);
           
           // 最新の変更内容を表示
           const headerHtml = `
@@ -467,14 +491,14 @@
           let listHtml = '';
           
           // 3件より多い履歴がある場合はアコーディオンを表示
-          if (history.length > 3) {
+          if (sortedHistory.length > 3) {
             toggleHtml = `
               <button class="change-history-toggle" onclick="changeHistory.toggleHistory('${id}')">
-                ${history.length - 3}件の過去の変更を表示
+                ${sortedHistory.length - 3}件の過去の変更を表示
               </button>
             `;
             
-            const historyItems = history.slice(3).map(item => `
+            const historyItems = sortedHistory.slice(3).map(item => `
               <div class="change-history-item">
                 <span>${item.content}</span>
                 <span class="change-history-date">${this.formatDate(item.date)}</span>
@@ -497,10 +521,12 @@
           
           if (listElement) {
             const isVisible = listElement.classList.contains('show');
+            const history = this.historyData[id] || [];
+            const sortedHistory = history.sort((a, b) => new Date(b.date) - new Date(a.date));
             
             if (isVisible) {
               listElement.classList.remove('show');
-              const historyCount = this.historyData[id].length - 3;
+              const historyCount = sortedHistory.length - 3;
               toggleButton.textContent = `${historyCount}件の過去の変更を表示`;
             } else {
               listElement.classList.add('show');

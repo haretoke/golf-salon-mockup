@@ -22,8 +22,9 @@
             <div class="plan-selection">
                 <h3>プランを選択</h3>
                 <div class="plan-options">
-                    <div class="plan-card plan-basic">
-                        <h4>プランA</h4>
+                    <div class="plan-card plan-standard">
+                        <div class="selected-badge">選択中</div>
+                        <h4>スタンダード</h4>
                         <div class="plan-price">
                             <span class="price">¥2,200</span>
                             <span class="period">/月</span>
@@ -32,26 +33,28 @@
                             <li>動画・画像・つぶやき閲覧</li>
                         </ul>
                     </div>
-                    <div class="plan-card plan-standard active">
+                    <div class="plan-card plan-gold active">
                         <div class="recommended-badge">おすすめ</div>
-                        <h4>プランB</h4>
+                        <div class="selected-badge">選択中</div>
+                        <h4>ゴールド</h4>
                         <div class="plan-price">
                             <span class="price">¥6,600</span>
                             <span class="period">/月</span>
                         </div>
                         <ul class="plan-features">
-                            <li>全コンテンツ閲覧</li>
+                            <li>動画・画像・つぶやき閲覧</li>
                             <li>オンラインレッスン月1回</li>
                         </ul>
                     </div>
-                    <div class="plan-card plan-premium">
-                        <h4>プランC</h4>
+                    <div class="plan-card plan-platinum">
+                        <div class="selected-badge">選択中</div>
+                        <h4>プラチナ</h4>
                         <div class="plan-price">
                             <span class="price">¥9,900</span>
                             <span class="period">/月</span>
                         </div>
                         <ul class="plan-features">
-                            <li>全コンテンツ閲覧</li>
+                            <li>動画・画像・つぶやき閲覧</li>
                             <li>オンラインレッスン月2回</li>
                         </ul>
                     </div>
@@ -70,7 +73,6 @@
                         <option value="">選択してください</option>
                         <option value="male">男性</option>
                         <option value="female">女性</option>
-                        <option value="other">その他</option>
                     </select>
                 </div>
                 
@@ -169,7 +171,7 @@
                 </div>
                 
                 <button type="submit" class="btn btn-gold btn-full signup-btn">
-                    プランBに登録する
+                    ゴールドプランに登録する
                 </button>
                 
                 <div class="security-info">
@@ -183,25 +185,6 @@
             </div>
         </div>
         
-        <div class="signup-image">
-            <div class="image-overlay">
-                <h2 class="image-title">上達への近道</h2>
-                <div class="benefits-list">
-                    <div class="benefit-item">
-                        <span class="benefit-icon"><i data-lucide="target" style="width: 20px; height: 20px; color: var(--gold);"></i></span>
-                        <span>レベル別の体系的学習</span>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon"><i data-lucide="trending-up" style="width: 20px; height: 20px; color: var(--gold);"></i></span>
-                        <span>確実なスコア向上</span>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon"><i data-lucide="trophy" style="width: 20px; height: 20px; color: var(--gold);"></i></span>
-                        <span>初心者から上級者まで対応</span>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
@@ -214,15 +197,15 @@
                 planCards.forEach(c => c.classList.remove('active'));
                 card.classList.add('active');
                 
-                if (card.classList.contains('plan-basic')) {
-                    signupBtn.textContent = 'プランAに登録する';
+                if (card.classList.contains('plan-standard')) {
+                    signupBtn.textContent = 'スタンダードプランに登録する';
                     signupBtn.className = 'btn btn-primary btn-full signup-btn';
-                } else if (card.classList.contains('plan-standard')) {
-                    signupBtn.textContent = 'プランBに登録する';
+                } else if (card.classList.contains('plan-gold')) {
+                    signupBtn.textContent = 'ゴールドプランに登録する';
                     signupBtn.className = 'btn btn-gold btn-full signup-btn';
-                } else if (card.classList.contains('plan-premium')) {
-                    signupBtn.textContent = 'プランCに登録する';
-                    signupBtn.className = 'btn btn-gold btn-full signup-btn';
+                } else if (card.classList.contains('plan-platinum')) {
+                    signupBtn.textContent = 'プラチナプランに登録する';
+                    signupBtn.className = 'btn btn-platinum btn-full signup-btn';
                 }
             });
         });
