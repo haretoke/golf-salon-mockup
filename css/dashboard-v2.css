@@ -239,8 +239,7 @@ body {
   border-color: var(--primary-green);
 }
 
-.search-btn,
-.filter-btn {
+.search-btn {
   padding: 0.75rem;
   background-color: var(--primary-green);
   color: var(--white);
@@ -253,8 +252,7 @@ body {
   justify-content: center;
 }
 
-.search-btn:hover,
-.filter-btn:hover {
+.search-btn:hover {
   background-color: var(--dark-green);
   transform: translateY(-2px);
 }
