@@ -146,7 +146,7 @@
   {
     "id": "setting_17",
     "key": "resend_api_key",
-    "value": "re_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "value": "",
     "type": "string",
     "description": "Resend API キー",
     "updatedAt": "2024-01-01T00:00:00Z",
@@ -155,7 +155,7 @@
   {
     "id": "setting_18",
     "key": "resend_webhook_secret",
-    "value": "whsec_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "value": "",
     "type": "string",
     "description": "Resend Webhook シークレット",
     "updatedAt": "2024-01-01T00:00:00Z",

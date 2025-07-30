@@ -714,9 +714,9 @@
     }
   ],
   "resend_integration": {
-    "api_key": "re_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "api_key": "",
     "webhook_url": "https://example.com/api/webhooks/resend",
-    "webhook_secret": "whsec_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "webhook_secret": "",
     "status": "connected",
     "last_webhook_received": "2024-07-18T12:30:00Z",
     "total_webhooks_received": 1245,
