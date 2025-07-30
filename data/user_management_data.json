@@ -1,0 +1,341 @@
+{
+  "users": [
+    {
+      "id": "user_1",
+      "basicInfo": {
+        "name": "田中 太郎",
+        "email": "tanaka@example.com",
+        "emailVerified": "2024-01-15T10:00:00Z",
+        "registrationDate": "2024-01-15T10:00:00Z",
+        "lastUpdated": "2024-07-15T10:00:00Z"
+      },
+      "subscription": {
+        "id": "sub_1",
+        "planId": "plan_gold",
+        "planName": "ゴールド",
+        "planPrice": 3980,
+        "status": "active",
+        "startDate": "2024-01-15T10:00:00Z",
+        "endDate": "2024-08-15T10:00:00Z",
+        "daysRemaining": 28,
+        "robotPaymentId": "rp_123456789"
+      },
+      "viewingStats": {
+        "totalViews": 2,
+        "totalWatchTime": 450,
+        "lastViewedAt": "2024-07-17T15:00:00Z",
+        "completedViews": 2,
+        "averageProgress": 1.0,
+        "viewHistory": [
+          {
+            "contentId": "content_1",
+            "viewedAt": "2024-07-17T14:30:00Z",
+            "duration": 330,
+            "progress": 1.0
+          },
+          {
+            "contentId": "content_3",
+            "viewedAt": "2024-07-17T15:00:00Z",
+            "duration": 120,
+            "progress": 1.0
+          }
+        ]
+      },
+      "notificationSettings": {
+        "emailNewContent": true,
+        "emailPaymentSuccess": true,
+        "emailPaymentFailed": true,
+        "emailPlanChange": true,
+        "emailMaintenance": true,
+        "emailMarketing": false,
+        "lastUpdated": "2024-03-20T14:30:00Z"
+      },
+      "paymentStatus": {
+        "latestPayment": {
+          "id": "payment_1",
+          "amount": 3980,
+          "currency": "JPY",
+          "status": "completed",
+          "paidAt": "2024-07-15T10:00:00Z",
+          "paymentMethod": "credit_card"
+        },
+        "totalPayments": 2,
+        "totalPaid": 7960,
+        "failedPayments": 0,
+        "hasPaymentIssues": false,
+        "nextPaymentDate": "2024-08-15T10:00:00Z"
+      }
+    },
+    {
+      "id": "user_2",
+      "basicInfo": {
+        "name": "佐藤 花子",
+        "email": "sato@example.com",
+        "emailVerified": "2024-02-01T09:00:00Z",
+        "registrationDate": "2024-02-01T09:00:00Z",
+        "lastUpdated": "2024-07-10T14:30:00Z"
+      },
+      "subscription": {
+        "id": "sub_2",
+        "planId": "plan_standard",
+        "planName": "スタンダード",
+        "planPrice": 1980,
+        "status": "active",
+        "startDate": "2024-02-01T09:00:00Z",
+        "endDate": "2024-08-01T09:00:00Z",
+        "daysRemaining": 14,
+        "robotPaymentId": "rp_123456790"
+      },
+      "viewingStats": {
+        "totalViews": 2,
+        "totalWatchTime": 340,
+        "lastViewedAt": "2024-07-16T09:30:00Z",
+        "completedViews": 1,
+        "averageProgress": 0.93,
+        "viewHistory": [
+          {
+            "contentId": "content_1",
+            "viewedAt": "2024-07-16T09:15:00Z",
+            "duration": 280,
+            "progress": 0.85
+          },
+          {
+            "contentId": "content_5",
+            "viewedAt": "2024-07-16T09:30:00Z",
+            "duration": 60,
+            "progress": 1.0
+          }
+        ]
+      },
+      "notificationSettings": {
+        "emailNewContent": true,
+        "emailPaymentSuccess": true,
+        "emailPaymentFailed": true,
+        "emailPlanChange": true,
+        "emailMaintenance": true,
+        "emailMarketing": true,
+        "lastUpdated": "2024-02-01T09:00:00Z"
+      },
+      "paymentStatus": {
+        "latestPayment": {
+          "id": "payment_2",
+          "amount": 1980,
+          "currency": "JPY",
+          "status": "completed",
+          "paidAt": "2024-07-01T09:00:00Z",
+          "paymentMethod": "credit_card"
+        },
+        "totalPayments": 1,
+        "totalPaid": 1980,
+        "failedPayments": 0,
+        "hasPaymentIssues": false,
+        "nextPaymentDate": "2024-08-01T09:00:00Z"
+      }
+    },
+    {
+      "id": "user_3",
+      "basicInfo": {
+        "name": "山田 次郎",
+        "email": "yamada@example.com",
+        "emailVerified": "2024-03-10T11:00:00Z",
+        "registrationDate": "2024-03-10T11:00:00Z",
+        "lastUpdated": "2024-07-18T09:15:00Z"
+      },
+      "subscription": {
+        "id": "sub_3",
+        "planId": "plan_platinum",
+        "planName": "プラチナ",
+        "planPrice": 6980,
+        "status": "active",
+        "startDate": "2024-03-10T11:00:00Z",
+        "endDate": "2024-09-10T11:00:00Z",
+        "daysRemaining": 54,
+        "robotPaymentId": "rp_123456791"
+      },
+      "viewingStats": {
+        "totalViews": 2,
+        "totalWatchTime": 420,
+        "lastViewedAt": "2024-07-15T20:30:00Z",
+        "completedViews": 2,
+        "averageProgress": 1.0,
+        "viewHistory": [
+          {
+            "contentId": "content_1",
+            "viewedAt": "2024-07-15T20:00:00Z",
+            "duration": 330,
+            "progress": 1.0
+          },
+          {
+            "contentId": "content_4",
+            "viewedAt": "2024-07-15T20:30:00Z",
+            "duration": 90,
+            "progress": 1.0
+          }
+        ]
+      },
+      "notificationSettings": {
+        "emailNewContent": false,
+        "emailPaymentSuccess": true,
+        "emailPaymentFailed": true,
+        "emailPlanChange": true,
+        "emailMaintenance": true,
+        "emailMarketing": false,
+        "lastUpdated": "2024-06-15T16:20:00Z"
+      },
+      "paymentStatus": {
+        "latestPayment": {
+          "id": "payment_3",
+          "amount": 6980,
+          "currency": "JPY",
+          "status": "completed",
+          "paidAt": "2024-07-10T11:00:00Z",
+          "paymentMethod": "credit_card"
+        },
+        "totalPayments": 1,
+        "totalPaid": 6980,
+        "failedPayments": 0,
+        "hasPaymentIssues": false,
+        "nextPaymentDate": "2024-09-10T11:00:00Z"
+      }
+    },
+    {
+      "id": "user_4",
+      "basicInfo": {
+        "name": "渡辺 美咲",
+        "email": "watanabe@example.com",
+        "emailVerified": "2024-04-05T08:00:00Z",
+        "registrationDate": "2024-04-05T08:00:00Z",
+        "lastUpdated": "2024-07-16T16:45:00Z"
+      },
+      "subscription": {
+        "id": "sub_4",
+        "planId": "plan_gold",
+        "planName": "ゴールド",
+        "planPrice": 3980,
+        "status": "active",
+        "startDate": "2024-04-05T08:00:00Z",
+        "endDate": "2024-10-05T08:00:00Z",
+        "daysRemaining": 79,
+        "robotPaymentId": "rp_123456792"
+      },
+      "viewingStats": {
+        "totalViews": 2,
+        "totalWatchTime": 195,
+        "lastViewedAt": "2024-07-14T12:00:00Z",
+        "completedViews": 2,
+        "averageProgress": 1.0,
+        "viewHistory": [
+          {
+            "contentId": "content_6",
+            "viewedAt": "2024-07-14T11:45:00Z",
+            "duration": 45,
+            "progress": 1.0
+          },
+          {
+            "contentId": "content_3",
+            "viewedAt": "2024-07-14T12:00:00Z",
+            "duration": 150,
+            "progress": 1.0
+          }
+        ]
+      },
+      "notificationSettings": {
+        "emailNewContent": true,
+        "emailPaymentSuccess": true,
+        "emailPaymentFailed": true,
+        "emailPlanChange": true,
+        "emailMaintenance": false,
+        "emailMarketing": false,
+        "lastUpdated": "2024-04-05T08:00:00Z"
+      },
+      "paymentStatus": {
+        "latestPayment": {
+          "id": "payment_4",
+          "amount": 3980,
+          "currency": "JPY",
+          "status": "completed",
+          "paidAt": "2024-07-05T08:00:00Z",
+          "paymentMethod": "credit_card"
+        },
+        "totalPayments": 1,
+        "totalPaid": 3980,
+        "failedPayments": 0,
+        "hasPaymentIssues": false,
+        "nextPaymentDate": "2024-10-05T08:00:00Z"
+      }
+    },
+    {
+      "id": "user_5",
+      "basicInfo": {
+        "name": "鈴木 健一",
+        "email": "suzuki@example.com",
+        "emailVerified": "2024-05-20T12:00:00Z",
+        "registrationDate": "2024-05-20T12:00:00Z",
+        "lastUpdated": "2024-07-17T11:20:00Z"
+      },
+      "subscription": {
+        "id": "sub_5",
+        "planId": "plan_standard",
+        "planName": "スタンダード",
+        "planPrice": 1980,
+        "status": "canceled",
+        "startDate": "2024-05-20T12:00:00Z",
+        "endDate": "2024-07-20T12:00:00Z",
+        "daysRemaining": 0,
+        "canceledAt": "2024-07-15T10:00:00Z",
+        "robotPaymentId": "rp_123456793"
+      },
+      "viewingStats": {
+        "totalViews": 0,
+        "totalWatchTime": 0,
+        "lastViewedAt": null,
+        "completedViews": 0,
+        "averageProgress": 0,
+        "viewHistory": []
+      },
+      "notificationSettings": {
+        "emailNewContent": true,
+        "emailPaymentSuccess": true,
+        "emailPaymentFailed": true,
+        "emailPlanChange": true,
+        "emailMaintenance": true,
+        "emailMarketing": true,
+        "lastUpdated": "2024-07-10T09:30:00Z"
+      },
+      "paymentStatus": {
+        "latestPayment": {
+          "id": "payment_5",
+          "amount": 1980,
+          "currency": "JPY",
+          "status": "failed",
+          "failedAt": "2024-07-20T12:00:00Z",
+          "failureReason": "カードの有効期限切れ",
+          "paymentMethod": "credit_card"
+        },
+        "totalPayments": 0,
+        "totalPaid": 0,
+        "failedPayments": 1,
+        "hasPaymentIssues": true,
+        "nextPaymentDate": null
+      }
+    }
+  ],
+  "summary": {
+    "totalUsers": 5,
+    "activeSubscriptions": 4,
+    "canceledSubscriptions": 1,
+    "paymentIssues": 1,
+    "totalRevenue": 20920,
+    "planDistribution": {
+      "plan_standard": 2,
+      "plan_gold": 2,
+      "plan_platinum": 1
+    },
+    "viewingActivity": {
+      "totalViews": 8,
+      "totalWatchTime": 1405,
+      "activeViewers": 4,
+      "averageViewsPerUser": 1.6
+    }
+  }
+}

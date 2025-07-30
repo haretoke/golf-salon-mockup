@@ -1,0 +1,178 @@
+{
+  "overview": {
+    "totalRevenue": 68700,
+    "totalTransactions": 12,
+    "successfulTransactions": 9,
+    "failedTransactions": 3,
+    "refundedTransactions": 1,
+    "successRate": 75.0,
+    "failureRate": 25.0,
+    "refundRate": 11.1,
+    "averageTransactionAmount": 5725
+  },
+  "monthlyStats": {
+    "2024-05": {
+      "revenue": 3980,
+      "transactions": 1,
+      "successful": 1,
+      "failed": 0,
+      "refunded": 1,
+      "successRate": 100.0,
+      "refundAmount": 3980
+    },
+    "2024-06": {
+      "revenue": 19900,
+      "transactions": 4,
+      "successful": 4,
+      "failed": 0,
+      "refunded": 0,
+      "successRate": 100.0,
+      "refundAmount": 0
+    },
+    "2024-07": {
+      "revenue": 44820,
+      "transactions": 7,
+      "successful": 4,
+      "failed": 3,
+      "refunded": 0,
+      "successRate": 57.1,
+      "refundAmount": 0
+    }
+  },
+  "yearlyStats": {
+    "2024": {
+      "revenue": 68700,
+      "transactions": 12,
+      "successful": 9,
+      "failed": 3,
+      "refunded": 1,
+      "successRate": 75.0,
+      "refundAmount": 3980
+    }
+  },
+  "planBreakdown": {
+    "plan_standard": {
+      "revenue": 7920,
+      "transactions": 4,
+      "successful": 2,
+      "failed": 2,
+      "refunded": 0,
+      "successRate": 50.0
+    },
+    "plan_gold": {
+      "revenue": 39800,
+      "transactions": 6,
+      "successful": 5,
+      "failed": 1,
+      "refunded": 1,
+      "successRate": 83.3
+    },
+    "plan_platinum": {
+      "revenue": 20960,
+      "transactions": 2,
+      "successful": 2,
+      "failed": 0,
+      "refunded": 0,
+      "successRate": 100.0
+    }
+  },
+  "paymentMethodBreakdown": {
+    "credit_card": {
+      "visa": {
+        "revenue": 35780,
+        "transactions": 6,
+        "successful": 4,
+        "failed": 1,
+        "refunded": 1,
+        "successRate": 66.7
+      },
+      "mastercard": {
+        "revenue": 21860,
+        "transactions": 4,
+        "successful": 2,
+        "failed": 2,
+        "refunded": 0,
+        "successRate": 50.0
+      },
+      "jcb": {
+        "revenue": 13960,
+        "transactions": 2,
+        "successful": 2,
+        "failed": 0,
+        "refunded": 0,
+        "successRate": 100.0
+      }
+    }
+  },
+  "robotPaymentIntegration": {
+    "status": "active",
+    "totalProcessed": 12,
+    "successfullyProcessed": 9,
+    "failedProcessed": 3,
+    "pendingWebhooks": 0,
+    "lastSyncAt": "2024-07-18T16:00:00Z",
+    "connectionHealth": "good"
+  },
+  "failureReasons": [
+    {
+      "code": "expired_card",
+      "reason": "カードの有効期限切れ",
+      "count": 1,
+      "percentage": 33.3
+    },
+    {
+      "code": "insufficient_funds",
+      "reason": "残高不足",
+      "count": 1,
+      "percentage": 33.3
+    },
+    {
+      "code": "card_declined",
+      "reason": "カード認証エラー",
+      "count": 1,
+      "percentage": 33.3
+    }
+  ],
+  "recentActivity": [
+    {
+      "id": "activity_1",
+      "type": "payment_failed",
+      "userId": "user_6",
+      "amount": 1980,
+      "timestamp": "2024-07-18T15:00:00Z",
+      "description": "決済失敗: 残高不足"
+    },
+    {
+      "id": "activity_2",
+      "type": "payment_failed",
+      "userId": "user_7",
+      "amount": 3980,
+      "timestamp": "2024-07-17T13:00:00Z",
+      "description": "決済失敗: カード認証エラー"
+    },
+    {
+      "id": "activity_3",
+      "type": "payment_success",
+      "userId": "user_1",
+      "amount": 3980,
+      "timestamp": "2024-07-15T10:00:00Z",
+      "description": "決済成功: ゴールドプラン"
+    },
+    {
+      "id": "activity_4",
+      "type": "payment_failed",
+      "userId": "user_5",
+      "amount": 1980,
+      "timestamp": "2024-07-20T12:00:00Z",
+      "description": "決済失敗: カードの有効期限切れ"
+    },
+    {
+      "id": "activity_5",
+      "type": "payment_success",
+      "userId": "user_3",
+      "amount": 6980,
+      "timestamp": "2024-07-10T11:00:00Z",
+      "description": "決済成功: プラチナプラン"
+    }
+  ]
+}

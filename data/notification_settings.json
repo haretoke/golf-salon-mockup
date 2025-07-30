@@ -1,0 +1,62 @@
+[
+  {
+    "id": "notif_1",
+    "userId": "user_1",
+    "emailNewContent": true,
+    "emailPaymentSuccess": true,
+    "emailPaymentFailed": true,
+    "emailPlanChange": true,
+    "emailMaintenance": true,
+    "emailMarketing": false,
+    "createdAt": "2024-01-15T10:00:00Z",
+    "updatedAt": "2024-03-20T14:30:00Z"
+  },
+  {
+    "id": "notif_2",
+    "userId": "user_2",
+    "emailNewContent": true,
+    "emailPaymentSuccess": true,
+    "emailPaymentFailed": true,
+    "emailPlanChange": true,
+    "emailMaintenance": true,
+    "emailMarketing": true,
+    "createdAt": "2024-02-01T09:00:00Z",
+    "updatedAt": "2024-02-01T09:00:00Z"
+  },
+  {
+    "id": "notif_3",
+    "userId": "user_3",
+    "emailNewContent": false,
+    "emailPaymentSuccess": true,
+    "emailPaymentFailed": true,
+    "emailPlanChange": true,
+    "emailMaintenance": true,
+    "emailMarketing": false,
+    "createdAt": "2024-03-10T11:00:00Z",
+    "updatedAt": "2024-06-15T16:20:00Z"
+  },
+  {
+    "id": "notif_4",
+    "userId": "user_4",
+    "emailNewContent": true,
+    "emailPaymentSuccess": true,
+    "emailPaymentFailed": true,
+    "emailPlanChange": true,
+    "emailMaintenance": false,
+    "emailMarketing": false,
+    "createdAt": "2024-04-05T08:00:00Z",
+    "updatedAt": "2024-04-05T08:00:00Z"
+  },
+  {
+    "id": "notif_5",
+    "userId": "user_5",
+    "emailNewContent": true,
+    "emailPaymentSuccess": true,
+    "emailPaymentFailed": true,
+    "emailPlanChange": true,
+    "emailMaintenance": true,
+    "emailMarketing": true,
+    "createdAt": "2024-05-20T12:00:00Z",
+    "updatedAt": "2024-07-10T09:30:00Z"
+  }
+]

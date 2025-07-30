@@ -1,0 +1,164 @@
+[
+  {
+    "id": "setting_1",
+    "key": "site_name",
+    "value": "Golf Salon",
+    "type": "string",
+    "description": "サイト名",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_2",
+    "key": "maintenance_mode",
+    "value": "false",
+    "type": "boolean",
+    "description": "メンテナンスモード",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_3",
+    "key": "max_video_file_size",
+    "value": "104857600",
+    "type": "number",
+    "description": "動画ファイルの最大サイズ（バイト）",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_4",
+    "key": "email_templates",
+    "value": "{\"welcome\": \"welcome_template.html\", \"payment_success\": \"payment_success_template.html\"}",
+    "type": "json",
+    "description": "メールテンプレート設定",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_5",
+    "key": "default_plan",
+    "value": "plan_standard",
+    "type": "string",
+    "description": "デフォルトプラン",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_6",
+    "key": "free_trial_days",
+    "value": "7",
+    "type": "number",
+    "description": "無料トライアル期間（日数）",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_7",
+    "key": "email_from_address",
+    "value": "noreply@example.com",
+    "type": "string",
+    "description": "メール送信元アドレス",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_8",
+    "key": "email_from_name",
+    "value": "Golf Salon",
+    "type": "string",
+    "description": "メール送信者名",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_9",
+    "key": "email_reply_to",
+    "value": "support@example.com",
+    "type": "string",
+    "description": "メール返信先アドレス",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_10",
+    "key": "email_retry_max_attempts",
+    "value": "3",
+    "type": "number",
+    "description": "メール送信リトライ最大回数",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_11",
+    "key": "email_retry_delay_minutes",
+    "value": "30",
+    "type": "number",
+    "description": "メール送信リトライ間隔（分）",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_12",
+    "key": "email_batch_size",
+    "value": "100",
+    "type": "number",
+    "description": "メール一括送信サイズ",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_13",
+    "key": "email_templates_directory",
+    "value": "/templates/email",
+    "type": "string",
+    "description": "メールテンプレートディレクトリ",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_14",
+    "key": "email_webhook_verification",
+    "value": "true",
+    "type": "boolean",
+    "description": "メールWebhook検証を有効にする",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_15",
+    "key": "email_bounce_handling",
+    "value": "true",
+    "type": "boolean",
+    "description": "メールバウンス処理を有効にする",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_16",
+    "key": "email_unsubscribe_link",
+    "value": "https://example.com/unsubscribe",
+    "type": "string",
+    "description": "メール配信停止リンク",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_17",
+    "key": "resend_api_key",
+    "value": "re_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "type": "string",
+    "description": "Resend API キー",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  },
+  {
+    "id": "setting_18",
+    "key": "resend_webhook_secret",
+    "value": "whsec_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "type": "string",
+    "description": "Resend Webhook シークレット",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin_1"
+  }
+]

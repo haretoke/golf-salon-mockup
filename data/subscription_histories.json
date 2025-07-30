@@ -1,0 +1,158 @@
+[
+  {
+    "id": "sub_hist_1",
+    "subscriptionId": "sub_1",
+    "action": "created",
+    "fromPlanId": null,
+    "toPlanId": "plan_gold",
+    "actionDate": "2024-01-15T10:00:00Z",
+    "note": "初回登録"
+  },
+  {
+    "id": "sub_hist_2",
+    "subscriptionId": "sub_2",
+    "action": "created",
+    "fromPlanId": null,
+    "toPlanId": "plan_standard",
+    "actionDate": "2024-02-01T09:00:00Z",
+    "note": "初回登録"
+  },
+  {
+    "id": "sub_hist_3",
+    "subscriptionId": "sub_3",
+    "action": "created",
+    "fromPlanId": null,
+    "toPlanId": "plan_standard",
+    "actionDate": "2024-03-10T11:00:00Z",
+    "note": "初回登録"
+  },
+  {
+    "id": "sub_hist_4",
+    "subscriptionId": "sub_3",
+    "action": "upgraded",
+    "fromPlanId": "plan_standard",
+    "toPlanId": "plan_platinum",
+    "actionDate": "2024-05-15T14:00:00Z",
+    "note": "スタンダードからプラチナにアップグレード"
+  },
+  {
+    "id": "sub_hist_5",
+    "subscriptionId": "sub_4",
+    "action": "created",
+    "fromPlanId": null,
+    "toPlanId": "plan_gold",
+    "actionDate": "2024-04-05T08:00:00Z",
+    "note": "初回登録"
+  },
+  {
+    "id": "sub_hist_6",
+    "subscriptionId": "sub_5",
+    "action": "created",
+    "fromPlanId": null,
+    "toPlanId": "plan_standard",
+    "actionDate": "2024-05-20T12:00:00Z",
+    "note": "初回登録"
+  },
+  {
+    "id": "sub_hist_7",
+    "subscriptionId": "sub_5",
+    "action": "canceled",
+    "fromPlanId": "plan_standard",
+    "toPlanId": null,
+    "actionDate": "2024-07-15T10:00:00Z",
+    "note": "決済失敗による自動退会",
+    "cancellationReason": "price_too_high"
+  },
+  {
+    "id": "sub_hist_8",
+    "subscriptionId": "sub_8",
+    "action": "created",
+    "fromPlanId": null,
+    "toPlanId": "plan_standard",
+    "actionDate": "2024-07-01T10:00:00Z",
+    "note": "初回登録"
+  },
+  {
+    "id": "sub_hist_9",
+    "subscriptionId": "sub_9",
+    "action": "created",
+    "fromPlanId": null,
+    "toPlanId": "plan_platinum",
+    "actionDate": "2024-03-15T09:00:00Z",
+    "note": "初回登録"
+  },
+  {
+    "id": "sub_hist_10",
+    "subscriptionId": "sub_9",
+    "action": "canceled",
+    "fromPlanId": "plan_platinum",
+    "toPlanId": null,
+    "actionDate": "2024-06-10T15:30:00Z",
+    "note": "コンテンツが期待に合わないため解約",
+    "cancellationReason": "content_dissatisfaction"
+  },
+  {
+    "id": "sub_hist_11",
+    "subscriptionId": "sub_10",
+    "action": "created",
+    "fromPlanId": null,
+    "toPlanId": "plan_gold",
+    "actionDate": "2024-06-20T12:00:00Z",
+    "note": "初回登録"
+  },
+  {
+    "id": "sub_hist_12",
+    "subscriptionId": "sub_11",
+    "action": "created",
+    "fromPlanId": null,
+    "toPlanId": "plan_standard",
+    "actionDate": "2024-01-25T08:00:00Z",
+    "note": "初回登録"
+  },
+  {
+    "id": "sub_hist_13",
+    "subscriptionId": "sub_12",
+    "action": "created",
+    "fromPlanId": null,
+    "toPlanId": "plan_platinum",
+    "actionDate": "2024-04-01T14:00:00Z",
+    "note": "初回登録"
+  },
+  {
+    "id": "sub_hist_14",
+    "subscriptionId": "sub_12",
+    "action": "canceled",
+    "fromPlanId": "plan_platinum",
+    "toPlanId": null,
+    "actionDate": "2024-06-25T16:00:00Z",
+    "note": "経済的理由により解約",
+    "cancellationReason": "financial_reasons"
+  },
+  {
+    "id": "sub_hist_15",
+    "subscriptionId": "sub_13",
+    "action": "created",
+    "fromPlanId": null,
+    "toPlanId": "plan_gold",
+    "actionDate": "2024-01-20T11:00:00Z",
+    "note": "初回登録"
+  },
+  {
+    "id": "sub_hist_16",
+    "subscriptionId": "sub_1",
+    "action": "downgraded",
+    "fromPlanId": "plan_platinum",
+    "toPlanId": "plan_gold",
+    "actionDate": "2024-03-01T12:00:00Z",
+    "note": "プラチナからゴールドにダウングレード"
+  },
+  {
+    "id": "sub_hist_17",
+    "subscriptionId": "sub_4",
+    "action": "upgraded",
+    "fromPlanId": "plan_standard",
+    "toPlanId": "plan_gold",
+    "actionDate": "2024-05-01T10:00:00Z",
+    "note": "スタンダードからゴールドにアップグレード"
+  }
+]

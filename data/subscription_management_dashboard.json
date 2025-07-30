@@ -1,0 +1,233 @@
+{
+  "summary": {
+    "totalSubscriptions": 13,
+    "activeSubscriptions": 6,
+    "canceledSubscriptions": 3,
+    "paymentFailedSubscriptions": 2,
+    "expiringSubscriptions": 1,
+    "renewalPendingSubscriptions": 1,
+    "totalRevenue": 47740,
+    "monthlyRevenue": 16860,
+    "churnRate": 0.23,
+    "lastUpdated": "2024-07-18T16:00:00Z"
+  },
+  "planStatistics": [
+    {
+      "planId": "plan_standard",
+      "planName": "スタンダード",
+      "price": 1980,
+      "activeSubscriptions": 3,
+      "totalSubscriptions": 4,
+      "revenue": 7920,
+      "churnRate": 0.25,
+      "conversionRate": 0.15
+    },
+    {
+      "planId": "plan_gold",
+      "planName": "ゴールド",
+      "price": 3980,
+      "activeSubscriptions": 3,
+      "totalSubscriptions": 5,
+      "revenue": 19900,
+      "churnRate": 0.20,
+      "conversionRate": 0.25
+    },
+    {
+      "planId": "plan_platinum",
+      "planName": "プラチナ",
+      "price": 6980,
+      "activeSubscriptions": 1,
+      "totalSubscriptions": 4,
+      "revenue": 20940,
+      "churnRate": 0.50,
+      "conversionRate": 0.10
+    }
+  ],
+  "cancellationReasons": [
+    {
+      "reason": "price_too_high",
+      "label": "料金が高すぎる",
+      "count": 1,
+      "percentage": 33.33
+    },
+    {
+      "reason": "content_dissatisfaction",
+      "label": "コンテンツが期待に合わない",
+      "count": 1,
+      "percentage": 33.33
+    },
+    {
+      "reason": "financial_reasons",
+      "label": "経済的理由",
+      "count": 1,
+      "percentage": 33.33
+    }
+  ],
+  "monthlyTrends": [
+    {
+      "month": "2024-01",
+      "newSubscriptions": 2,
+      "cancellations": 0,
+      "revenue": 7940,
+      "churnRate": 0.0
+    },
+    {
+      "month": "2024-02",
+      "newSubscriptions": 1,
+      "cancellations": 0,
+      "revenue": 1980,
+      "churnRate": 0.0
+    },
+    {
+      "month": "2024-03",
+      "newSubscriptions": 2,
+      "cancellations": 0,
+      "revenue": 13960,
+      "churnRate": 0.0
+    },
+    {
+      "month": "2024-04",
+      "newSubscriptions": 2,
+      "cancellations": 0,
+      "revenue": 10960,
+      "churnRate": 0.0
+    },
+    {
+      "month": "2024-05",
+      "newSubscriptions": 1,
+      "cancellations": 0,
+      "revenue": 1980,
+      "churnRate": 0.0
+    },
+    {
+      "month": "2024-06",
+      "newSubscriptions": 2,
+      "cancellations": 2,
+      "revenue": 10960,
+      "churnRate": 0.4
+    },
+    {
+      "month": "2024-07",
+      "newSubscriptions": 1,
+      "cancellations": 1,
+      "revenue": 1980,
+      "churnRate": 0.33
+    }
+  ],
+  "upcomingRenewals": [
+    {
+      "subscriptionId": "sub_11",
+      "userId": "user_11",
+      "userName": "森 隆志",
+      "planId": "plan_standard",
+      "planName": "スタンダード",
+      "endDate": "2024-07-25T08:00:00Z",
+      "daysUntilExpiration": 7,
+      "status": "expiring_soon",
+      "priority": "high"
+    },
+    {
+      "subscriptionId": "sub_13",
+      "userId": "user_13",
+      "userName": "松本 拓也",
+      "planId": "plan_gold",
+      "planName": "ゴールド",
+      "endDate": "2024-07-20T11:00:00Z",
+      "daysUntilExpiration": 2,
+      "status": "renewal_pending",
+      "priority": "urgent"
+    },
+    {
+      "subscriptionId": "sub_2",
+      "userId": "user_2",
+      "userName": "佐藤 花子",
+      "planId": "plan_standard",
+      "planName": "スタンダード",
+      "endDate": "2024-08-01T09:00:00Z",
+      "daysUntilExpiration": 14,
+      "status": "active",
+      "priority": "medium"
+    },
+    {
+      "subscriptionId": "sub_8",
+      "userId": "user_8",
+      "userName": "加藤 真由美",
+      "planId": "plan_standard",
+      "planName": "スタンダード",
+      "endDate": "2024-08-01T10:00:00Z",
+      "daysUntilExpiration": 14,
+      "status": "active",
+      "priority": "medium"
+    },
+    {
+      "subscriptionId": "sub_1",
+      "userId": "user_1",
+      "userName": "田中 太郎",
+      "planId": "plan_gold",
+      "planName": "ゴールド",
+      "endDate": "2024-08-15T10:00:00Z",
+      "daysUntilExpiration": 28,
+      "status": "active",
+      "priority": "low"
+    }
+  ],
+  "paymentIssues": [
+    {
+      "subscriptionId": "sub_6",
+      "userId": "user_6",
+      "userName": "中村 麻衣",
+      "planId": "plan_standard",
+      "planName": "スタンダード",
+      "status": "payment_failed",
+      "lastFailureDate": "2024-07-18T15:00:00Z",
+      "failureReason": "残高不足",
+      "retryCount": 2,
+      "nextRetryDate": "2024-07-20T15:00:00Z"
+    },
+    {
+      "subscriptionId": "sub_7",
+      "userId": "user_7",
+      "userName": "高橋 大輔",
+      "planId": "plan_gold",
+      "planName": "ゴールド",
+      "status": "payment_failed",
+      "lastFailureDate": "2024-07-17T13:00:00Z",
+      "failureReason": "カード認証エラー",
+      "retryCount": 3,
+      "nextRetryDate": null,
+      "actionStatus": "resolved"
+    }
+  ],
+  "planUpgradeDowngrade": [
+    {
+      "subscriptionId": "sub_3",
+      "userId": "user_3",
+      "userName": "山田 次郎",
+      "action": "upgraded",
+      "fromPlan": "plan_standard",
+      "toPlan": "plan_platinum",
+      "actionDate": "2024-05-15T14:00:00Z",
+      "revenueImpact": 5000
+    },
+    {
+      "subscriptionId": "sub_1",
+      "userId": "user_1",
+      "userName": "田中 太郎",
+      "action": "downgraded",
+      "fromPlan": "plan_platinum",
+      "toPlan": "plan_gold",
+      "actionDate": "2024-03-01T12:00:00Z",
+      "revenueImpact": -3000
+    },
+    {
+      "subscriptionId": "sub_4",
+      "userId": "user_4",
+      "userName": "渡辺 美咲",
+      "action": "upgraded",
+      "fromPlan": "plan_standard",
+      "toPlan": "plan_gold",
+      "actionDate": "2024-05-01T10:00:00Z",
+      "revenueImpact": 2000
+    }
+  ]
+}

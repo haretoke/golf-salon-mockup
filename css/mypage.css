@@ -40,7 +40,6 @@ body {
   flex: 1;
 }
 
-
 /* プランサンプル表示用の縦並びレイアウト */
 .current-plan-samples {
   display: flex;
@@ -354,6 +353,48 @@ body {
   font-size: 0.875rem;
   opacity: 0.9;
   margin-left: 0.25rem;
+}
+
+/* LINE連携セクション */
+.line-integration {
+  text-align: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 1.5rem;
+}
+
+.btn-line {
+  background: #06c755;
+  color: white;
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 185, 0, 0.3);
+}
+
+.btn-line:hover {
+  background: #05b34d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 185, 0, 0.4);
+}
+
+.line-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.line-note {
+  margin: 0.75rem 0 0 0;
+  font-size: 0.875rem;
+  color: var(--gray-dark);
 }
 
 /* プラン機能 */
@@ -849,6 +890,11 @@ input:checked + .slider:before {
     max-width: 300px;
   }
 
+  .btn-line {
+    width: 100%;
+    max-width: 280px;
+  }
+
   .card-header {
     flex-direction: row;
     flex-wrap: wrap;
@@ -1119,17 +1165,17 @@ input:checked + .slider:before {
   .plan-preview-controls {
     padding: 1rem;
   }
-  
+
   .preview-buttons {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .preview-btn {
     width: 100%;
     max-width: 200px;
   }
-  
+
   .profile-header {
     flex-direction: column;
     text-align: center;

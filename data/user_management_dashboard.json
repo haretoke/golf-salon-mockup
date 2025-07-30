@@ -1,0 +1,144 @@
+{
+  "kpiCards": [
+    {
+      "title": "総ユーザー数",
+      "value": 5,
+      "trend": "+2",
+      "trendType": "positive",
+      "description": "今月の新規登録"
+    },
+    {
+      "title": "アクティブユーザー",
+      "value": 4,
+      "trend": "80%",
+      "trendType": "neutral",
+      "description": "アクティブ率"
+    },
+    {
+      "title": "月間売上",
+      "value": "¥20,920",
+      "trend": "+15%",
+      "trendType": "positive",
+      "description": "前月比"
+    },
+    {
+      "title": "決済成功率",
+      "value": "83%",
+      "trend": "-17%",
+      "trendType": "negative",
+      "description": "要注意: 決済エラー増加"
+    }
+  ],
+  "planDistribution": {
+    "スタンダード": {
+      "count": 2,
+      "percentage": 40,
+      "revenue": 3960
+    },
+    "ゴールド": {
+      "count": 2,
+      "percentage": 40,
+      "revenue": 7960
+    },
+    "プラチナ": {
+      "count": 1,
+      "percentage": 20,
+      "revenue": 6980
+    }
+  },
+  "userActivityStats": {
+    "totalViews": 8,
+    "totalWatchTime": "23時間25分",
+    "averageViewsPerUser": 1.6,
+    "averageWatchTimePerUser": "4時間41分",
+    "activeViewers": 4,
+    "completionRate": 87.5
+  },
+  "paymentIssues": [
+    {
+      "userId": "user_5",
+      "name": "鈴木 健一",
+      "email": "suzuki@example.com",
+      "issue": "カードの有効期限切れ",
+      "failedAt": "2024/07/20",
+      "amount": 1980,
+      "status": "未解決"
+    }
+  ],
+  "recentActivity": [
+    {
+      "type": "user_registration",
+      "userId": "user_5",
+      "name": "鈴木 健一",
+      "timestamp": "2024/05/20 12:00",
+      "description": "新規ユーザー登録（スタンダードプラン）"
+    },
+    {
+      "type": "payment_success",
+      "userId": "user_1",
+      "name": "田中 太郎",
+      "timestamp": "2024/07/15 10:00",
+      "description": "ゴールドプラン決済完了（¥3,980）"
+    },
+    {
+      "type": "subscription_cancel",
+      "userId": "user_5",
+      "name": "鈴木 健一",
+      "timestamp": "2024/07/15 10:00",
+      "description": "サブスクリプションキャンセル"
+    },
+    {
+      "type": "payment_failed",
+      "userId": "user_5",
+      "name": "鈴木 健一",
+      "timestamp": "2024/07/20 12:00",
+      "description": "決済失敗（カードの有効期限切れ）"
+    }
+  ],
+  "notificationSettings": {
+    "emailNewContent": {
+      "enabled": 4,
+      "disabled": 1,
+      "percentage": 80
+    },
+    "emailPaymentSuccess": {
+      "enabled": 5,
+      "disabled": 0,
+      "percentage": 100
+    },
+    "emailPaymentFailed": {
+      "enabled": 5,
+      "disabled": 0,
+      "percentage": 100
+    },
+    "emailPlanChange": {
+      "enabled": 5,
+      "disabled": 0,
+      "percentage": 100
+    },
+    "emailMaintenance": {
+      "enabled": 4,
+      "disabled": 1,
+      "percentage": 80
+    },
+    "emailMarketing": {
+      "enabled": 2,
+      "disabled": 3,
+      "percentage": 40
+    }
+  },
+  "alerts": [
+    {
+      "type": "payment_failure",
+      "priority": "high",
+      "message": "user_5 (鈴木 健一) の決済が失敗しました",
+      "timestamp": "2024/07/20 12:00"
+    },
+    {
+      "type": "subscription_expiring",
+      "priority": "medium",
+      "message": "user_2 (佐藤 花子) のサブスクが2週間以内に期限切れです",
+      "timestamp": "2024/07/18 09:00"
+    }
+  ]
+}

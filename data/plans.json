@@ -1,0 +1,58 @@
+[
+  {
+    "id": "plan_standard",
+    "name": "standard",
+    "displayName": "スタンダード",
+    "price": 1980,
+    "description": "基本的なゴルフレッスンコンテンツをお楽しみいただけます。",
+    "features": [
+      "基本レッスン動画見放題",
+      "つぶやき投稿閲覧",
+      "基本的な画像解説",
+      "月1回のライブ配信参加"
+    ],
+    "isActive": true,
+    "sortOrder": 1,
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "plan_gold",
+    "name": "gold",
+    "displayName": "ゴールド",
+    "price": 3980,
+    "description": "プレミアムコンテンツと個別フィードバック付きのプランです。",
+    "features": [
+      "全レッスン動画見放題",
+      "プレミアム動画コンテンツ",
+      "詳細な画像解説・図解",
+      "月2回のライブ配信参加",
+      "個別フォーム診断（月1回）",
+      "コース戦略解説"
+    ],
+    "isActive": true,
+    "sortOrder": 2,
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "plan_platinum",
+    "name": "platinum",
+    "displayName": "プラチナ",
+    "price": 6980,
+    "description": "最上位プランで、個別指導とVIP特典が受けられます。",
+    "features": [
+      "全コンテンツ見放題",
+      "限定プレミアム動画",
+      "個別オンラインレッスン（月1回）",
+      "ライブ配信優先参加",
+      "個別フォーム診断（月2回）",
+      "コース同伴ラウンド権利（年2回）",
+      "プロとの直接チャット相談"
+    ],
+    "isActive": true,
+    "sortOrder": 3,
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z"
+  }
+]

@@ -1,0 +1,113 @@
+{
+  "connectionStatus": {
+    "status": "connected",
+    "lastConnectedAt": "2024-07-18T16:00:00Z",
+    "lastDisconnectedAt": null,
+    "connectionUptime": 99.8,
+    "totalDowntime": 2.4,
+    "lastHealthCheckAt": "2024-07-18T16:00:00Z",
+    "healthCheckStatus": "healthy"
+  },
+  "webhookStatus": {
+    "webhookUrl": "https://golf-salon.example.com/api/webhooks/robot-payment",
+    "lastWebhookReceived": "2024-07-18T15:30:00Z",
+    "totalWebhooksReceived": 145,
+    "failedWebhooks": 2,
+    "successRate": 98.6,
+    "pendingWebhooks": 0,
+    "lastFailedWebhook": "2024-07-15T10:30:00Z",
+    "failedWebhookReason": "timeout"
+  },
+  "apiUsage": {
+    "totalRequests": 1250,
+    "successfulRequests": 1230,
+    "failedRequests": 20,
+    "successRate": 98.4,
+    "averageResponseTime": 250,
+    "rateLimitStatus": "normal",
+    "rateLimitRemaining": 4800,
+    "rateLimitResetAt": "2024-07-18T17:00:00Z"
+  },
+  "synchronizationStatus": {
+    "lastSyncAt": "2024-07-18T16:00:00Z",
+    "syncStatus": "completed",
+    "pendingSyncItems": 0,
+    "lastSyncDuration": 1.2,
+    "syncFrequency": "hourly",
+    "nextSyncAt": "2024-07-18T17:00:00Z",
+    "totalSyncErrors": 0,
+    "lastSyncError": null
+  },
+  "transactionTracking": {
+    "totalTrackedTransactions": 12,
+    "successfullyTracked": 12,
+    "trackingErrors": 0,
+    "lastTrackingError": null,
+    "averageTrackingDelay": 0.5,
+    "maxTrackingDelay": 2.1
+  },
+  "securityStatus": {
+    "apiKeyStatus": "active",
+    "apiKeyExpiresAt": "2024-12-31T23:59:59Z",
+    "encryptionStatus": "enabled",
+    "lastSecurityAudit": "2024-07-01T00:00:00Z",
+    "securityScore": 95,
+    "vulnerabilities": 0
+  },
+  "errorLogs": [
+    {
+      "id": "error_1",
+      "timestamp": "2024-07-15T10:30:00Z",
+      "type": "webhook_timeout",
+      "message": "Webhook delivery timed out after 30 seconds",
+      "severity": "medium",
+      "resolved": true,
+      "resolvedAt": "2024-07-15T10:45:00Z"
+    },
+    {
+      "id": "error_2",
+      "timestamp": "2024-07-10T14:20:00Z",
+      "type": "api_rate_limit",
+      "message": "API rate limit exceeded, request throttled",
+      "severity": "low",
+      "resolved": true,
+      "resolvedAt": "2024-07-10T14:21:00Z"
+    }
+  ],
+  "performanceMetrics": {
+    "averagePaymentProcessingTime": 2.3,
+    "averageRefundProcessingTime": 1.8,
+    "averageWebhookDeliveryTime": 0.3,
+    "uptime": {
+      "daily": 99.9,
+      "weekly": 99.8,
+      "monthly": 99.7
+    },
+    "throughput": {
+      "transactionsPerHour": 5,
+      "transactionsPerDay": 120,
+      "peakTransactionsPerHour": 15
+    }
+  },
+  "alerts": [
+    {
+      "id": "alert_1",
+      "type": "info",
+      "message": "Robot Payment APIの新機能が利用可能です",
+      "timestamp": "2024-07-18T12:00:00Z",
+      "acknowledged": false,
+      "priority": "low"
+    }
+  ],
+  "configuration": {
+    "environment": "production",
+    "apiVersion": "v2.1",
+    "timeout": 30,
+    "retryAttempts": 3,
+    "retryDelay": 1000,
+    "webhookRetryAttempts": 5,
+    "webhookRetryDelay": 2000,
+    "enableLogging": true,
+    "logLevel": "info"
+  }
+}

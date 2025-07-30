@@ -1,0 +1,163 @@
+{
+  "metadata": {
+    "title": "決済管理システム",
+    "description": "ゴルフサロンの決済処理、統計、失敗管理、返金処理を一元管理",
+    "version": "1.0.0",
+    "lastUpdated": "2024-07-18T16:00:00Z"
+  },
+  "navigation": [
+    {
+      "id": "dashboard",
+      "title": "ダッシュボード",
+      "icon": "dashboard",
+      "path": "/admin/payments/dashboard",
+      "description": "決済の概要と主要指標"
+    },
+    {
+      "id": "transactions",
+      "title": "決済履歴",
+      "icon": "list",
+      "path": "/admin/payments/transactions",
+      "description": "全決済取引の詳細履歴"
+    },
+    {
+      "id": "failures",
+      "title": "決済失敗管理",
+      "icon": "error",
+      "path": "/admin/payments/failures",
+      "description": "失敗した決済の管理と対応"
+    },
+    {
+      "id": "refunds",
+      "title": "返金処理",
+      "icon": "refund",
+      "path": "/admin/payments/refunds",
+      "description": "返金要求の管理と処理"
+    },
+    {
+      "id": "analytics",
+      "title": "売上分析",
+      "icon": "analytics",
+      "path": "/admin/payments/analytics",
+      "description": "売上の詳細分析とレポート"
+    },
+    {
+      "id": "robot-payment",
+      "title": "Robot Payment連携",
+      "icon": "integration",
+      "path": "/admin/payments/robot-payment",
+      "description": "Robot Payment APIの連携状況"
+    }
+  ],
+  "permissions": {
+    "view_payments": ["admin", "finance_manager"],
+    "manage_refunds": ["admin", "finance_manager"],
+    "view_analytics": ["admin", "finance_manager", "viewer"],
+    "manage_robot_payment": ["admin", "system_admin"]
+  },
+  "settings": {
+    "currency": "JPY",
+    "timezone": "Asia/Tokyo",
+    "dateFormat": "YYYY-MM-DD",
+    "timeFormat": "HH:mm:ss",
+    "language": "ja-JP",
+    "pageSize": 50,
+    "refreshInterval": 30000,
+    "alertThresholds": {
+      "failureRate": 10,
+      "refundRate": 5,
+      "lowRevenue": 50000
+    }
+  },
+  "quickActions": [
+    {
+      "id": "process_refund",
+      "title": "返金処理",
+      "icon": "refund",
+      "action": "openRefundModal",
+      "description": "新しい返金要求を処理"
+    },
+    {
+      "id": "retry_failed_payment",
+      "title": "決済再試行",
+      "icon": "retry",
+      "action": "retryFailedPayment",
+      "description": "失敗した決済の再試行"
+    },
+    {
+      "id": "export_data",
+      "title": "データエクスポート",
+      "icon": "download",
+      "action": "exportPaymentData",
+      "description": "決済データをCSVでエクスポート"
+    },
+    {
+      "id": "sync_robot_payment",
+      "title": "Robot Payment同期",
+      "icon": "sync",
+      "action": "syncRobotPayment",
+      "description": "Robot Paymentとの同期を実行"
+    }
+  ],
+  "alerts": [
+    {
+      "id": "high_failure_rate",
+      "type": "warning",
+      "message": "決済失敗率が10%を超えています",
+      "timestamp": "2024-07-18T14:00:00Z",
+      "acknowledged": false,
+      "priority": "medium"
+    },
+    {
+      "id": "pending_refunds",
+      "type": "info",
+      "message": "承認待ちの返金要求が2件あります",
+      "timestamp": "2024-07-18T13:00:00Z",
+      "acknowledged": false,
+      "priority": "low"
+    }
+  ],
+  "reports": {
+    "available": [
+      {
+        "id": "monthly_revenue",
+        "title": "月次売上レポート",
+        "description": "月別の売上詳細分析",
+        "format": ["PDF", "Excel"],
+        "schedule": "monthly"
+      },
+      {
+        "id": "failure_analysis",
+        "title": "決済失敗分析レポート",
+        "description": "決済失敗の原因と対策分析",
+        "format": ["PDF", "Excel"],
+        "schedule": "weekly"
+      },
+      {
+        "id": "refund_summary",
+        "title": "返金処理サマリー",
+        "description": "返金処理の詳細まとめ",
+        "format": ["PDF", "Excel"],
+        "schedule": "monthly"
+      }
+    ]
+  },
+  "integrations": {
+    "robotPayment": {
+      "enabled": true,
+      "status": "connected",
+      "apiVersion": "v2.1",
+      "lastSync": "2024-07-18T16:00:00Z"
+    },
+    "accountingSystem": {
+      "enabled": false,
+      "status": "not_configured",
+      "note": "会計システムとの連携は未設定"
+    },
+    "emailNotification": {
+      "enabled": true,
+      "status": "active",
+      "provider": "SendGrid"
+    }
+  }
+}

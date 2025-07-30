@@ -1,666 +1,889 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>マイページ - Golf Salon</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/mypage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/mypage.css" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <header class="header-v2">
-        <div class="header-content">
-            <h1 class="header-logo">Golf Salon</h1>
-            <nav class="header-nav">
-                <a href="dashboard.html" class="nav-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                    </svg>
-                </a>
-                <a href="mypage.html" class="nav-icon active">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                    </svg>
-                </a>
-            </nav>
-        </div>
+      <div class="header-content">
+        <h1 class="header-logo">Golf Salon</h1>
+        <nav class="header-nav">
+          <a href="dashboard.html" class="nav-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </svg>
+          </a>
+          <a href="mypage.html" class="nav-icon active">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
+              />
+            </svg>
+          </a>
+        </nav>
+      </div>
     </header>
 
     <main class="main-content">
-        <!-- プラン切り替えプレビュー機能 -->
-        <div class="plan-preview-controls">
-            <p class="preview-note">※デザイン確認用のプレビュー機能</p>
-            <div class="preview-buttons">
-                <button class="preview-btn" data-plan="standard">スタンダード</button>
-                <button class="preview-btn active" data-plan="gold">ゴールド</button>
-                <button class="preview-btn" data-plan="platinum">プラチナ</button>
+      <!-- プラン切り替えプレビュー機能 -->
+      <div class="plan-preview-controls">
+        <p class="preview-note">※デザイン確認用のプレビュー機能</p>
+        <div class="preview-buttons">
+          <button class="preview-btn" data-plan="standard">スタンダード</button>
+          <button class="preview-btn active" data-plan="gold">ゴールド</button>
+          <button class="preview-btn" data-plan="platinum">プラチナ</button>
+        </div>
+      </div>
+
+      <div class="profile-section">
+        <div class="profile-header">
+          <div class="profile-info">
+            <h2 class="profile-name">山田 太郎</h2>
+            <p class="profile-email">yamada@example.com</p>
+            <div class="membership-badges">
+              <div class="membership-badge standard" style="display: none">
+                <i data-lucide="user" class="badge-icon"></i>
+                スタンダード
+              </div>
+              <div class="membership-badge gold" style="display: inline-flex">
+                <i data-lucide="star" class="badge-icon"></i>
+                ゴールド
+              </div>
+              <div class="membership-badge platinum" style="display: none">
+                <i data-lucide="crown" class="badge-icon"></i>
+                プラチナ
+              </div>
             </div>
+          </div>
         </div>
-        
-        <div class="profile-section">
-            <div class="profile-header">
-                <div class="profile-info">
-                    <h2 class="profile-name">山田 太郎</h2>
-                    <p class="profile-email">yamada@example.com</p>
-                    <div class="membership-badges">
-                        <div class="membership-badge standard" style="display: none;">
-                            <i data-lucide="user" class="badge-icon"></i>
-                            スタンダード
-                        </div>
-                        <div class="membership-badge gold" style="display: inline-flex;">
-                            <i data-lucide="star" class="badge-icon"></i>
-                            ゴールド
-                        </div>
-                        <div class="membership-badge platinum" style="display: none;">
-                            <i data-lucide="crown" class="badge-icon"></i>
-                            プラチナ
-                        </div>
-                    </div>
+      </div>
+
+      <div class="settings-grid">
+        <section class="settings-card" id="subscription">
+          <h3 class="card-title">サブスクリプション</h3>
+          <div class="current-plan-samples">
+            <div class="current-plan-compact standard" style="display: none">
+              <div class="plan-status-compact">
+                <span class="status-badge-compact active">利用中</span>
+                <span class="plan-name-compact">スタンダード</span>
+                <div class="plan-price-compact">
+                  <span class="price-compact">¥2,200</span>
+                  <span class="period-compact">/月</span>
                 </div>
+              </div>
+              <div class="plan-features-compact">
+                <ul>
+                  <li>動画・画像・つぶやき閲覧</li>
+                </ul>
+              </div>
+              <div class="billing-info-compact">
+                <p><small>※毎月1日に自動課金されます</small></p>
+              </div>
             </div>
-        </div>
 
-        <div class="settings-grid">
-            <section class="settings-card" id="accountSettings">
-                <div class="card-header">
-                    <h3 class="card-title">アカウント設定</h3>
-                    <div class="header-actions">
-                        <button class="btn btn-outline btn-sm header-edit-btn" onclick="startEdit('accountSettings')">
-                            <i data-lucide="edit" class="btn-icon"></i>
-                            編集
-                        </button>
-                        <div class="edit-controls" style="display: none;">
-                            <button class="btn btn-outline btn-sm" onclick="cancelEdit('accountSettings')">キャンセル</button>
-                            <button class="btn btn-primary btn-sm" onclick="saveChanges('accountSettings')">保存</button>
-                        </div>
-                    </div>
+            <div class="current-plan-compact gold" style="display: flex">
+              <div class="plan-status-compact">
+                <span class="status-badge-compact active">利用中</span>
+                <span class="plan-name-compact">ゴールド</span>
+                <div class="plan-price-compact">
+                  <span class="price-compact">¥6,600</span>
+                  <span class="period-compact">/月</span>
                 </div>
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <h4>お名前</h4>
-                        <p class="editable-field" data-field="name" data-original="山田 太郎">山田 太郎</p>
-                        <input type="text" class="edit-input" data-field="name" value="山田 太郎" style="display: none;">
-                    </div>
-                </div>
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <h4>性別</h4>
-                        <p class="editable-field" data-field="gender" data-original="男性">男性</p>
-                        <select class="edit-input" data-field="gender" style="display: none;">
-                            <option value="男性">男性</option>
-                            <option value="女性">女性</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <h4>都道府県</h4>
-                        <p class="editable-field" data-field="prefecture" data-original="東京都">東京都</p>
-                        <select class="edit-input" data-field="prefecture" style="display: none;">
-                            <option value="東京都">東京都</option>
-                            <option value="神奈川県">神奈川県</option>
-                            <option value="大阪府">大阪府</option>
-                            <option value="愛知県">愛知県</option>
-                            <!-- 他の都道府県... -->
-                        </select>
-                    </div>
-                </div>
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <h4>レベル</h4>
-                        <p class="editable-field" data-field="level" data-original="中上級者">中上級者</p>
-                        <select class="edit-input" data-field="level" style="display: none;">
-                            <option value="初心者">初心者</option>
-                            <option value="中級者">中級者</option>
-                            <option value="中上級者">中上級者</option>
-                            <option value="上級者">上級者</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <h4>メールアドレス</h4>
-                        <p class="editable-field" data-field="email" data-original="yamada@example.com">yamada@example.com</p>
-                        <input type="email" class="edit-input" data-field="email" value="yamada@example.com" style="display: none;">
-                    </div>
-                </div>
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <h4>パスワード</h4>
-                        <p class="editable-field" data-field="password" data-original="••••••••">••••••••</p>
-                        <input type="password" class="edit-input" data-field="password" placeholder="新しいパスワード" style="display: none;">
-                    </div>
-                </div>
-            </section>
+              </div>
+              <div class="plan-features-compact">
+                <ul>
+                  <li>動画・画像・つぶやき閲覧</li>
+                  <li>オンラインレッスン月1回</li>
+                </ul>
+              </div>
+              <div class="billing-info-compact">
+                <p><small>※毎月1日に自動課金されます</small></p>
+              </div>
+            </div>
 
-            <section class="settings-card">
-                <h3 class="card-title">サブスクリプション</h3>
-                <div class="current-plan-samples">
-                    <div class="current-plan-compact standard" style="display: none;">
-                        <div class="plan-status-compact">
-                            <span class="status-badge-compact active">利用中</span>
-                            <span class="plan-name-compact">スタンダード</span>
-                            <div class="plan-price-compact">
-                                <span class="price-compact">¥2,200</span>
-                                <span class="period-compact">/月</span>
-                            </div>
-                        </div>
-                        <div class="plan-features-compact">
-                            <ul>
-                                <li>動画・画像・つぶやき閲覧</li>
-                            </ul>
-                        </div>
-                        <div class="billing-info-compact">
-                            <p><small>※毎月1日に自動課金されます</small></p>
-                        </div>
-                    </div>
-                    
-                    <div class="current-plan-compact gold" style="display: flex;">
-                        <div class="plan-status-compact">
-                            <span class="status-badge-compact active">利用中</span>
-                            <span class="plan-name-compact">ゴールド</span>
-                            <div class="plan-price-compact">
-                                <span class="price-compact">¥6,600</span>
-                                <span class="period-compact">/月</span>
-                            </div>
-                        </div>
-                        <div class="plan-features-compact">
-                            <ul>
-                                <li>動画・画像・つぶやき閲覧</li>
-                                <li>オンラインレッスン月1回</li>
-                            </ul>
-                        </div>
-                        <div class="billing-info-compact">
-                            <p><small>※毎月1日に自動課金されます</small></p>
-                        </div>
-                    </div>
-                    
-                    <div class="current-plan-compact platinum" style="display: none;">
-                        <div class="plan-status-compact">
-                            <span class="status-badge-compact active">利用中</span>
-                            <span class="plan-name-compact">プラチナ</span>
-                            <div class="plan-price-compact">
-                                <span class="price-compact">¥9,900</span>
-                                <span class="period-compact">/月</span>
-                            </div>
-                        </div>
-                        <div class="plan-features-compact">
-                            <ul>
-                                <li>動画・画像・つぶやき閲覧</li>
-                                <li>オンラインレッスン月2回</li>
-                            </ul>
-                        </div>
-                        <div class="billing-info-compact">
-                            <p><small>※毎月1日に自動課金されます</small></p>
-                        </div>
-                    </div>
+            <div class="current-plan-compact platinum" style="display: none">
+              <div class="plan-status-compact">
+                <span class="status-badge-compact active">利用中</span>
+                <span class="plan-name-compact">プラチナ</span>
+                <div class="plan-price-compact">
+                  <span class="price-compact">¥9,900</span>
+                  <span class="period-compact">/月</span>
                 </div>
-            </section>
-
-            <!-- クレジットカード情報詳細 -->
-            <section class="settings-card">
-                <h3 class="card-title">クレジットカード情報</h3>
-                <div class="payment-card-new">
-                    <div class="card-visual-new">
-                        <div class="card-brand-new">
-                            <i data-lucide="credit-card" class="brand-icon"></i>
-                            <span class="brand-name">Visa</span>
-                        </div>
-                        <div class="card-number-new">**** **** **** 1234</div>
-                        <div class="card-details-new">
-                            <span class="card-expiry">有効期限: 12/27</span>
-                            <span class="card-holder">YAMADA TARO</span>
-                        </div>
-                    </div>
-                    <div class="payment-actions-new">
-                        <button class="btn btn-outline btn-sm" onclick="changePaymentMethod()">
-                            <i data-lucide="edit-3"></i>
-                            変更
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- プラン変更 -->
-            <section class="settings-card">
-                <h3 class="card-title">プラン変更</h3>
-                <div class="plan-options">
-                    <div class="plan-card plan-standard">
-                        <div class="current-badge">現在のプラン</div>
-                        <h5>スタンダード</h5>
-                        <div class="plan-price">
-                            <span class="price">¥2,200</span>
-                            <span class="period">/月</span>
-                        </div>
-                        <ul class="plan-features">
-                            <li>動画・画像・つぶやき閲覧</li>
-                        </ul>
-                        <button class="btn btn-sm change-plan-btn" data-plan="standard" data-price="2200">
-                            このプランに変更
-                        </button>
-                        <p class="change-note downgrade">翌月から適用されます</p>
-                    </div>
-
-                    <div class="plan-card plan-gold current">
-                        <div class="current-badge">現在のプラン</div>
-                        <h5>ゴールド</h5>
-                        <div class="plan-price">
-                            <span class="price">¥6,600</span>
-                            <span class="period">/月</span>
-                        </div>
-                        <ul class="plan-features">
-                            <li>動画・画像・つぶやき閲覧</li>
-                            <li>オンラインレッスン月1回</li>
-                        </ul>
-                        <button class="btn btn-sm change-plan-btn" data-plan="gold" data-price="6600" disabled>
-                            現在利用中
-                        </button>
-                        <p class="change-note"></p>
-                    </div>
-
-                    <div class="plan-card plan-platinum">
-                        <div class="current-badge">現在のプラン</div>
-                        <h5>プラチナ</h5>
-                        <div class="plan-price">
-                            <span class="price">¥9,900</span>
-                            <span class="period">/月</span>
-                        </div>
-                        <ul class="plan-features">
-                            <li>動画・画像・つぶやき閲覧</li>
-                            <li>オンラインレッスン月2回</li>
-                        </ul>
-                        <button class="btn btn-sm change-plan-btn" data-plan="platinum" data-price="9900">
-                            このプランに変更
-                        </button>
-                        <p class="change-note upgrade">差額¥3,300を即時課金</p>
-                    </div>
-                </div>
-            </section>
-
-        </div>
-
-        <div class="account-actions">
-            <button class="btn btn-outline btn-with-icon" onclick="showContactModal()">
-                <i data-lucide="mail" class="btn-icon"></i>
-                お問い合わせ
+              </div>
+              <div class="plan-features-compact">
+                <ul>
+                  <li>動画・画像・つぶやき閲覧</li>
+                  <li>オンラインレッスン月2回</li>
+                </ul>
+              </div>
+              <div class="billing-info-compact">
+                <p><small>※毎月1日に自動課金されます</small></p>
+              </div>
+            </div>
+          </div>
+          <!-- LINE連携ボタン -->
+          <div class="line-integration">
+            <button class="btn btn-line" onclick="openLineChat()">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="8 8 30 30"
+                width="48px"
+                height="48px"
+              >
+                <path
+                  fill="#fff"
+                  d="M37.113,22.417c0-5.865-5.88-10.637-13.107-10.637s-13.108,4.772-13.108,10.637c0,5.258,4.663,9.662,10.962,10.495c0.427,0.092,1.008,0.282,1.155,0.646c0.132,0.331,0.086,0.85,0.042,1.185c0,0-0.153,0.925-0.187,1.122c-0.057,0.331-0.263,1.296,1.135,0.707c1.399-0.589,7.548-4.445,10.298-7.611h-0.001C36.203,26.879,37.113,24.764,37.113,22.417z M18.875,25.907h-2.604c-0.379,0-0.687-0.308-0.687-0.688V20.01c0-0.379,0.308-0.687,0.687-0.687c0.379,0,0.687,0.308,0.687,0.687v4.521h1.917c0.379,0,0.687,0.308,0.687,0.687C19.562,25.598,19.254,25.907,18.875,25.907z M21.568,25.219c0,0.379-0.308,0.688-0.687,0.688s-0.687-0.308-0.687-0.688V20.01c0-0.379,0.308-0.687,0.687-0.687s0.687,0.308,0.687,0.687V25.219z M27.838,25.219c0,0.297-0.188,0.559-0.47,0.652c-0.071,0.024-0.145,0.036-0.218,0.036c-0.215,0-0.42-0.103-0.549-0.275l-2.669-3.635v3.222c0,0.379-0.308,0.688-0.688,0.688c-0.379,0-0.688-0.308-0.688-0.688V20.01c0-0.296,0.189-0.558,0.47-0.652c0.071-0.024,0.144-0.035,0.218-0.035c0.214,0,0.42,0.103,0.549,0.275l2.67,3.635V20.01c0-0.379,0.309-0.687,0.688-0.687c0.379,0,0.687,0.308,0.687,0.687V25.219z M32.052,21.927c0.379,0,0.688,0.308,0.688,0.688c0,0.379-0.308,0.687-0.688,0.687h-1.917v1.23h1.917c0.379,0,0.688,0.308,0.688,0.687c0,0.379-0.309,0.688-0.688,0.688h-2.604c-0.378,0-0.687-0.308-0.687-0.688v-2.603c0-0.001,0-0.001,0-0.001c0,0,0-0.001,0-0.001v-2.601c0-0.001,0-0.001,0-0.002c0-0.379,0.308-0.687,0.687-0.687h2.604c0.379,0,0.688,0.308,0.688,0.687s-0.308,0.687-0.688,0.687h-1.917v1.23H32.052z"
+                />
+              </svg>
+              LINEでオンラインレッスン等文言
             </button>
-            <button class="btn-danger btn-with-icon" onclick="showWithdrawModal()">
-                <i data-lucide="log-out" class="btn-icon"></i>
-                退会申請
-            </button>
-        </div>
+            <p class="line-note">
+              必要に応じてオンラインレッスンについての補足を行います。
+            </p>
+          </div>
+        </section>
+
+        <!-- クレジットカード情報詳細 -->
+        <section class="settings-card" id="payment">
+          <h3 class="card-title">クレジットカード情報</h3>
+          <div class="payment-card-new">
+            <div class="card-visual-new">
+              <div class="card-brand-new">
+                <i data-lucide="credit-card" class="brand-icon"></i>
+                <span class="brand-name">Visa</span>
+              </div>
+              <div class="card-number-new">**** **** **** 1234</div>
+              <div class="card-details-new">
+                <span class="card-expiry">有効期限: 12/27</span>
+                <span class="card-holder">YAMADA TARO</span>
+              </div>
+            </div>
+            <div class="payment-actions-new">
+              <button
+                class="btn btn-outline btn-sm"
+                onclick="changePaymentMethod()"
+              >
+                <i data-lucide="edit-3"></i>
+                変更
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- プラン変更 -->
+        <section class="settings-card" id="planChange">
+          <h3 class="card-title">プラン変更</h3>
+          <div class="plan-options">
+            <div class="plan-card plan-standard">
+              <div class="current-badge">現在のプラン</div>
+              <h5>スタンダード</h5>
+              <div class="plan-price">
+                <span class="price">¥2,200</span>
+                <span class="period">/月</span>
+              </div>
+              <ul class="plan-features">
+                <li>動画・画像・つぶやき閲覧</li>
+              </ul>
+              <button
+                class="btn btn-sm change-plan-btn"
+                data-plan="standard"
+                data-price="2200"
+              >
+                このプランに変更
+              </button>
+              <p class="change-note downgrade">翌月から適用されます</p>
+            </div>
+
+            <div class="plan-card plan-gold current">
+              <div class="current-badge">現在のプラン</div>
+              <h5>ゴールド</h5>
+              <div class="plan-price">
+                <span class="price">¥6,600</span>
+                <span class="period">/月</span>
+              </div>
+              <ul class="plan-features">
+                <li>動画・画像・つぶやき閲覧</li>
+                <li>オンラインレッスン月1回</li>
+              </ul>
+              <button
+                class="btn btn-sm change-plan-btn"
+                data-plan="gold"
+                data-price="6600"
+                disabled
+              >
+                現在利用中
+              </button>
+              <p class="change-note"></p>
+            </div>
+
+            <div class="plan-card plan-platinum">
+              <div class="current-badge">現在のプラン</div>
+              <h5>プラチナ</h5>
+              <div class="plan-price">
+                <span class="price">¥9,900</span>
+                <span class="period">/月</span>
+              </div>
+              <ul class="plan-features">
+                <li>動画・画像・つぶやき閲覧</li>
+                <li>オンラインレッスン月2回</li>
+              </ul>
+              <button
+                class="btn btn-sm change-plan-btn"
+                data-plan="platinum"
+                data-price="9900"
+              >
+                このプランに変更
+              </button>
+              <p class="change-note upgrade">差額¥3,300を即時課金</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- アカウント設定（最下部に移動） -->
+        <section class="settings-card" id="accountSettings">
+          <div class="card-header">
+            <h3 class="card-title">アカウント設定</h3>
+            <div class="header-actions">
+              <button
+                class="btn btn-outline btn-sm header-edit-btn"
+                onclick="startEdit('accountSettings')"
+              >
+                <i data-lucide="edit" class="btn-icon"></i>
+                編集
+              </button>
+              <div class="edit-controls" style="display: none">
+                <button
+                  class="btn btn-outline btn-sm"
+                  onclick="cancelEdit('accountSettings')"
+                >
+                  キャンセル
+                </button>
+                <button
+                  class="btn btn-primary btn-sm"
+                  onclick="saveChanges('accountSettings')"
+                >
+                  保存
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>お名前</h4>
+              <p
+                class="editable-field"
+                data-field="name"
+                data-original="山田 太郎"
+              >
+                山田 太郎
+              </p>
+              <input
+                type="text"
+                class="edit-input"
+                data-field="name"
+                value="山田 太郎"
+                style="display: none"
+              />
+            </div>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>性別</h4>
+              <p
+                class="editable-field"
+                data-field="gender"
+                data-original="男性"
+              >
+                男性
+              </p>
+              <select
+                class="edit-input"
+                data-field="gender"
+                style="display: none"
+              >
+                <option value="男性">男性</option>
+                <option value="女性">女性</option>
+              </select>
+            </div>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>都道府県</h4>
+              <p
+                class="editable-field"
+                data-field="prefecture"
+                data-original="東京都"
+              >
+                東京都
+              </p>
+              <select
+                class="edit-input"
+                data-field="prefecture"
+                style="display: none"
+              >
+                <option value="東京都">東京都</option>
+                <option value="神奈川県">神奈川県</option>
+                <option value="大阪府">大阪府</option>
+                <option value="愛知県">愛知県</option>
+                <!-- 他の都道府県... -->
+              </select>
+            </div>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>レベル</h4>
+              <p
+                class="editable-field"
+                data-field="level"
+                data-original="中上級者"
+              >
+                中上級者
+              </p>
+              <select
+                class="edit-input"
+                data-field="level"
+                style="display: none"
+              >
+                <option value="初心者">初心者</option>
+                <option value="中級者">中級者</option>
+                <option value="中上級者">中上級者</option>
+                <option value="上級者">上級者</option>
+              </select>
+            </div>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>メールアドレス</h4>
+              <p
+                class="editable-field"
+                data-field="email"
+                data-original="yamada@example.com"
+              >
+                yamada@example.com
+              </p>
+              <input
+                type="email"
+                class="edit-input"
+                data-field="email"
+                value="yamada@example.com"
+                style="display: none"
+              />
+            </div>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>パスワード</h4>
+              <p
+                class="editable-field"
+                data-field="password"
+                data-original="••••••••"
+              >
+                ••••••••
+              </p>
+              <input
+                type="password"
+                class="edit-input"
+                data-field="password"
+                placeholder="新しいパスワード"
+                style="display: none"
+              />
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="account-actions">
+        <button
+          class="btn btn-outline btn-with-icon"
+          onclick="showContactModal()"
+        >
+          <i data-lucide="mail" class="btn-icon"></i>
+          お問い合わせ
+        </button>
+        <button class="btn-danger btn-with-icon" onclick="showWithdrawModal()">
+          <i data-lucide="log-out" class="btn-icon"></i>
+          退会申請
+        </button>
+      </div>
     </main>
 
     <!-- お問い合わせモーダル -->
     <div id="contactModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>お問い合わせ</h3>
-                <span class="modal-close" onclick="hideContactModal()">&times;</span>
-            </div>
-            <div class="modal-body">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="contactCategory" class="form-label">お問い合わせ内容</label>
-                        <select id="contactCategory" class="form-input" required>
-                            <option value="">選択してください</option>
-                            <option value="technical">技術的な問題</option>
-                            <option value="billing">課金・支払いについて</option>
-                            <option value="content">コンテンツについて</option>
-                            <option value="account">アカウントについて</option>
-                            <option value="feature">機能の要望・改善</option>
-                            <option value="other">その他</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="contactMessage" class="form-label">詳細内容</label>
-                        <textarea id="contactMessage" class="form-input" rows="6" placeholder="お問い合わせの詳細をご記入ください" required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="contactEmail" class="form-label">返信先メールアドレス</label>
-                        <input type="email" id="contactEmail" class="form-input" value="yamada@example.com" readonly required>
-                        <small class="form-note">※ 登録されているメールアドレスです。変更する場合はアカウント設定で更新してください</small>
-                    </div>
-                    
-                    <div class="contact-notice">
-                        <h5><i data-lucide="info" style="width: 16px; height: 16px; margin-right: 0.5rem; color: var(--primary-green);"></i>お問い合わせについて</h5>
-                        <ul>
-                            <li>通常1-2営業日以内にご返信いたします</li>
-                            <li>技術的な問題の場合は、ご利用環境（デバイス、ブラウザ）もお教えください</li>
-                        </ul>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" onclick="hideContactModal()">キャンセル</button>
-                <button class="btn btn-primary" onclick="submitContact()">送信</button>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>お問い合わせ</h3>
+          <span class="modal-close" onclick="hideContactModal()">&times;</span>
         </div>
+        <div class="modal-body">
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="contactCategory" class="form-label"
+                >お問い合わせ内容</label
+              >
+              <select id="contactCategory" class="form-input" required>
+                <option value="">選択してください</option>
+                <option value="technical">技術的な問題</option>
+                <option value="billing">課金・支払いについて</option>
+                <option value="content">コンテンツについて</option>
+                <option value="account">アカウントについて</option>
+                <option value="feature">機能の要望・改善</option>
+                <option value="other">その他</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contactMessage" class="form-label">詳細内容</label>
+              <textarea
+                id="contactMessage"
+                class="form-input"
+                rows="6"
+                placeholder="お問い合わせの詳細をご記入ください"
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="contactEmail" class="form-label"
+                >返信先メールアドレス</label
+              >
+              <input
+                type="email"
+                id="contactEmail"
+                class="form-input"
+                value="yamada@example.com"
+                readonly
+                required
+              />
+              <small class="form-note"
+                >※
+                登録されているメールアドレスです。変更する場合はアカウント設定で更新してください</small
+              >
+            </div>
+
+            <div class="contact-notice">
+              <h5>
+                <i
+                  data-lucide="info"
+                  style="
+                    width: 16px;
+                    height: 16px;
+                    margin-right: 0.5rem;
+                    color: var(--primary-green);
+                  "
+                ></i
+                >お問い合わせについて
+              </h5>
+              <ul>
+                <li>通常1-2営業日以内にご返信いたします</li>
+                <li>
+                  技術的な問題の場合は、ご利用環境（デバイス、ブラウザ）もお教えください
+                </li>
+              </ul>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" onclick="hideContactModal()">
+            キャンセル
+          </button>
+          <button class="btn btn-primary" onclick="submitContact()">
+            送信
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- 退会確認モーダル -->
     <div id="withdrawModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>退会申請の確認</h3>
-                <span class="modal-close" onclick="hideWithdrawModal()">&times;</span>
-            </div>
-            <div class="modal-body">
-                <!-- 退会適用日の確認 -->
-                <div class="withdrawal-schedule">
-                    <div class="schedule-header">
-                        <div class="schedule-icon">
-                            <i data-lucide="calendar-x"></i>
-                        </div>
-                        <h4>退会適用日</h4>
-                    </div>
-                    <div class="schedule-details">
-                        <div class="withdrawal-date" id="withdrawalDate">
-                            <span class="date-label">退会日：</span>
-                            <span class="date-value">計算中...</span>
-                        </div>
-                        <div class="processing-info">
-                            <i data-lucide="clock" class="info-icon"></i>
-                            <span class="processing-time" id="processingTime">申請処理時刻を取得中...</span>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- 注意点 -->
-                <div class="withdrawal-notice">
-                    <h4><i data-lucide="alert-triangle" style="display: inline; width: 16px; height: 16px; margin-right: 0.5rem;"></i>注意点</h4>
-                    <ul class="notice-list">
-                        <li>退会の申請完了メールが数分以内に送信されます</li>
-                        <li>万が一、メールが受信されない場合、退会の申請が完了していないケースがあるので、必ず問い合わせフォームよりお問い合わせください</li>
-                        <li>メールが受信できていない場合、かつ退会の申請完了メールの提示ができない場合は会員継続となりますので、必ずご確認をお願いします</li>
-                    </ul>
-                </div>
-
-                <!-- 確認チェックボックス -->
-                <div class="confirmation-checkbox">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="confirmationCheck" class="confirmation-checkbox-input">
-                        <span>上記注意点を確認し、退会申請を行います</span>
-                    </label>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" onclick="hideWithdrawModal()">キャンセル</button>
-                <button class="btn btn-danger" id="confirmWithdraw" disabled onclick="processWithdraw()">退会申請</button>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>退会申請の確認</h3>
+          <span class="modal-close" onclick="hideWithdrawModal()">&times;</span>
         </div>
+        <div class="modal-body">
+          <!-- 退会適用日の確認 -->
+          <div class="withdrawal-schedule">
+            <div class="schedule-header">
+              <div class="schedule-icon">
+                <i data-lucide="calendar-x"></i>
+              </div>
+              <h4>退会適用日</h4>
+            </div>
+            <div class="schedule-details">
+              <div class="withdrawal-date" id="withdrawalDate">
+                <span class="date-label">退会日：</span>
+                <span class="date-value">計算中...</span>
+              </div>
+              <div class="processing-info">
+                <i data-lucide="clock" class="info-icon"></i>
+                <span class="processing-time" id="processingTime"
+                  >申請処理時刻を取得中...</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- 注意点 -->
+          <div class="withdrawal-notice">
+            <h4>
+              <i
+                data-lucide="alert-triangle"
+                style="
+                  display: inline;
+                  width: 16px;
+                  height: 16px;
+                  margin-right: 0.5rem;
+                "
+              ></i
+              >注意点
+            </h4>
+            <ul class="notice-list">
+              <li>退会の申請完了メールが数分以内に送信されます</li>
+              <li>
+                万が一、メールが受信されない場合、退会の申請が完了していないケースがあるので、必ず問い合わせフォームよりお問い合わせください
+              </li>
+              <li>
+                メールが受信できていない場合、かつ退会の申請完了メールの提示ができない場合は会員継続となりますので、必ずご確認をお願いします
+              </li>
+            </ul>
+          </div>
+
+          <!-- 確認チェックボックス -->
+          <div class="confirmation-checkbox">
+            <label class="checkbox-label">
+              <input
+                type="checkbox"
+                id="confirmationCheck"
+                class="confirmation-checkbox-input"
+              />
+              <span>上記注意点を確認し、退会申請を行います</span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" onclick="hideWithdrawModal()">
+            キャンセル
+          </button>
+          <button
+            class="btn btn-danger"
+            id="confirmWithdraw"
+            disabled
+            onclick="processWithdraw()"
+          >
+            退会申請
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- プラン変更確認モーダル -->
     <div id="planChangeModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>プラン変更の確認</h3>
-                <span class="modal-close" onclick="hidePlanChangeModal()">&times;</span>
-            </div>
-            <div class="modal-body">
-                <div id="planChangeDetails"></div>
-                <div class="important-note" style="background-color: var(--off-white); border: 1px solid var(--gray-medium); border-radius: var(--radius-md); padding: 1rem; margin: 1rem 0;">
-                    <p style="margin: 0 0 0.5rem 0;"><strong>重要な注意事項:</strong></p>
-                    <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.875rem;">
-                        <li>アップグレード：即時反映され、月額差額を即時課金（日割りなし）</li>
-                        <li>ダウングレード：翌月から適用</li>
-                        <li>決済は安全なシステムで処理されます</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" onclick="hidePlanChangeModal()">キャンセル</button>
-                <button class="btn btn-primary" id="confirmPlanChange" onclick="confirmPlanChange()">変更する</button>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>プラン変更の確認</h3>
+          <span class="modal-close" onclick="hidePlanChangeModal()"
+            >&times;</span
+          >
         </div>
+        <div class="modal-body">
+          <div id="planChangeDetails"></div>
+          <div
+            class="important-note"
+            style="
+              background-color: var(--off-white);
+              border: 1px solid var(--gray-medium);
+              border-radius: var(--radius-md);
+              padding: 1rem;
+              margin: 1rem 0;
+            "
+          >
+            <p style="margin: 0 0 0.5rem 0"><strong>重要な注意事項:</strong></p>
+            <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.875rem">
+              <li>
+                アップグレード：即時反映され、月額差額を即時課金（日割りなし）
+              </li>
+              <li>ダウングレード：翌月から適用</li>
+              <li>決済は安全なシステムで処理されます</li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" onclick="hidePlanChangeModal()">
+            キャンセル
+          </button>
+          <button
+            class="btn btn-primary"
+            id="confirmPlanChange"
+            onclick="confirmPlanChange()"
+          >
+            変更する
+          </button>
+        </div>
+      </div>
     </div>
 
     <script>
-        // 退会適用日を計算する関数
-        function calculateWithdrawalDate() {
-            const now = new Date();
-            const currentYear = now.getFullYear();
-            const currentMonth = now.getMonth(); // 0-11
-            const currentDay = now.getDate();
-            const currentHour = now.getHours();
-            
-            let withdrawalDate;
-            
-            // 当月10日以前なら翌月1日、11日以降なら翌々月1日
-            if (currentDay <= 10) {
-                withdrawalDate = new Date(currentYear, currentMonth + 1, 1);
-            } else {
-                withdrawalDate = new Date(currentYear, currentMonth + 2, 1);
-            }
-            
-            // 年をまたぐ場合の調整
-            if (withdrawalDate.getMonth() > 11) {
-                withdrawalDate = new Date(currentYear + 1, withdrawalDate.getMonth() - 12, 1);
-            }
-            
-            return {
-                withdrawal: withdrawalDate,
-                processing: `${currentYear}年${currentMonth + 1}月${currentDay}日${currentHour}時${now.getMinutes().toString().padStart(2, '0')}分`
-            };
+      // 退会適用日を計算する関数
+      function calculateWithdrawalDate() {
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth(); // 0-11
+        const currentDay = now.getDate();
+        const currentHour = now.getHours();
+
+        let withdrawalDate;
+
+        // 当月10日以前なら翌月1日、11日以降なら翌々月1日
+        if (currentDay <= 10) {
+          withdrawalDate = new Date(currentYear, currentMonth + 1, 1);
+        } else {
+          withdrawalDate = new Date(currentYear, currentMonth + 2, 1);
         }
 
-        // 退会モーダル制御
-        function showWithdrawModal() {
-            document.getElementById('withdrawModal').style.display = 'flex';
-            
-            // 日付を計算・表示
-            const dates = calculateWithdrawalDate();
-            const withdrawalYear = dates.withdrawal.getFullYear();
-            const withdrawalMonth = dates.withdrawal.getMonth() + 1;
-            const withdrawalDay = dates.withdrawal.getDate();
-            
-            document.getElementById('withdrawalDate').textContent = 
-                `退会適用日：${withdrawalYear}年${withdrawalMonth}月${withdrawalDay}日から利用停止`;
-            
-            document.getElementById('processingTime').textContent = 
-                `${dates.processing} 時点で申請が処理された場合の予定日となります`;
+        // 年をまたぐ場合の調整
+        if (withdrawalDate.getMonth() > 11) {
+          withdrawalDate = new Date(
+            currentYear + 1,
+            withdrawalDate.getMonth() - 12,
+            1
+          );
         }
 
-        function hideWithdrawModal() {
-            document.getElementById('withdrawModal').style.display = 'none';
-            document.getElementById('confirmationCheck').checked = false;
-            document.getElementById('confirmWithdraw').disabled = true;
-        }
+        return {
+          withdrawal: withdrawalDate,
+          processing: `${currentYear}年${
+            currentMonth + 1
+          }月${currentDay}日${currentHour}時${now
+            .getMinutes()
+            .toString()
+            .padStart(2, "0")}分`,
+        };
+      }
 
-        // チェックボックスの状態確認
-        document.getElementById('confirmationCheck').addEventListener('change', function(e) {
-            const confirmBtn = document.getElementById('confirmWithdraw');
-            confirmBtn.disabled = !e.target.checked;
+      // 退会モーダル制御
+      function showWithdrawModal() {
+        document.getElementById("withdrawModal").style.display = "flex";
+
+        // 日付を計算・表示
+        const dates = calculateWithdrawalDate();
+        const withdrawalYear = dates.withdrawal.getFullYear();
+        const withdrawalMonth = dates.withdrawal.getMonth() + 1;
+        const withdrawalDay = dates.withdrawal.getDate();
+
+        document.getElementById(
+          "withdrawalDate"
+        ).textContent = `退会適用日：${withdrawalYear}年${withdrawalMonth}月${withdrawalDay}日から利用停止`;
+
+        document.getElementById(
+          "processingTime"
+        ).textContent = `${dates.processing} 時点で申請が処理された場合の予定日となります`;
+      }
+
+      function hideWithdrawModal() {
+        document.getElementById("withdrawModal").style.display = "none";
+        document.getElementById("confirmationCheck").checked = false;
+        document.getElementById("confirmWithdraw").disabled = true;
+      }
+
+      // チェックボックスの状態確認
+      document
+        .getElementById("confirmationCheck")
+        .addEventListener("change", function (e) {
+          const confirmBtn = document.getElementById("confirmWithdraw");
+          confirmBtn.disabled = !e.target.checked;
         });
 
-        function processWithdraw() {
-            const checkbox = document.getElementById('confirmationCheck');
-            if (checkbox.checked) {
-                alert('退会申請を受け付けました。申請完了メールをご確認ください。');
-                hideWithdrawModal();
-                // 実際にはここでサーバーに退会申請を送信
-            } else {
-                alert('注意点の確認にチェックを入れてください。');
+      function processWithdraw() {
+        const checkbox = document.getElementById("confirmationCheck");
+        if (checkbox.checked) {
+          alert("退会申請を受け付けました。申請完了メールをご確認ください。");
+          hideWithdrawModal();
+          // 実際にはここでサーバーに退会申請を送信
+        } else {
+          alert("注意点の確認にチェックを入れてください。");
+        }
+      }
+
+      // お問い合わせモーダル制御
+      function showContactModal() {
+        document.getElementById("contactModal").style.display = "flex";
+      }
+
+      function hideContactModal() {
+        document.getElementById("contactModal").style.display = "none";
+        document.getElementById("contactForm").reset();
+        // メールアドレスを再設定
+        document.getElementById("contactEmail").value = "yamada@example.com";
+      }
+
+      function submitContact() {
+        const form = document.getElementById("contactForm");
+        const category = document.getElementById("contactCategory").value;
+        const message = document.getElementById("contactMessage").value;
+        const email = document.getElementById("contactEmail").value;
+
+        // バリデーション
+        if (!category || !message || !email) {
+          alert("すべての項目を入力してください。");
+          return;
+        }
+
+        // 実際にはここでサーバーに送信
+        const contactData = {
+          category: category,
+          message: message,
+          email: email,
+          timestamp: new Date().toISOString(),
+        };
+
+        console.log("お問い合わせデータ:", contactData);
+
+        alert("お問い合わせを送信しました。1-2営業日以内にご返信いたします。");
+        hideContactModal();
+      }
+
+      // モーダル外クリックで閉じる
+      window.onclick = function (event) {
+        const withdrawModal = document.getElementById("withdrawModal");
+        const contactModal = document.getElementById("contactModal");
+        const planChangeModal = document.getElementById("planChangeModal");
+
+        if (event.target === withdrawModal) {
+          hideWithdrawModal();
+        } else if (event.target === contactModal) {
+          hideContactModal();
+        } else if (event.target === planChangeModal) {
+          hidePlanChangeModal();
+        }
+      };
+
+      // アカウント設定編集機能
+      let editingSection = null;
+
+      function startEdit(sectionId, fieldName) {
+        const section = document.getElementById(sectionId);
+
+        // 編集モードに切り替え
+        if (!editingSection) {
+          editingSection = sectionId;
+          section.classList.add("editing");
+
+          // ヘッダー編集ボタンを非表示にし、編集コントロールを表示
+          const headerEditBtn = section.querySelector(".header-edit-btn");
+          const editControls = section.querySelector(".edit-controls");
+          if (headerEditBtn) headerEditBtn.style.display = "none";
+          editControls.style.display = "flex";
+
+          // すべての項目を編集可能にする
+          const editableItems = section.querySelectorAll(".setting-item");
+          editableItems.forEach((item) => {
+            const field = item.querySelector(".editable-field");
+            const input = item.querySelector(".edit-input");
+            const fieldType = input.getAttribute("data-field");
+
+            // selectの場合は現在の値を選択
+            if (input.tagName === "SELECT") {
+              input.value = field.textContent;
             }
-        }
 
-        // お問い合わせモーダル制御
-        function showContactModal() {
-            document.getElementById('contactModal').style.display = 'flex';
-        }
+            field.style.display = "none";
+            input.style.display = "block";
 
-        function hideContactModal() {
-            document.getElementById('contactModal').style.display = 'none';
-            document.getElementById('contactForm').reset();
-            // メールアドレスを再設定
-            document.getElementById('contactEmail').value = 'yamada@example.com';
-        }
-
-        function submitContact() {
-            const form = document.getElementById('contactForm');
-            const category = document.getElementById('contactCategory').value;
-            const message = document.getElementById('contactMessage').value;
-            const email = document.getElementById('contactEmail').value;
-
-            // バリデーション
-            if (!category || !message || !email) {
-                alert('すべての項目を入力してください。');
-                return;
+            // 最初のフィールドにフォーカス（fieldNameが指定されていない場合）
+            if (!fieldName && fieldType === "name") {
+              setTimeout(() => input.focus(), 100);
+            } else if (fieldType === fieldName) {
+              setTimeout(() => input.focus(), 100);
             }
-
-            // 実際にはここでサーバーに送信
-            const contactData = {
-                category: category,
-                message: message,
-                email: email,
-                timestamp: new Date().toISOString()
-            };
-
-            console.log('お問い合わせデータ:', contactData);
-            
-            alert('お問い合わせを送信しました。1-2営業日以内にご返信いたします。');
-            hideContactModal();
+          });
         }
+      }
 
-        // モーダル外クリックで閉じる
-        window.onclick = function(event) {
-            const withdrawModal = document.getElementById('withdrawModal');
-            const contactModal = document.getElementById('contactModal');
-            const planChangeModal = document.getElementById('planChangeModal');
-            
-            if (event.target === withdrawModal) {
-                hideWithdrawModal();
-            } else if (event.target === contactModal) {
-                hideContactModal();
-            } else if (event.target === planChangeModal) {
-                hidePlanChangeModal();
+      function cancelEdit(sectionId) {
+        const section = document.getElementById(sectionId);
+
+        // ヘッダー編集ボタンを再表示し、編集コントロールを非表示
+        const headerEditBtn = section.querySelector(".header-edit-btn");
+        const editControls = section.querySelector(".edit-controls");
+        if (headerEditBtn) headerEditBtn.style.display = "flex";
+        editControls.style.display = "none";
+
+        // すべての項目を表示モードに戻す
+        const editableItems = section.querySelectorAll(".setting-item");
+        editableItems.forEach((item) => {
+          const field = item.querySelector(".editable-field");
+          const input = item.querySelector(".edit-input");
+
+          // 元の値に戻す
+          input.value = field.getAttribute("data-original");
+
+          field.style.display = "block";
+          input.style.display = "none";
+        });
+
+        section.classList.remove("editing");
+        editingSection = null;
+      }
+
+      function saveChanges(sectionId) {
+        const section = document.getElementById(sectionId);
+        let hasChanges = false;
+
+        // 変更を適用
+        const editableItems = section.querySelectorAll(".setting-item");
+        editableItems.forEach((item) => {
+          const field = item.querySelector(".editable-field");
+          const input = item.querySelector(".edit-input");
+          const newValue = input.value;
+          const originalValue = field.getAttribute("data-original");
+
+          if (newValue !== originalValue) {
+            hasChanges = true;
+            field.textContent = newValue;
+            field.setAttribute("data-original", newValue);
+
+            // パスワードの場合は表示用に変換
+            if (input.getAttribute("data-field") === "password" && newValue) {
+              field.textContent = "••••••••";
             }
+          }
+
+          field.style.display = "block";
+          input.style.display = "none";
+        });
+
+        // ヘッダー編集ボタンを再表示し、編集コントロールを非表示
+        const headerEditBtn = section.querySelector(".header-edit-btn");
+        const editControls = section.querySelector(".edit-controls");
+        if (headerEditBtn) headerEditBtn.style.display = "flex";
+        editControls.style.display = "none";
+
+        section.classList.remove("editing");
+        editingSection = null;
+
+        if (hasChanges) {
+          // 成功メッセージを表示
+          showSaveMessage("アカウント設定を保存しました");
         }
+      }
 
-        // アカウント設定編集機能
-        let editingSection = null;
-
-        function startEdit(sectionId, fieldName) {
-            const section = document.getElementById(sectionId);
-            
-            // 編集モードに切り替え
-            if (!editingSection) {
-                editingSection = sectionId;
-                section.classList.add('editing');
-                
-                // ヘッダー編集ボタンを非表示にし、編集コントロールを表示
-                const headerEditBtn = section.querySelector('.header-edit-btn');
-                const editControls = section.querySelector('.edit-controls');
-                if (headerEditBtn) headerEditBtn.style.display = 'none';
-                editControls.style.display = 'flex';
-                
-                // すべての項目を編集可能にする
-                const editableItems = section.querySelectorAll('.setting-item');
-                editableItems.forEach(item => {
-                    const field = item.querySelector('.editable-field');
-                    const input = item.querySelector('.edit-input');
-                    const fieldType = input.getAttribute('data-field');
-                    
-                    // selectの場合は現在の値を選択
-                    if (input.tagName === 'SELECT') {
-                        input.value = field.textContent;
-                    }
-                    
-                    field.style.display = 'none';
-                    input.style.display = 'block';
-                    
-                    // 最初のフィールドにフォーカス（fieldNameが指定されていない場合）
-                    if (!fieldName && fieldType === 'name') {
-                        setTimeout(() => input.focus(), 100);
-                    } else if (fieldType === fieldName) {
-                        setTimeout(() => input.focus(), 100);
-                    }
-                });
-            }
-        }
-
-        function cancelEdit(sectionId) {
-            const section = document.getElementById(sectionId);
-            
-            // ヘッダー編集ボタンを再表示し、編集コントロールを非表示
-            const headerEditBtn = section.querySelector('.header-edit-btn');
-            const editControls = section.querySelector('.edit-controls');
-            if (headerEditBtn) headerEditBtn.style.display = 'flex';
-            editControls.style.display = 'none';
-            
-            // すべての項目を表示モードに戻す
-            const editableItems = section.querySelectorAll('.setting-item');
-            editableItems.forEach(item => {
-                const field = item.querySelector('.editable-field');
-                const input = item.querySelector('.edit-input');
-                
-                // 元の値に戻す
-                input.value = field.getAttribute('data-original');
-                
-                field.style.display = 'block';
-                input.style.display = 'none';
-            });
-            
-            section.classList.remove('editing');
-            editingSection = null;
-        }
-
-        function saveChanges(sectionId) {
-            const section = document.getElementById(sectionId);
-            let hasChanges = false;
-            
-            // 変更を適用
-            const editableItems = section.querySelectorAll('.setting-item');
-            editableItems.forEach(item => {
-                const field = item.querySelector('.editable-field');
-                const input = item.querySelector('.edit-input');
-                const newValue = input.value;
-                const originalValue = field.getAttribute('data-original');
-                
-                if (newValue !== originalValue) {
-                    hasChanges = true;
-                    field.textContent = newValue;
-                    field.setAttribute('data-original', newValue);
-                    
-                    // パスワードの場合は表示用に変換
-                    if (input.getAttribute('data-field') === 'password' && newValue) {
-                        field.textContent = '••••••••';
-                    }
-                }
-                
-                field.style.display = 'block';
-                input.style.display = 'none';
-            });
-            
-            // ヘッダー編集ボタンを再表示し、編集コントロールを非表示
-            const headerEditBtn = section.querySelector('.header-edit-btn');
-            const editControls = section.querySelector('.edit-controls');
-            if (headerEditBtn) headerEditBtn.style.display = 'flex';
-            editControls.style.display = 'none';
-            
-            section.classList.remove('editing');
-            editingSection = null;
-            
-            if (hasChanges) {
-                // 成功メッセージを表示
-                showSaveMessage('アカウント設定を保存しました');
-            }
-        }
-
-        function showSaveMessage(message) {
-            // 簡易的な成功メッセージ表示
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'save-message';
-            messageDiv.textContent = message;
-            messageDiv.style.cssText = `
+      function showSaveMessage(message) {
+        // 簡易的な成功メッセージ表示
+        const messageDiv = document.createElement("div");
+        messageDiv.className = "save-message";
+        messageDiv.textContent = message;
+        messageDiv.style.cssText = `
                 position: fixed;
                 top: 20px;
                 right: 20px;
@@ -672,18 +895,18 @@
                 z-index: 1000;
                 animation: slideIn 0.3s ease;
             `;
-            
-            document.body.appendChild(messageDiv);
-            
-            setTimeout(() => {
-                messageDiv.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => messageDiv.remove(), 300);
-            }, 3000);
-        }
 
-        // アニメーション用CSS
-        const style = document.createElement('style');
-        style.textContent = `
+        document.body.appendChild(messageDiv);
+
+        setTimeout(() => {
+          messageDiv.style.animation = "slideOut 0.3s ease";
+          setTimeout(() => messageDiv.remove(), 300);
+        }, 3000);
+      }
+
+      // アニメーション用CSS
+      const style = document.createElement("style");
+      style.textContent = `
             @keyframes slideIn {
                 from { transform: translateX(100%); opacity: 0; }
                 to { transform: translateX(0); opacity: 1; }
@@ -693,233 +916,263 @@
                 to { transform: translateX(100%); opacity: 0; }
             }
         `;
-        document.head.appendChild(style);
+      document.head.appendChild(style);
 
-        // プラン変更機能
-        let selectedPlan = null;
-        let selectedPrice = null;
-        let currentPrice = 6600;
+      // プラン変更機能
+      let selectedPlan = null;
+      let selectedPrice = null;
+      let currentPrice = 6600;
 
-        // プラン変更ボタンクリック
-        document.querySelectorAll('.change-plan-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                selectedPlan = this.dataset.plan;
-                selectedPrice = parseInt(this.dataset.price);
-                showPlanChangeModal();
-            });
+      // プラン変更ボタンクリック
+      document.querySelectorAll(".change-plan-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          selectedPlan = this.dataset.plan;
+          selectedPrice = parseInt(this.dataset.price);
+          showPlanChangeModal();
         });
+      });
 
-        function showPlanChangeModal() {
-            const modal = document.getElementById('planChangeModal');
-            const details = document.getElementById('planChangeDetails');
-            const confirmBtn = document.getElementById('confirmPlanChange');
+      function showPlanChangeModal() {
+        const modal = document.getElementById("planChangeModal");
+        const details = document.getElementById("planChangeDetails");
+        const confirmBtn = document.getElementById("confirmPlanChange");
 
-            const planOrder = { 'standard': 1, 'gold': 2, 'platinum': 3 };
-            const currentPlanType = document.querySelector('.preview-btn.active').dataset.plan;
-            const currentLevel = planOrder[currentPlanType];
-            const targetLevel = planOrder[selectedPlan];
+        const planOrder = { standard: 1, gold: 2, platinum: 3 };
+        const currentPlanType = document.querySelector(".preview-btn.active")
+          .dataset.plan;
+        const currentLevel = planOrder[currentPlanType];
+        const targetLevel = planOrder[selectedPlan];
 
-            let planName = '';
-            let changeType = '';
-            let additionalInfo = '';
-            let btnClass = '';
+        let planName = "";
+        let changeType = "";
+        let additionalInfo = "";
+        let btnClass = "";
 
-            // プラン名の設定
-            if (selectedPlan === 'standard') {
-                planName = 'スタンダード';
-                btnClass = 'btn btn-primary';
-            } else if (selectedPlan === 'gold') {
-                planName = 'ゴールド';
-                btnClass = 'btn btn-gold';
-            } else if (selectedPlan === 'platinum') {
-                planName = 'プラチナ';
-                btnClass = 'btn btn-platinum';
-            }
+        // プラン名の設定
+        if (selectedPlan === "standard") {
+          planName = "スタンダード";
+          btnClass = "btn btn-primary";
+        } else if (selectedPlan === "gold") {
+          planName = "ゴールド";
+          btnClass = "btn btn-gold";
+        } else if (selectedPlan === "platinum") {
+          planName = "プラチナ";
+          btnClass = "btn btn-platinum";
+        }
 
-            // アップグレード/ダウングレードの判定
-            if (targetLevel > currentLevel) {
-                changeType = 'アップグレード';
-                const difference = selectedPrice - currentPrice;
-                additionalInfo = `差額¥${difference.toLocaleString()}を即時課金いたします。`;
-            } else if (targetLevel < currentLevel) {
-                changeType = 'ダウングレード';
-                additionalInfo = '翌月から適用されます。';
-            }
+        // アップグレード/ダウングレードの判定
+        if (targetLevel > currentLevel) {
+          changeType = "アップグレード";
+          const difference = selectedPrice - currentPrice;
+          additionalInfo = `差額¥${difference.toLocaleString()}を即時課金いたします。`;
+        } else if (targetLevel < currentLevel) {
+          changeType = "ダウングレード";
+          additionalInfo = "翌月から適用されます。";
+        }
 
-            details.innerHTML = `
+        details.innerHTML = `
                 <p><strong>変更先プラン:</strong> ${planName}（¥${selectedPrice.toLocaleString()}/月）</p>
                 <p><strong>変更タイプ:</strong> ${changeType}</p>
                 <p><strong>適用時期:</strong> ${additionalInfo}</p>
             `;
 
-            confirmBtn.className = btnClass;
-            modal.style.display = 'flex';
-        }
+        confirmBtn.className = btnClass;
+        modal.style.display = "flex";
+      }
 
-        function hidePlanChangeModal() {
-            document.getElementById('planChangeModal').style.display = 'none';
-        }
+      function hidePlanChangeModal() {
+        document.getElementById("planChangeModal").style.display = "none";
+      }
 
-        function confirmPlanChange() {
-            // ここで実際のプラン変更処理を行う
-            alert('プラン変更を受け付けました。決済画面に移動します。');
-            hidePlanChangeModal();
-        }
+      function confirmPlanChange() {
+        // ここで実際のプラン変更処理を行う
+        alert("プラン変更を受け付けました。決済画面に移動します。");
+        hidePlanChangeModal();
+      }
 
-        function changePaymentMethod() {
-            alert('支払い方法変更画面に移動します。安全な決済画面で変更できます。');
-        }
+      function changePaymentMethod() {
+        alert("支払い方法変更画面に移動します。安全な決済画面で変更できます。");
+      }
 
-        // Lucide Icons初期化
-        // プラン切り替えプレビュー機能
-        const planData = {
-            standard: {
-                name: 'スタンダード',
-                price: '¥2,200',
-                features: ['動画・画像・つぶやき閲覧'],
-                badgeClass: 'standard',
-                avatarBorderColor: 'var(--primary-green)',
-                icon: 'user'
-            },
-            gold: {
-                name: 'ゴールド',
-                price: '¥6,600',
-                features: ['動画・画像・つぶやき閲覧', 'オンラインレッスン月1回'],
-                badgeClass: 'gold',
-                avatarBorderColor: 'var(--gold)',
-                icon: 'star'
-            },
-            platinum: {
-                name: 'プラチナ',
-                price: '¥9,900',
-                features: ['動画・画像・つぶやき閲覧', 'オンラインレッスン月2回'],
-                badgeClass: 'platinum',
-                avatarBorderColor: '#718096',
-                icon: 'crown'
+      // Lucide Icons初期化
+      // プラン切り替えプレビュー機能
+      const planData = {
+        standard: {
+          name: "スタンダード",
+          price: "¥2,200",
+          features: ["動画・画像・つぶやき閲覧"],
+          badgeClass: "standard",
+          avatarBorderColor: "var(--primary-green)",
+          icon: "user",
+        },
+        gold: {
+          name: "ゴールド",
+          price: "¥6,600",
+          features: ["動画・画像・つぶやき閲覧", "オンラインレッスン月1回"],
+          badgeClass: "gold",
+          avatarBorderColor: "var(--gold)",
+          icon: "star",
+        },
+        platinum: {
+          name: "プラチナ",
+          price: "¥9,900",
+          features: ["動画・画像・つぶやき閲覧", "オンラインレッスン月2回"],
+          badgeClass: "platinum",
+          avatarBorderColor: "#718096",
+          icon: "crown",
+        },
+      };
+
+      function switchPlan(planType) {
+        const plan = planData[planType];
+
+        // ボタンのアクティブ状態を切り替え
+        document.querySelectorAll(".preview-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+        document
+          .querySelector(`[data-plan="${planType}"]`)
+          .classList.add("active");
+
+        // membership-badgesの表示制御
+        document.querySelectorAll(".membership-badge").forEach((badge) => {
+          badge.style.display = "none";
+        });
+        document.querySelector(
+          `.membership-badge.${plan.badgeClass}`
+        ).style.display = "inline-flex";
+
+        // current-plan-samplesの表示制御
+        document
+          .querySelectorAll(".current-plan-compact")
+          .forEach((compact) => {
+            compact.style.display = "none";
+          });
+        document.querySelector(
+          `.current-plan-compact.${planType}`
+        ).style.display = "flex";
+
+        // プラン変更セクションの現在プランマーカー移動
+        const planOrder = { standard: 1, gold: 2, platinum: 3 };
+        const currentPlanLevel = planOrder[planType];
+
+        document.querySelectorAll(".plan-card").forEach((card) => {
+          card.classList.remove("current");
+          const badge = card.querySelector(".current-badge");
+          if (badge) {
+            badge.style.display = "none";
+          }
+          const btn = card.querySelector(".change-plan-btn");
+          if (btn) {
+            btn.disabled = false;
+            btn.style.background = "";
+            btn.style.color = "";
+            btn.style.cursor = "";
+            // ボタンテキストを「このプランに変更」に戻す
+            btn.textContent = "このプランに変更";
+          }
+
+          // change-noteの更新
+          const changeNote = card.querySelector(".change-note");
+          if (changeNote) {
+            // プランのタイプを取得
+            let targetPlanType = null;
+            if (card.classList.contains("plan-standard"))
+              targetPlanType = "standard";
+            else if (card.classList.contains("plan-gold"))
+              targetPlanType = "gold";
+            else if (card.classList.contains("plan-platinum"))
+              targetPlanType = "platinum";
+
+            if (targetPlanType) {
+              const targetPlanLevel = planOrder[targetPlanType];
+
+              if (targetPlanLevel > currentPlanLevel) {
+                // アップグレード
+                const currentPlanPrice =
+                  planType === "standard"
+                    ? 2200
+                    : planType === "gold"
+                    ? 6600
+                    : 9900;
+                const targetPlanPrice =
+                  targetPlanType === "standard"
+                    ? 2200
+                    : targetPlanType === "gold"
+                    ? 6600
+                    : 9900;
+                const difference = targetPlanPrice - currentPlanPrice;
+                changeNote.textContent = `差額¥${difference.toLocaleString()}を即時課金`;
+                changeNote.className = "change-note upgrade";
+                changeNote.style.display = "block";
+              } else if (targetPlanLevel < currentPlanLevel) {
+                // ダウングレード
+                changeNote.textContent = "翌月から適用されます";
+                changeNote.className = "change-note downgrade";
+                changeNote.style.display = "block";
+              } else {
+                changeNote.style.display = "none";
+              }
             }
-        };
-
-        function switchPlan(planType) {
-            const plan = planData[planType];
-            
-            // ボタンのアクティブ状態を切り替え
-            document.querySelectorAll('.preview-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelector(`[data-plan="${planType}"]`).classList.add('active');
-            
-            // membership-badgesの表示制御
-            document.querySelectorAll('.membership-badge').forEach(badge => {
-                badge.style.display = 'none';
-            });
-            document.querySelector(`.membership-badge.${plan.badgeClass}`).style.display = 'inline-flex';
-            
-            // current-plan-samplesの表示制御
-            document.querySelectorAll('.current-plan-compact').forEach(compact => {
-                compact.style.display = 'none';
-            });
-            document.querySelector(`.current-plan-compact.${planType}`).style.display = 'flex';
-            
-            // プラン変更セクションの現在プランマーカー移動
-            const planOrder = { 'standard': 1, 'gold': 2, 'platinum': 3 };
-            const currentPlanLevel = planOrder[planType];
-            
-            document.querySelectorAll('.plan-card').forEach(card => {
-                card.classList.remove('current');
-                const badge = card.querySelector('.current-badge');
-                if (badge) {
-                    badge.style.display = 'none';
-                }
-                const btn = card.querySelector('.change-plan-btn');
-                if (btn) {
-                    btn.disabled = false;
-                    btn.style.background = '';
-                    btn.style.color = '';
-                    btn.style.cursor = '';
-                    // ボタンテキストを「このプランに変更」に戻す
-                    btn.textContent = 'このプランに変更';
-                }
-                
-                // change-noteの更新
-                const changeNote = card.querySelector('.change-note');
-                if (changeNote) {
-                    // プランのタイプを取得
-                    let targetPlanType = null;
-                    if (card.classList.contains('plan-standard')) targetPlanType = 'standard';
-                    else if (card.classList.contains('plan-gold')) targetPlanType = 'gold';
-                    else if (card.classList.contains('plan-platinum')) targetPlanType = 'platinum';
-                    
-                    if (targetPlanType) {
-                        const targetPlanLevel = planOrder[targetPlanType];
-                        
-                        if (targetPlanLevel > currentPlanLevel) {
-                            // アップグレード
-                            const currentPlanPrice = planType === 'standard' ? 2200 : (planType === 'gold' ? 6600 : 9900);
-                            const targetPlanPrice = targetPlanType === 'standard' ? 2200 : (targetPlanType === 'gold' ? 6600 : 9900);
-                            const difference = targetPlanPrice - currentPlanPrice;
-                            changeNote.textContent = `差額¥${difference.toLocaleString()}を即時課金`;
-                            changeNote.className = 'change-note upgrade';
-                            changeNote.style.display = 'block';
-                        } else if (targetPlanLevel < currentPlanLevel) {
-                            // ダウングレード
-                            changeNote.textContent = '翌月から適用されます';
-                            changeNote.className = 'change-note downgrade';
-                            changeNote.style.display = 'block';
-                        } else {
-                            changeNote.style.display = 'none';
-                        }
-                    }
-                }
-            });
-            
-            const currentPlanCard = document.querySelector(`.plan-card.plan-${planType}`);
-            if (currentPlanCard) {
-                currentPlanCard.classList.add('current');
-                const badge = currentPlanCard.querySelector('.current-badge');
-                if (badge) {
-                    badge.style.display = 'block';
-                }
-                const btn = currentPlanCard.querySelector('.change-plan-btn');
-                if (btn) {
-                    btn.disabled = true;
-                    btn.style.background = 'var(--gray-medium)';
-                    btn.style.color = 'var(--gray-dark)';
-                    btn.style.cursor = 'not-allowed';
-                    // 現在のプランのボタンテキストを「現在利用中」に変更
-                    btn.textContent = '現在利用中';
-                }
-                // 現在のプランのchange-noteは非表示
-                const changeNote = currentPlanCard.querySelector('.change-note');
-                if (changeNote) {
-                    changeNote.style.display = 'none';
-                }
-            }
-            
-            // プラン変更モーダル用の現在価格を更新
-            if (planType === 'standard') {
-                currentPrice = 2200;
-            } else if (planType === 'gold') {
-                currentPrice = 6600;
-            } else if (planType === 'platinum') {
-                currentPrice = 9900;
-            }
-        }
-
-        // プレビューボタンのイベントリスナー
-        document.querySelectorAll('.preview-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const planType = this.getAttribute('data-plan');
-                switchPlan(planType);
-            });
+          }
         });
 
-        // 初期状態でゴールドプランを表示
-        document.addEventListener('DOMContentLoaded', function() {
-            switchPlan('gold');
-        });
+        const currentPlanCard = document.querySelector(
+          `.plan-card.plan-${planType}`
+        );
+        if (currentPlanCard) {
+          currentPlanCard.classList.add("current");
+          const badge = currentPlanCard.querySelector(".current-badge");
+          if (badge) {
+            badge.style.display = "block";
+          }
+          const btn = currentPlanCard.querySelector(".change-plan-btn");
+          if (btn) {
+            btn.disabled = true;
+            btn.style.background = "var(--gray-medium)";
+            btn.style.color = "var(--gray-dark)";
+            btn.style.cursor = "not-allowed";
+            // 現在のプランのボタンテキストを「現在利用中」に変更
+            btn.textContent = "現在利用中";
+          }
+          // 現在のプランのchange-noteは非表示
+          const changeNote = currentPlanCard.querySelector(".change-note");
+          if (changeNote) {
+            changeNote.style.display = "none";
+          }
+        }
 
-        lucide.createIcons();
-        
+        // プラン変更モーダル用の現在価格を更新
+        if (planType === "standard") {
+          currentPrice = 2200;
+        } else if (planType === "gold") {
+          currentPrice = 6600;
+        } else if (planType === "platinum") {
+          currentPrice = 9900;
+        }
+      }
+
+      // プレビューボタンのイベントリスナー
+      document.querySelectorAll(".preview-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const planType = this.getAttribute("data-plan");
+          switchPlan(planType);
+        });
+      });
+
+      // 初期状態でゴールドプランを表示
+      document.addEventListener("DOMContentLoaded", function () {
+        switchPlan("gold");
+      });
+
+      lucide.createIcons();
+
+      // LINE連携機能
+      function openLineChat() {
+        // LINE公式アカウントのIDまたは友だち追加URLを設定
+        const lineUrl = "https://line.me/R/ti/p/@golf-salon"; // 実際のLINE公式アカウントIDに変更
+        window.open(lineUrl, "_blank");
+      }
     </script>
-</body>
+  </body>
 </html>

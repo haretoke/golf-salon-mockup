@@ -1,0 +1,100 @@
+{
+  "tableHeaders": [
+    "ユーザーID",
+    "名前",
+    "メールアドレス",
+    "プラン",
+    "ステータス",
+    "登録日",
+    "最終更新日",
+    "サブスク終了日",
+    "総視聴数",
+    "最終視聴日",
+    "決済状況",
+    "通知設定"
+  ],
+  "tableData": [
+    {
+      "userId": "user_1",
+      "name": "田中 太郎",
+      "email": "tanaka@example.com",
+      "plan": "ゴールド (¥3,980)",
+      "status": "アクティブ",
+      "registrationDate": "2024/01/15",
+      "lastUpdated": "2024/07/15",
+      "subscriptionEndDate": "2024/08/15",
+      "totalViews": 2,
+      "lastViewedDate": "2024/07/17",
+      "paymentStatus": "正常",
+      "notificationSettings": "新コンテンツ通知: ON, マーケティング: OFF"
+    },
+    {
+      "userId": "user_2",
+      "name": "佐藤 花子",
+      "email": "sato@example.com",
+      "plan": "スタンダード (¥1,980)",
+      "status": "アクティブ",
+      "registrationDate": "2024/02/01",
+      "lastUpdated": "2024/07/10",
+      "subscriptionEndDate": "2024/08/01",
+      "totalViews": 2,
+      "lastViewedDate": "2024/07/16",
+      "paymentStatus": "正常",
+      "notificationSettings": "新コンテンツ通知: ON, マーケティング: ON"
+    },
+    {
+      "userId": "user_3",
+      "name": "山田 次郎",
+      "email": "yamada@example.com",
+      "plan": "プラチナ (¥6,980)",
+      "status": "アクティブ",
+      "registrationDate": "2024/03/10",
+      "lastUpdated": "2024/07/18",
+      "subscriptionEndDate": "2024/09/10",
+      "totalViews": 2,
+      "lastViewedDate": "2024/07/15",
+      "paymentStatus": "正常",
+      "notificationSettings": "新コンテンツ通知: OFF, マーケティング: OFF"
+    },
+    {
+      "userId": "user_4",
+      "name": "渡辺 美咲",
+      "email": "watanabe@example.com",
+      "plan": "ゴールド (¥3,980)",
+      "status": "アクティブ",
+      "registrationDate": "2024/04/05",
+      "lastUpdated": "2024/07/16",
+      "subscriptionEndDate": "2024/10/05",
+      "totalViews": 2,
+      "lastViewedDate": "2024/07/14",
+      "paymentStatus": "正常",
+      "notificationSettings": "新コンテンツ通知: ON, マーケティング: OFF"
+    },
+    {
+      "userId": "user_5",
+      "name": "鈴木 健一",
+      "email": "suzuki@example.com",
+      "plan": "スタンダード (¥1,980)",
+      "status": "キャンセル済み",
+      "registrationDate": "2024/05/20",
+      "lastUpdated": "2024/07/17",
+      "subscriptionEndDate": "2024/07/20",
+      "totalViews": 0,
+      "lastViewedDate": "-",
+      "paymentStatus": "決済失敗",
+      "notificationSettings": "新コンテンツ通知: ON, マーケティング: ON"
+    }
+  ],
+  "filters": {
+    "status": ["全て", "アクティブ", "キャンセル済み"],
+    "plan": ["全て", "スタンダード", "ゴールド", "プラチナ"],
+    "paymentStatus": ["全て", "正常", "決済失敗", "未決済"]
+  },
+  "actions": [
+    "詳細表示",
+    "プラン変更",
+    "サブスク停止",
+    "通知設定変更",
+    "メール送信"
+  ]
+}
