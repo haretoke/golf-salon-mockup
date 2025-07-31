@@ -24,21 +24,21 @@
       // Tailwind v4 設定の動的読み込み
       async function loadTailwindConfig() {
         try {
-          const response = await fetch('css/tailwind-v4-config.css');
+          const response = await fetch("css/tailwind-v4-config.css");
           const cssContent = await response.text();
-          
+
           // <style type="text/tailwindcss">タグを作成
-          const styleElement = document.createElement('style');
-          styleElement.type = 'text/tailwindcss';
+          const styleElement = document.createElement("style");
+          styleElement.type = "text/tailwindcss";
           styleElement.textContent = cssContent;
-          
+
           // headに挿入
           document.head.appendChild(styleElement);
         } catch (error) {
-          console.error('Tailwind設定の読み込みに失敗しました:', error);
+          console.error("Tailwind設定の読み込みに失敗しました:", error);
         }
       }
-      
+
       // DOMContentLoadedより前に実行
       loadTailwindConfig();
     </script>
@@ -306,7 +306,6 @@
       }
 
       .sidebar-toggle {
-        display: none;
         width: 40px;
         height: 40px;
         border: none;
@@ -1665,7 +1664,6 @@
         width: 100%;
         height: 100%;
         height: calc(var(--vh, 1vh) * 100);
-        background-color: white;
         transform: translateX(100%);
         transition: transform 0.3s ease;
         display: flex;
@@ -2120,7 +2118,6 @@
         width: 100%;
         height: 100vh;
         height: calc(var(--vh, 1vh) * 100);
-        background-color: #fefefe;
         transform: translateX(100%);
         transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         display: flex;
@@ -2298,7 +2295,7 @@
         <header class="admin-header sm:p-3">
           <div class="header-left w-full">
             <button
-              class="sidebar-toggle flex w-10 h-10 items-center justify-center bg-transparent border-0 cursor-pointer rounded-md transition-colors hover:bg-gray-100"
+              class="sidebar-toggle flex w-10 h-10 items-center justify-center bg-transparent border-0 cursor-pointer rounded-md transition-colors hover:bg-gray-100 lg:hidden"
               onclick="toggleSidebar()"
             >
               <i data-lucide="menu" class="w-5 h-5"></i>
@@ -2550,7 +2547,7 @@
     </div>
 
     <!-- 全画面編集画面 -->
-    <div id="editScreen" class="edit-screen z-40 overflow-hidden">
+    <div id="editScreen" class="edit-screen bg-off-white z-40 overflow-hidden">
       <div class="edit-header">
         <button class="back-btn" onclick="hideEditScreen()">
           <i data-lucide="chevron-left"></i>
@@ -3038,7 +3035,10 @@
     </div>
 
     <!-- 設定詳細画面（iOS風スライドイン） -->
-    <div id="settingsDetailScreen" class="settings-detail-screen z-40">
+    <div
+      id="settingsDetailScreen"
+      class="settings-detail-screen bg-off-white z-40"
+    >
       <div class="settings-detail-header">
         <button class="settings-back-btn" onclick="hideSettingsDetail()">
           <i data-lucide="chevron-left"></i>
@@ -3249,19 +3249,25 @@
       // editContent のラッパー関数（データ初期化を待機）
       async function handleEditContent(id) {
         // スワイプやドラッグ中の場合は無視
-        if (typeof window.hasMoved !== 'undefined' && window.hasMoved) {
+        if (typeof window.hasMoved !== "undefined" && window.hasMoved) {
           return false;
         }
-        if (typeof window.isDragging !== 'undefined' && window.isDragging) {
+        if (typeof window.isDragging !== "undefined" && window.isDragging) {
           return false;
         }
-        if (typeof window.clickDisabledUntil !== 'undefined' && Date.now() < window.clickDisabledUntil) {
+        if (
+          typeof window.clickDisabledUntil !== "undefined" &&
+          Date.now() < window.clickDisabledUntil
+        ) {
           return false;
         }
-        if (typeof window.preventNextClick !== 'undefined' && window.preventNextClick) {
+        if (
+          typeof window.preventNextClick !== "undefined" &&
+          window.preventNextClick
+        ) {
           return false;
         }
-        
+
         // データが初期化されるまで待機
         if (!dataInitialized) {
           // 最大5秒待機
@@ -3281,16 +3287,22 @@
         }
 
         // 最終チェック：再度スワイプ状態を確認
-        if (typeof window.hasMoved !== 'undefined' && window.hasMoved) {
+        if (typeof window.hasMoved !== "undefined" && window.hasMoved) {
           return false;
         }
-        if (typeof window.isDragging !== 'undefined' && window.isDragging) {
+        if (typeof window.isDragging !== "undefined" && window.isDragging) {
           return false;
         }
-        if (typeof window.clickDisabledUntil !== 'undefined' && Date.now() < window.clickDisabledUntil) {
+        if (
+          typeof window.clickDisabledUntil !== "undefined" &&
+          Date.now() < window.clickDisabledUntil
+        ) {
           return false;
         }
-        if (typeof window.preventNextClick !== 'undefined' && window.preventNextClick) {
+        if (
+          typeof window.preventNextClick !== "undefined" &&
+          window.preventNextClick
+        ) {
           return false;
         }
 
