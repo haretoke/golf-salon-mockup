@@ -1222,3 +1222,25 @@ input:checked + .slider:before {
     gap: 0.25rem;
   }
 }
+
+/* 名前編集用スタイル */
+.name-edit-group {
+  margin-top: 0.5rem;
+}
+
+.name-field-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.name-field-half {
+  flex: 1;
+}
+
+.name-field-label {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--gray-dark);
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}

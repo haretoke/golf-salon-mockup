@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>会員登録 - Step 3 | Golf Salon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+      async function loadTailwindConfig() {
+        try {
+          const response = await fetch("css/tailwind-v4-config.css");
+          const cssContent = await response.text();
+
+          const styleElement = document.createElement("style");
+          styleElement.type = "text/tailwindcss";
+          styleElement.textContent = cssContent;
+
+          document.head.appendChild(styleElement);
+        } catch (error) {
+          console.error("Tailwind設定の読み込みに失敗しました:", error);
+        }
+      }
+
+      loadTailwindConfig();
+    </script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="js/utils/signup-flow.js"></script>
+  </head>
+  <body class="bg-gray-light min-h-screen">
+    <div
+      class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+    >
+      <div class="max-w-2xl w-full space-y-8">
+        <!-- ヘッダー -->
+        <div class="text-center">
+          <div
+            class="mx-auto h-12 w-12 bg-green-gradient rounded-full flex items-center justify-center"
+          >
+            <i data-lucide="golf-ball" class="w-6 h-6 text-white"></i>
+          </div>
+          <h1 class="mt-6 text-3xl font-bold text-gray-900">Golf Salon</h1>
+          <p class="mt-2 text-sm text-gray-600">プロから学ぶゴルフレッスン</p>
+        </div>
+
+        <!-- プログレスバー -->
+        <div class="flex items-center justify-center mb-8">
+          <div class="flex items-center space-x-4">
+            <!-- Step 1: Completed -->
+            <div class="flex items-center">
+              <div
+                class="w-10 h-10 bg-dark-green text-white rounded-full flex items-center justify-center text-sm font-medium"
+              >
+                <i data-lucide="check" class="w-5 h-5"></i>
+              </div>
+              <span class="ml-2 text-sm font-medium text-gray-600"
+                >メールアドレス</span
+              >
+            </div>
+
+            <div class="w-16 h-1 bg-dark-green rounded"></div>
+
+            <!-- Step 2: Completed -->
+            <div class="flex items-center">
+              <div
+                class="w-10 h-10 bg-dark-green text-white rounded-full flex items-center justify-center text-sm font-medium"
+              >
+                <i data-lucide="check" class="w-5 h-5"></i>
+              </div>
+              <span class="ml-2 text-sm font-medium text-gray-600">認証</span>
+            </div>
+
+            <div class="w-16 h-1 bg-primary-green rounded"></div>
+
+            <!-- Step 3: Active -->
+            <div class="flex items-center">
+              <div
+                class="w-10 h-10 bg-primary-green text-white rounded-full flex items-center justify-center text-sm font-medium"
+              >
+                3
+              </div>
+              <span class="ml-2 text-sm font-medium text-primary-600"
+                >詳細情報</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- メインコンテンツ -->
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <div class="space-y-8">
+            <div class="text-center">
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">
+                詳細情報を入力
+              </h2>
+              <p class="text-sm text-gray-600">
+                最後に、プランの選択と基本情報を入力してください
+              </p>
+            </div>
+
+            <!-- エラー表示エリア -->
+            <div
+              id="error-message"
+              class="hidden bg-red-50 border border-red-200 rounded-lg p-4"
+            >
+              <div class="flex items-center">
+                <i
+                  data-lucide="alert-circle"
+                  class="w-5 h-5 text-red-600 mr-3"
+                ></i>
+                <div class="flex-1">
+                  <p class="text-sm text-red-800" id="error-text"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 登録フォーム -->
+            <form id="registration-form" class="space-y-8">
+              <!-- プラン選択 -->
+              <div class="w-full mb-8">
+                <h3 class="text-center mb-6 text-lg font-semibold text-dark-green">プランを選択</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="plan-card plan-standard rounded-lg p-6 text-center transition-all duration-300 relative cursor-pointer border-2 border-gray-medium bg-white opacity-70 hover:border-primary-green hover:-translate-y-0.5 hover:shadow-md">
+                    <div class="selected-badge absolute -top-2.5 left-1/2 transform -translate-x-1/2 bg-primary-green text-white px-4 py-1 rounded text-xs font-semibold shadow-[0_2px_8px_rgba(44,85,48,0.3)] hidden z-10">選択中</div>
+                    <h4 class="mb-4 font-bold text-lg text-dark-green bg-standard-bg rounded px-4 py-2">スタンダード</h4>
+                    <div class="mb-4">
+                      <span class="text-2xl font-bold text-primary-green">¥2,200</span>
+                      <span class="text-base text-gray-dark">/月</span>
+                    </div>
+                    <ul class="space-y-1 text-sm text-gray-dark">
+                      <li class="py-1">✓ 動画・画像・つぶやき閲覧</li>
+                    </ul>
+                  </div>
+                  <div class="plan-card plan-gold active rounded-lg p-6 text-center transition-all duration-300 relative cursor-pointer border-[3px] border-gold bg-white shadow-[0_6px_20px_rgba(212,175,55,0.4),0_0_0_6px_rgba(212,175,55,0.15)] -translate-y-1 scale-105 hover:-translate-y-1 hover:scale-105">
+                    <div class="recommended-badge absolute -top-2.5 left-1/2 transform -translate-x-1/2 bg-gold-gradient text-white px-4 py-1 rounded text-xs font-semibold">おすすめ</div>
+                    <div class="selected-badge absolute -top-2.5 left-1/2 transform -translate-x-1/2 bg-gold text-white px-4 py-1 rounded text-xs font-semibold shadow-[0_2px_8px_rgba(212,175,55,0.3)] hidden z-10">選択中</div>
+                    <h4 class="mb-4 font-bold text-lg text-white bg-gold-gradient rounded px-4 py-2">ゴールド</h4>
+                    <div class="mb-4">
+                      <span class="text-2xl font-bold text-gold">¥6,600</span>
+                      <span class="text-base text-gray-dark">/月</span>
+                    </div>
+                    <ul class="space-y-1 text-sm text-gray-dark">
+                      <li class="py-1">✓ 動画・画像・つぶやき閲覧</li>
+                      <li class="py-1">✓ オンラインレッスン月1回</li>
+                    </ul>
+                  </div>
+                  <div class="plan-card plan-platinum rounded-lg p-6 text-center transition-all duration-300 relative cursor-pointer border border-slate-500 bg-platinum-gradient opacity-70 hover:border-primary-green hover:-translate-y-0.5 hover:shadow-md animate-[platinumShine_10s_ease-in-out_infinite] bg-[length:200%_200%]">
+                    <div class="selected-badge absolute -top-2.5 left-1/2 transform -translate-x-1/2 bg-slate-500 text-white px-4 py-1 rounded text-xs font-semibold shadow-[0_2px_8px_rgba(113,128,150,0.3)] hidden z-10">選択中</div>
+                    <h4 class="mb-4 font-bold text-lg text-white bg-platinum-gradient-dark rounded px-4 py-2 animate-[platinumShineDark_10s_ease-in-out_infinite] bg-[length:200%_200%] overflow-hidden">プラチナ</h4>
+                    <div class="mb-4">
+                      <span class="text-2xl font-bold text-slate-600">¥9,900</span>
+                      <span class="text-base text-gray-dark">/月</span>
+                    </div>
+                    <ul class="space-y-1 text-sm text-gray-dark">
+                      <li class="py-1">✓ 動画・画像・つぶやき閲覧</li>
+                      <li class="py-1">✓ オンラインレッスン月2回</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 基本情報 -->
+              <div class="space-y-6">
+                <h3 class="text-lg font-semibold text-gray-900">基本情報</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label
+                      for="lastName"
+                      class="block text-sm font-medium text-gray-700 mb-2"
+                    >
+                      姓
+                    </label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      required
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                      placeholder="田中"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      for="firstName"
+                      class="block text-sm font-medium text-gray-700 mb-2"
+                    >
+                      名
+                    </label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      required
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                      placeholder="太郎"
+                    />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label
+                      for="gender"
+                      class="block text-sm font-medium text-gray-700 mb-2"
+                    >
+                      性別
+                    </label>
+                    <select
+                      id="gender"
+                      name="gender"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                    >
+                      <option value="">選択してください</option>
+                      <option value="male">男性</option>
+                      <option value="female">女性</option>
+                      <option value="other">その他</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label
+                      for="prefecture"
+                      class="block text-sm font-medium text-gray-700 mb-2"
+                    >
+                      都道府県
+                    </label>
+                    <select
+                      id="prefecture"
+                      name="prefecture"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                    >
+                      <option value="">選択してください</option>
+                      <option value="hokkaido">北海道</option>
+                      <option value="aomori">青森県</option>
+                      <option value="iwate">岩手県</option>
+                      <option value="miyagi">宮城県</option>
+                      <option value="akita">秋田県</option>
+                      <option value="yamagata">山形県</option>
+                      <option value="fukushima">福島県</option>
+                      <option value="ibaraki">茨城県</option>
+                      <option value="tochigi">栃木県</option>
+                      <option value="gunma">群馬県</option>
+                      <option value="saitama">埼玉県</option>
+                      <option value="chiba">千葉県</option>
+                      <option value="tokyo">東京都</option>
+                      <option value="kanagawa">神奈川県</option>
+                      <option value="niigata">新潟県</option>
+                      <option value="toyama">富山県</option>
+                      <option value="ishikawa">石川県</option>
+                      <option value="fukui">福井県</option>
+                      <option value="yamanashi">山梨県</option>
+                      <option value="nagano">長野県</option>
+                      <option value="gifu">岐阜県</option>
+                      <option value="shizuoka">静岡県</option>
+                      <option value="aichi">愛知県</option>
+                      <option value="mie">三重県</option>
+                      <option value="shiga">滋賀県</option>
+                      <option value="kyoto">京都府</option>
+                      <option value="osaka">大阪府</option>
+                      <option value="hyogo">兵庫県</option>
+                      <option value="nara">奈良県</option>
+                      <option value="wakayama">和歌山県</option>
+                      <option value="tottori">鳥取県</option>
+                      <option value="shimane">島根県</option>
+                      <option value="okayama">岡山県</option>
+                      <option value="hiroshima">広島県</option>
+                      <option value="yamaguchi">山口県</option>
+                      <option value="tokushima">徳島県</option>
+                      <option value="kagawa">香川県</option>
+                      <option value="ehime">愛媛県</option>
+                      <option value="kochi">高知県</option>
+                      <option value="fukuoka">福岡県</option>
+                      <option value="saga">佐賀県</option>
+                      <option value="nagasaki">長崎県</option>
+                      <option value="kumamoto">熊本県</option>
+                      <option value="oita">大分県</option>
+                      <option value="miyazaki">宮崎県</option>
+                      <option value="kagoshima">鹿児島県</option>
+                      <option value="okinawa">沖縄県</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label
+                      for="golfLevel"
+                      class="block text-sm font-medium text-gray-700 mb-2"
+                    >
+                      ゴルフレベル
+                    </label>
+                    <select
+                      id="golfLevel"
+                      name="golfLevel"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                    >
+                      <option value="">選択してください</option>
+                      <option value="beginner">初心者</option>
+                      <option value="intermediate">中級者</option>
+                      <option value="advanced">上級者</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label
+                      for="referralSource"
+                      class="block text-sm font-medium text-gray-700 mb-2"
+                    >
+                      入会ルート
+                    </label>
+                    <select
+                      id="referralSource"
+                      name="referralSource"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                    >
+                      <option value="">選択してください</option>
+                      <option value="youtube">YouTube</option>
+                      <option value="instagram">Instagram</option>
+                      <option value="tiktok">TikTok</option>
+                      <option value="referral">ご紹介</option>
+                      <option value="other">その他</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    for="password"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    パスワード
+                  </label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                    minlength="8"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                    placeholder="8文字以上で入力してください"
+                  />
+                  <p class="mt-1 text-xs text-gray-500">
+                    ※ 8文字以上で入力してください
+                  </p>
+                </div>
+              </div>
+
+              <!-- 同意チェックボックス -->
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <input
+                    type="checkbox"
+                    id="agree-terms"
+                    name="agreeTerms"
+                    required
+                    class="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-green border-gray-300 rounded"
+                  />
+                  <label for="agree-terms" class="ml-3 text-sm text-gray-700">
+                    <a href="#" class="text-primary-600 hover:underline"
+                      >利用規約</a
+                    >および<a href="#" class="text-primary-600 hover:underline"
+                      >プライバシーポリシー</a
+                    >に同意します
+                  </label>
+                </div>
+              </div>
+
+              <!-- 登録ボタン -->
+              <button
+                type="submit"
+                id="register-btn"
+                class="w-full bg-primary-green text-white py-3 px-4 rounded-lg font-medium hover:bg-primary-dark-green focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span class="flex items-center justify-center">
+                  <span id="register-btn-text">アカウントを作成</span>
+                  <div id="register-loading-spinner" class="hidden ml-2">
+                    <svg
+                      class="animate-spin h-4 w-4 text-white"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        class="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        stroke-width="4"
+                      ></circle>
+                      <path
+                        class="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      ></path>
+                    </svg>
+                  </div>
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ページ読み込み時の初期化
+      document.addEventListener("DOMContentLoaded", () => {
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+
+        // // 詳細情報入力フォームの初期化
+        // if (window.SignupFlow) {
+        //   window.SignupFlow.initStep3();
+        // }
+
+        // プラン選択の制御
+        initPlanSelection();
+      });
+
+      // プラン選択の制御
+      function initPlanSelection() {
+        const planCards = document.querySelectorAll('.plan-card');
+        
+        planCards.forEach(card => {
+          card.addEventListener('click', () => {
+            // すべてのカードをリセット
+            planCards.forEach(c => {
+              c.classList.remove('active');
+              
+              // スタンダードプランのリセット
+              if (c.classList.contains('plan-standard')) {
+                c.className = 'plan-card plan-standard rounded-lg p-6 text-center transition-all duration-300 relative cursor-pointer border-2 border-gray-medium bg-white opacity-70 hover:border-primary-green hover:-translate-y-0.5 hover:shadow-md';
+                const selectedBadge = c.querySelector('.selected-badge');
+                if (selectedBadge) selectedBadge.classList.add('hidden');
+              }
+              // ゴールドプランのリセット
+              else if (c.classList.contains('plan-gold')) {
+                c.className = 'plan-card plan-gold rounded-lg p-6 text-center transition-all duration-300 relative cursor-pointer border-2 border-gold bg-white opacity-70 hover:border-primary-green hover:-translate-y-0.5 hover:shadow-md shadow-[0_4px_15px_rgba(212,175,55,0.3),0_0_0_4px_rgba(212,175,55,0.1)]';
+                const recommendedBadge = c.querySelector('.recommended-badge');
+                const selectedBadge = c.querySelector('.selected-badge');
+                if (recommendedBadge) recommendedBadge.classList.remove('hidden');
+                if (selectedBadge) selectedBadge.classList.add('hidden');
+              }
+              // プラチナプランのリセット
+              else if (c.classList.contains('plan-platinum')) {
+                c.className = 'plan-card plan-platinum rounded-lg p-6 text-center transition-all duration-300 relative cursor-pointer border border-slate-500 bg-platinum-gradient opacity-70 hover:border-primary-green hover:-translate-y-0.5 hover:shadow-md animate-[platinumShine_10s_ease-in-out_infinite] bg-[length:200%_200%]';
+                const selectedBadge = c.querySelector('.selected-badge');
+                if (selectedBadge) selectedBadge.classList.add('hidden');
+              }
+            });
+            
+            // 選択されたカードをアクティブに
+            card.classList.add('active');
+            
+            // プラン別のアクティブスタイル適用
+            if (card.classList.contains('plan-standard')) {
+              card.className = 'plan-card plan-standard active rounded-lg p-6 text-center transition-all duration-300 relative cursor-pointer border-[3px] border-primary-green bg-white shadow-[0_6px_20px_rgba(44,85,48,0.4),0_0_0_6px_rgba(44,85,48,0.15)] -translate-y-1 scale-105 hover:-translate-y-1 hover:scale-105';
+              const selectedBadge = card.querySelector('.selected-badge');
+              if (selectedBadge) selectedBadge.classList.remove('hidden');
+            } else if (card.classList.contains('plan-gold')) {
+              card.className = 'plan-card plan-gold active rounded-lg p-6 text-center transition-all duration-300 relative cursor-pointer border-[3px] border-gold bg-white shadow-[0_6px_20px_rgba(212,175,55,0.4),0_0_0_6px_rgba(212,175,55,0.15)] -translate-y-1 scale-105 hover:-translate-y-1 hover:scale-105';
+              const recommendedBadge = card.querySelector('.recommended-badge');
+              const selectedBadge = card.querySelector('.selected-badge');
+              if (recommendedBadge) recommendedBadge.classList.add('hidden');
+              if (selectedBadge) selectedBadge.classList.remove('hidden');
+            } else if (card.classList.contains('plan-platinum')) {
+              card.className = 'plan-card plan-platinum active rounded-lg p-6 text-center transition-all duration-300 relative cursor-pointer border-[3px] border-slate-500 bg-platinum-gradient shadow-[0_6px_20px_rgba(113,128,150,0.4),0_0_0_6px_rgba(113,128,150,0.15)] -translate-y-1 scale-105 hover:-translate-y-1 hover:scale-105 animate-[platinumShine_10s_ease-in-out_infinite] bg-[length:200%_200%]';
+              const selectedBadge = card.querySelector('.selected-badge');
+              if (selectedBadge) selectedBadge.classList.remove('hidden');
+            }
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

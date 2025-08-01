@@ -283,18 +283,33 @@
               <h4>お名前</h4>
               <p
                 class="editable-field"
-                data-field="name"
+                data-field="fullName"
                 data-original="山田 太郎"
               >
                 山田 太郎
               </p>
-              <input
-                type="text"
-                class="edit-input"
-                data-field="name"
-                value="山田 太郎"
-                style="display: none"
-              />
+              <div class="edit-input-group name-edit-group" style="display: none">
+                <div class="name-field-group">
+                  <div class="name-field-half">
+                    <label class="name-field-label">姓</label>
+                    <input
+                      type="text"
+                      class="edit-input"
+                      data-field="lastName"
+                      value="山田"
+                    />
+                  </div>
+                  <div class="name-field-half">
+                    <label class="name-field-label">名</label>
+                    <input
+                      type="text"
+                      class="edit-input"
+                      data-field="firstName"
+                      value="太郎"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="setting-item">
@@ -332,11 +347,53 @@
                 data-field="prefecture"
                 style="display: none"
               >
+                <option value="北海道">北海道</option>
+                <option value="青森県">青森県</option>
+                <option value="岩手県">岩手県</option>
+                <option value="宮城県">宮城県</option>
+                <option value="秋田県">秋田県</option>
+                <option value="山形県">山形県</option>
+                <option value="福島県">福島県</option>
+                <option value="茨城県">茨城県</option>
+                <option value="栃木県">栃木県</option>
+                <option value="群馬県">群馬県</option>
+                <option value="埼玉県">埼玉県</option>
+                <option value="千葉県">千葉県</option>
                 <option value="東京都">東京都</option>
                 <option value="神奈川県">神奈川県</option>
-                <option value="大阪府">大阪府</option>
+                <option value="新潟県">新潟県</option>
+                <option value="富山県">富山県</option>
+                <option value="石川県">石川県</option>
+                <option value="福井県">福井県</option>
+                <option value="山梨県">山梨県</option>
+                <option value="長野県">長野県</option>
+                <option value="岐阜県">岐阜県</option>
+                <option value="静岡県">静岡県</option>
                 <option value="愛知県">愛知県</option>
-                <!-- 他の都道府県... -->
+                <option value="三重県">三重県</option>
+                <option value="滋賀県">滋賀県</option>
+                <option value="京都府">京都府</option>
+                <option value="大阪府">大阪府</option>
+                <option value="兵庫県">兵庫県</option>
+                <option value="奈良県">奈良県</option>
+                <option value="和歌山県">和歌山県</option>
+                <option value="鳥取県">鳥取県</option>
+                <option value="島根県">島根県</option>
+                <option value="岡山県">岡山県</option>
+                <option value="広島県">広島県</option>
+                <option value="山口県">山口県</option>
+                <option value="徳島県">徳島県</option>
+                <option value="香川県">香川県</option>
+                <option value="愛媛県">愛媛県</option>
+                <option value="高知県">高知県</option>
+                <option value="福岡県">福岡県</option>
+                <option value="佐賀県">佐賀県</option>
+                <option value="長崎県">長崎県</option>
+                <option value="熊本県">熊本県</option>
+                <option value="大分県">大分県</option>
+                <option value="宮崎県">宮崎県</option>
+                <option value="鹿児島県">鹿児島県</option>
+                <option value="沖縄県">沖縄県</option>
               </select>
             </div>
           </div>
@@ -356,9 +413,7 @@
                 style="display: none"
               >
                 <option value="初心者">初心者</option>
-                <option value="中級者">中級者</option>
                 <option value="中上級者">中上級者</option>
-                <option value="上級者">上級者</option>
               </select>
             </div>
           </div>
@@ -790,21 +845,56 @@
           editableItems.forEach((item) => {
             const field = item.querySelector(".editable-field");
             const input = item.querySelector(".edit-input");
-            const fieldType = input.getAttribute("data-field");
+            const nameEditGroup = item.querySelector(".name-edit-group");
+            
+            if (nameEditGroup) {
+              // 名前フィールドの特別処理
+              const lastNameInput = nameEditGroup.querySelector('input[data-field="lastName"]');
+              const firstNameInput = nameEditGroup.querySelector('input[data-field="firstName"]');
+              
+              // 現在の表示値を姓・名に分割
+              const currentFullName = field.textContent.trim();
+              const nameParts = currentFullName.split(' ');
+              const lastName = nameParts[0] || '';
+              const firstName = nameParts[1] || '';
+              
+              // 入力フィールドに現在の値を設定
+              if (lastNameInput) lastNameInput.value = lastName;
+              if (firstNameInput) firstNameInput.value = firstName;
+              
+              field.style.display = "none";
+              nameEditGroup.style.display = "block";
+              
+              // 最初のフィールド（姓）にフォーカス
+              if (lastNameInput) {
+                setTimeout(() => lastNameInput.focus(), 100);
+              }
+            } else if (input) {
+              const fieldType = input.getAttribute("data-field");
 
-            // selectの場合は現在の値を選択
-            if (input.tagName === "SELECT") {
-              input.value = field.textContent;
-            }
+              // selectの場合は現在の表示値を選択
+              if (input.tagName === "SELECT") {
+                const currentValue = field.textContent.trim();
+                input.value = currentValue;
+                
+                // 値が見つからない場合はデバッグ用にログ出力
+                if (input.value !== currentValue) {
+                  console.log(`Warning: Could not set select value "${currentValue}" for field "${fieldType}"`);
+                }
+              } else {
+                // 通常のinput要素の場合は現在の表示値を設定
+                input.value = field.textContent.trim();
+              }
 
-            field.style.display = "none";
-            input.style.display = "block";
+              field.style.display = "none";
+              input.style.display = "block";
 
-            // 最初のフィールドにフォーカス（fieldNameが指定されていない場合）
-            if (!fieldName && fieldType === "name") {
-              setTimeout(() => input.focus(), 100);
-            } else if (fieldType === fieldName) {
-              setTimeout(() => input.focus(), 100);
+              // 最初のフィールドにフォーカス（fieldNameが指定されていない場合）
+              if (!fieldName && fieldType === "name") {
+                setTimeout(() => input.focus(), 100);
+              } else if (fieldType === fieldName) {
+                setTimeout(() => input.focus(), 100);
+              }
             }
           });
         }
@@ -824,12 +914,37 @@
         editableItems.forEach((item) => {
           const field = item.querySelector(".editable-field");
           const input = item.querySelector(".edit-input");
+          const nameEditGroup = item.querySelector(".name-edit-group");
 
-          // 元の値に戻す
-          input.value = field.getAttribute("data-original");
+          if (nameEditGroup) {
+            // 名前フィールドの特別処理
+            const lastNameInput = nameEditGroup.querySelector('input[data-field="lastName"]');
+            const firstNameInput = nameEditGroup.querySelector('input[data-field="firstName"]');
+            
+            // 現在の表示値（元の値）を姓・名に分割して復元
+            const originalFullName = field.getAttribute("data-original");
+            const nameParts = originalFullName.split(' ');
+            const lastName = nameParts[0] || '';
+            const firstName = nameParts[1] || '';
+            
+            if (lastNameInput) lastNameInput.value = lastName;
+            if (firstNameInput) firstNameInput.value = firstName;
+            
+            field.style.display = "block";
+            nameEditGroup.style.display = "none";
+          } else if (input) {
+            // 元の値に戻す
+            const originalValue = field.getAttribute("data-original");
+            input.value = originalValue;
+            
+            // selectの場合は選択値を確認
+            if (input.tagName === "SELECT" && input.value !== originalValue) {
+              console.log(`Warning: Could not restore select value "${originalValue}" for field "${input.getAttribute("data-field")}"`);
+            }
 
-          field.style.display = "block";
-          input.style.display = "none";
+            field.style.display = "block";
+            input.style.display = "none";
+          }
         });
 
         section.classList.remove("editing");
@@ -845,22 +960,44 @@
         editableItems.forEach((item) => {
           const field = item.querySelector(".editable-field");
           const input = item.querySelector(".edit-input");
-          const newValue = input.value;
-          const originalValue = field.getAttribute("data-original");
+          const nameEditGroup = item.querySelector(".name-edit-group");
 
-          if (newValue !== originalValue) {
-            hasChanges = true;
-            field.textContent = newValue;
-            field.setAttribute("data-original", newValue);
-
-            // パスワードの場合は表示用に変換
-            if (input.getAttribute("data-field") === "password" && newValue) {
-              field.textContent = "••••••••";
+          if (nameEditGroup) {
+            // 名前フィールドの特別処理
+            const lastNameInput = nameEditGroup.querySelector('input[data-field="lastName"]');
+            const firstNameInput = nameEditGroup.querySelector('input[data-field="firstName"]');
+            
+            if (lastNameInput && firstNameInput) {
+              const newFullName = `${lastNameInput.value} ${firstNameInput.value}`;
+              const originalValue = field.getAttribute("data-original");
+              
+              if (newFullName !== originalValue) {
+                hasChanges = true;
+                field.textContent = newFullName;
+                field.setAttribute("data-original", newFullName);
+              }
             }
-          }
+            
+            field.style.display = "block";
+            nameEditGroup.style.display = "none";
+          } else if (input) {
+            const newValue = input.value;
+            const originalValue = field.getAttribute("data-original");
 
-          field.style.display = "block";
-          input.style.display = "none";
+            if (newValue !== originalValue) {
+              hasChanges = true;
+              field.textContent = newValue;
+              field.setAttribute("data-original", newValue);
+
+              // パスワードの場合は表示用に変換
+              if (input.getAttribute("data-field") === "password" && newValue) {
+                field.textContent = "••••••••";
+              }
+            }
+
+            field.style.display = "block";
+            input.style.display = "none";
+          }
         });
 
         // ヘッダー編集ボタンを再表示し、編集コントロールを非表示

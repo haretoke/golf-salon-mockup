@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>会員登録 - Step 5 | Golf Salon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+      async function loadTailwindConfig() {
+        try {
+          const response = await fetch("css/tailwind-v4-config.css");
+          const cssContent = await response.text();
+
+          const styleElement = document.createElement("style");
+          styleElement.type = "text/tailwindcss";
+          styleElement.textContent = cssContent;
+
+          document.head.appendChild(styleElement);
+        } catch (error) {
+          console.error("Tailwind設定の読み込みに失敗しました:", error);
+        }
+      }
+
+      loadTailwindConfig();
+    </script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="js/utils/signup-flow.js"></script>
+
+    <!-- Billing-Robo JavaScript Libraries -->
+    <script
+      type="text/javascript"
+      src="https://credit.j-payment.co.jp/gateway/js/jquery.js"
+    ></script>
+    <!--※1-->
+    <script
+      type="text/javascript"
+      src="https://credit.j-payment.co.jp/gateway/js/CPToken.js"
+    ></script>
+    <!--※2-->
+    <script
+      type="text/javascript"
+      src="https://credit.j-payment.co.jp/gateway/js/EMV3DSAdapter.js"
+    ></script>
+    <!--※3-->
+  </head>
+  <body class="bg-gray-light min-h-screen">
+    <div
+      class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+    >
+      <div class="max-w-4xl w-full space-y-8">
+        <!-- ヘッダー -->
+        <div class="text-center">
+          <div
+            class="mx-auto h-12 w-12 bg-green-gradient rounded-full flex items-center justify-center"
+          >
+            <i data-lucide="golf-ball" class="w-6 h-6 text-white"></i>
+          </div>
+          <h1 class="mt-6 text-3xl font-bold text-gray-900">Golf Salon</h1>
+          <p class="mt-2 text-sm text-gray-600">プロから学ぶゴルフレッスン</p>
+        </div>
+
+        <!-- プログレスバー -->
+        <div class="flex items-center justify-center mb-8 px-2">
+          <div
+            class="flex items-center space-x-1 sm:space-x-2 overflow-x-auto max-w-full"
+          >
+            <!-- Step 1: Completed -->
+            <div class="flex items-center">
+              <div
+                class="w-8 h-8 bg-dark-green text-white rounded-full flex items-center justify-center text-xs font-medium"
+              >
+                <i data-lucide="check" class="w-4 h-4"></i>
+              </div>
+              <span
+                class="ml-1 text-xs font-medium text-gray-600 hidden sm:inline"
+                >メール</span
+              >
+            </div>
+
+            <div class="w-10 h-1 bg-dark-green rounded"></div>
+
+            <!-- Step 2: Completed -->
+            <div class="flex items-center">
+              <div
+                class="w-8 h-8 bg-dark-green text-white rounded-full flex items-center justify-center text-xs font-medium"
+              >
+                <i data-lucide="check" class="w-4 h-4"></i>
+              </div>
+              <span
+                class="ml-1 text-xs font-medium text-gray-600 hidden sm:inline"
+                >認証</span
+              >
+            </div>
+
+            <div class="w-10 h-1 bg-dark-green rounded"></div>
+
+            <!-- Step 3: Completed -->
+            <div class="flex items-center">
+              <div
+                class="w-8 h-8 bg-dark-green text-white rounded-full flex items-center justify-center text-xs font-medium"
+              >
+                <i data-lucide="check" class="w-4 h-4"></i>
+              </div>
+              <span
+                class="ml-1 text-xs font-medium text-gray-600 hidden sm:inline"
+                >基本情報</span
+              >
+            </div>
+
+            <div class="w-10 h-1 bg-dark-green rounded"></div>
+
+            <!-- Step 4: Completed -->
+            <div class="flex items-center">
+              <div
+                class="w-8 h-8 bg-dark-green text-white rounded-full flex items-center justify-center text-xs font-medium"
+              >
+                <i data-lucide="check" class="w-4 h-4"></i>
+              </div>
+              <span
+                class="ml-1 text-xs font-medium text-gray-600 hidden sm:inline"
+                >プラン</span
+              >
+            </div>
+
+            <div class="w-10 h-1 bg-primary-green rounded"></div>
+
+            <!-- Step 5: Active -->
+            <div class="flex items-center">
+              <div
+                class="w-8 h-8 bg-primary-green text-white rounded-full flex items-center justify-center text-xs font-medium"
+              >
+                5
+              </div>
+              <span
+                class="ml-1 text-xs font-medium text-primary-600 hidden sm:inline"
+                >支払い</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- メインコンテンツ -->
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <div class="space-y-8">
+            <div class="text-center">
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">
+                支払い情報を入力
+              </h2>
+              <p class="text-sm text-gray-600">
+                安全な決済システムで月額プランの支払い設定を行います
+              </p>
+            </div>
+
+            <!-- 選択プラン確認 -->
+            <div id="selected-plan-summary" class="bg-gray-50 rounded-lg p-4">
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                選択プラン
+              </h3>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span id="plan-name" class="font-medium text-gray-900"
+                    >ゴールドプラン</span
+                  >
+                  <p class="text-sm text-gray-600">月額利用料（税込み）</p>
+                </div>
+                <div class="text-right">
+                  <span
+                    id="plan-price"
+                    class="text-2xl font-bold text-primary-green"
+                    >¥6,600</span
+                  >
+                  <p class="text-sm text-gray-600">毎月請求</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- エラー表示エリア -->
+            <div
+              id="error-message"
+              class="hidden bg-red-50 border border-red-200 rounded-lg p-4"
+            >
+              <div class="flex items-center">
+                <i
+                  data-lucide="alert-circle"
+                  class="w-5 h-5 text-red-600 mr-3"
+                ></i>
+                <div class="flex-1">
+                  <p class="text-sm text-red-800" id="error-text"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- カード入力モーダル -->
+            <div
+              id="card-input-modal"
+              class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden"
+            >
+              <div
+                class="bg-white rounded-xl shadow-2xl max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto"
+              >
+                <div class="p-6">
+                  <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">
+                      カード情報入力
+                    </h3>
+                    <button
+                      id="close-modal-btn"
+                      class="text-gray-400 hover:text-gray-600 transition-colors"
+                    >
+                      <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                  </div>
+
+                  <div
+                    class="mb-4 bg-blue-50 border border-blue-200 rounded-lg p-3"
+                  >
+                    <div class="flex items-start">
+                      <i
+                        data-lucide="shield-check"
+                        class="w-4 h-4 text-blue-600 mr-2 mt-0.5"
+                      ></i>
+                      <div class="text-xs text-blue-800">
+                        <p class="font-medium">安全な接続</p>
+                        <p>
+                          カード情報は決済代行会社に直接送信され、暗号化されて処理されます。
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- モーダル内エラー表示 -->
+                  <div
+                    id="modal-error-message"
+                    class="hidden mb-4 bg-red-50 border border-red-200 rounded-lg p-3"
+                  >
+                    <div class="flex items-start">
+                      <i
+                        data-lucide="alert-circle"
+                        class="w-4 h-4 text-red-600 mr-2 mt-0.5"
+                      ></i>
+                      <div class="text-xs text-red-800">
+                        <p class="font-medium">入力エラー</p>
+                        <p id="modal-error-text"></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- モーダル内成功表示 -->
+                  <div
+                    id="modal-success-message"
+                    class="hidden mb-4 bg-green-50 border border-green-200 rounded-lg p-3"
+                  >
+                    <div class="flex items-start">
+                      <i
+                        data-lucide="check-circle"
+                        class="w-4 h-4 text-green-600 mr-2 mt-0.5"
+                      ></i>
+                      <div class="text-xs text-green-800">
+                        <p class="font-medium">認証完了</p>
+                        <p id="modal-success-text">
+                          カード情報の確認が完了しました。
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <form id="card-modal-form" class="space-y-4">
+                    <div>
+                      <label
+                        for="modal-cardNumber"
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                      >
+                        カード番号
+                      </label>
+                      <div class="relative">
+                        <input
+                          type="text"
+                          id="modal-cardNumber"
+                          name="cardNumber"
+                          required
+                          maxlength="19"
+                          placeholder="1234 5678 9012 3456"
+                          class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                        />
+                        <div
+                          class="absolute inset-y-0 right-0 pr-3 flex items-center"
+                        >
+                          <i
+                            id="card-number-status"
+                            class="w-4 h-4 text-gray-400 hidden"
+                            data-lucide="check-circle"
+                          ></i>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                      <div>
+                        <label
+                          for="modal-expiryDate"
+                          class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                          有効期限
+                        </label>
+                        <div class="relative">
+                          <input
+                            type="text"
+                            id="modal-expiryDate"
+                            name="expiryDate"
+                            required
+                            maxlength="5"
+                            placeholder="MM/YY"
+                            class="w-full px-3 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                          />
+                          <div
+                            class="absolute inset-y-0 right-0 pr-2 flex items-center"
+                          >
+                            <i
+                              id="expiry-status"
+                              class="w-3 h-3 text-gray-400 hidden"
+                              data-lucide="check-circle"
+                            ></i>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label
+                          for="modal-cvv"
+                          class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                          セキュリティコード
+                        </label>
+                        <div class="relative">
+                          <input
+                            type="text"
+                            id="modal-cvv"
+                            name="cvv"
+                            required
+                            maxlength="4"
+                            placeholder="123"
+                            class="w-full px-3 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                          />
+                          <div
+                            class="absolute inset-y-0 right-0 pr-2 flex items-center"
+                          >
+                            <i
+                              id="cvv-status"
+                              class="w-3 h-3 text-gray-400 hidden"
+                              data-lucide="check-circle"
+                            ></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label
+                        for="modal-cardHolder"
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                      >
+                        カード名義人
+                      </label>
+                      <div class="relative">
+                        <input
+                          type="text"
+                          id="modal-cardHolder"
+                          name="cardHolder"
+                          required
+                          placeholder="TANAKA TARO"
+                          style="text-transform: uppercase"
+                          class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                        />
+                        <div
+                          class="absolute inset-y-0 right-0 pr-3 flex items-center"
+                        >
+                          <i
+                            id="cardholder-status"
+                            class="w-4 h-4 text-gray-400 hidden"
+                            data-lucide="check-circle"
+                          ></i>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flex space-x-3 pt-4">
+                      <button
+                        type="button"
+                        id="cancel-card-btn"
+                        class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                      >
+                        キャンセル
+                      </button>
+                      <button
+                        type="submit"
+                        id="save-card-btn"
+                        class="flex-1 bg-primary-green text-white px-4 py-2 rounded-lg hover:bg-primary-dark-green focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <span class="flex items-center justify-center">
+                          <span id="save-card-btn-text">カード登録</span>
+                          <div
+                            id="save-card-loading-spinner"
+                            class="hidden ml-2"
+                          >
+                            <svg
+                              class="animate-spin h-4 w-4 text-white"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle
+                                class="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                stroke-width="4"
+                              ></circle>
+                              <path
+                                class="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                              ></path>
+                            </svg>
+                          </div>
+                        </span>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- 支払いフォーム -->
+            <form id="payment-form" class="space-y-8">
+              <!-- Billing-Robo Token Fields (Hidden) -->
+              <input type="hidden" id="tkn" name="tkn" value="" />
+              <input type="hidden" id="card-token" name="cardToken" />
+              <input type="hidden" id="auth-veres" name="authVeres" />
+              <input type="hidden" id="auth-pares" name="authPares" />
+
+              <!-- 3Dセキュアポップアップ表示用 -->
+              <div id="EMV3DS_INPUT_FORM"></div>
+
+              <!-- 支払い方法選択 -->
+              <div class="space-y-4">
+                <h3 class="text-lg font-semibold text-gray-900">支払い方法</h3>
+                <div class="grid grid-cols-1 gap-3">
+                  <label class="payment-method cursor-pointer">
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value="creditcard"
+                      class="sr-only"
+                      checked
+                    />
+                    <div
+                      class="border-2 border-primary-green bg-primary-50 rounded-lg p-4 flex items-center"
+                    >
+                      <i
+                        data-lucide="credit-card"
+                        class="w-5 h-5 text-primary-green mr-3"
+                      ></i>
+                      <span class="font-medium text-gray-900"
+                        >クレジットカード</span
+                      >
+                      <div class="ml-auto flex space-x-2">
+                        <img src="./images/visa.svg" alt="Visa" class="h-6" />
+                        <img
+                          src="./images/mastercard.svg"
+                          alt="Mastercard"
+                          class="h-6"
+                        />
+                        <img src="./images/jcb.svg" alt="JCB" class="h-6" />
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- カード情報入力セクション -->
+              <div id="credit-card-section" class="space-y-6">
+                <h3 class="text-lg font-semibold text-gray-900">
+                  月額課金用カード登録
+                </h3>
+
+                <!-- カード未登録時の表示 -->
+                <div id="card-not-registered" class="space-y-4">
+                  <button
+                    type="button"
+                    id="add-card-btn"
+                    class="w-full bg-primary-green text-white py-3 px-4 rounded-lg font-medium hover:bg-primary-dark-green focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-2 transition-colors"
+                  >
+                    <span class="flex items-center justify-center">
+                      <i data-lucide="credit-card" class="w-5 h-5 mr-2"></i>
+                      カード情報を入力
+                    </span>
+                  </button>
+
+                  <p class="text-xs text-gray-500 text-center">
+                    月額課金用のカードを登録します
+                  </p>
+                </div>
+
+                <!-- カード登録済み時の表示 -->
+                <div id="card-registered" class="hidden space-y-4">
+                  <div
+                    class="bg-green-50 border border-green-200 rounded-lg p-4"
+                  >
+                    <div class="flex items-start">
+                      <i
+                        data-lucide="check-circle"
+                        class="w-5 h-5 text-green-600 mr-3 mt-0.5"
+                      ></i>
+                      <div class="text-sm text-green-800">
+                        <p class="font-medium mb-1">カード登録完了</p>
+                        <p id="registered-card-info">
+                          **** **** **** 1234 (Visa)
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 利用規約・返金ポリシー同意 -->
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <input
+                    type="checkbox"
+                    id="agree-payment-terms"
+                    name="agreePaymentTerms"
+                    required
+                    class="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-green border-gray-300 rounded"
+                  />
+                  <label
+                    for="agree-payment-terms"
+                    class="ml-3 text-sm text-gray-700"
+                  >
+                    <a
+                      href="legal.html#payment"
+                      class="text-primary-600 hover:underline"
+                      target="_blank"
+                      >決済利用規約</a
+                    >および<a
+                      href="legal.html#tokusho"
+                      class="text-primary-600 hover:underline"
+                      target="_blank"
+                      >返金ポリシー</a
+                    >に同意します
+                  </label>
+                </div>
+                <div class="flex items-start">
+                  <input
+                    type="checkbox"
+                    id="agree-auto-renewal"
+                    name="agreeAutoRenewal"
+                    required
+                    class="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-green border-gray-300 rounded"
+                  />
+                  <label
+                    for="agree-auto-renewal"
+                    class="ml-3 text-sm text-gray-700"
+                  >
+                    毎月自動更新される月額プランであることを理解し、同意します
+                  </label>
+                </div>
+              </div>
+
+              <!-- 決済ボタン -->
+              <button
+                type="submit"
+                id="payment-btn"
+                disabled
+                class="w-full bg-primary-green text-white py-4 px-4 rounded-lg font-medium text-lg hover:bg-primary-dark-green focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span class="flex items-center justify-center">
+                  <i data-lucide="lock" class="w-5 h-5 mr-2"></i>
+                  <span id="payment-btn-text">¥6,600で登録を完了する</span>
+                  <div id="payment-loading-spinner" class="hidden ml-2">
+                    <svg
+                      class="animate-spin h-5 w-5 text-white"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        class="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        stroke-width="4"
+                      ></circle>
+                      <path
+                        class="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      ></path>
+                    </svg>
+                  </div>
+                </span>
+              </button>
+
+              <!-- セキュリティ情報 -->
+              <div class="text-center space-y-2">
+                <p
+                  class="text-xs text-gray-500 flex items-center justify-center"
+                >
+                  <i
+                    data-lucide="shield-check"
+                    class="w-4 h-4 mr-2 text-primary-green"
+                  ></i>
+                  SSL暗号化通信で安全に保護されています
+                </p>
+                <p
+                  class="text-xs text-gray-500 flex items-center justify-center"
+                >
+                  <i
+                    data-lucide="credit-card"
+                    class="w-4 h-4 mr-2 text-primary-green"
+                  ></i>
+                  PCI DSS準拠の安全な決済システム
+                </p>
+                <p class="text-xs text-gray-500">
+                  初回請求日:
+                  <span id="billing-date" class="font-medium"></span>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- 戻るリンク -->
+        <div class="text-center">
+          <a
+            href="signup-step4.html"
+            class="text-sm text-gray-500 hover:text-gray-700"
+          >
+            <i data-lucide="arrow-left" class="w-4 h-4 inline mr-1"></i>
+            プラン選択に戻る
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ページ読み込み時の初期化
+      document.addEventListener("DOMContentLoaded", () => {
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+
+        // 支払いフォームの初期化（直接実装のため外部初期化は不要）
+
+        // 選択プラン情報を表示
+        loadSelectedPlan();
+
+        // カード番号フォーマット
+        initCardFormatting();
+
+        // フォーム送信処理
+        initPaymentForm();
+
+        // カード入力モーダルの初期化
+        initCardModal();
+
+        // チェックボックスの変更時にボタン状態をチェック
+        initCheckboxListeners();
+
+        // 初期状態での決済ボタン状態をチェック
+        checkPaymentButtonStatus();
+      });
+
+      // 選択プラン情報の読み込み
+      function loadSelectedPlan() {
+        const planData = JSON.parse(
+          localStorage.getItem("selectedPlan") ||
+            '{"type": "gold", "price": 6600, "name": "ゴールドプラン"}'
+        );
+        const basicInfo = JSON.parse(
+          localStorage.getItem("signupBasicInfo") || "{}"
+        );
+
+        document.getElementById("plan-name").textContent = planData.name;
+        document.getElementById(
+          "plan-price"
+        ).textContent = `¥${planData.price.toLocaleString()}`;
+        document.getElementById(
+          "payment-btn-text"
+        ).textContent = `¥${planData.price.toLocaleString()}で登録を完了する`;
+
+        // 請求先都道府県を基本情報から設定
+        if (basicInfo.prefecture) {
+          const prefectureSelect = document.getElementById("billingPrefecture");
+          const prefectureText =
+            prefectureSelect.querySelector(
+              `option[value="${basicInfo.prefecture}"]`
+            )?.textContent || basicInfo.prefecture;
+          prefectureSelect.value = prefectureText;
+        }
+
+        // 初回請求日を設定（即時）
+        const billingDate = new Date();
+        document.getElementById("billing-date").textContent =
+          "即時（登録完了時）";
+      }
+
+      // カード番号フォーマット（モーダル用は別途initCardModal内で処理）
+      function initCardFormatting() {
+        // 現在はモーダル方式のため、この関数は空
+      }
+
+      // チェックボックスのイベントリスナー初期化
+      function initCheckboxListeners() {
+        const agreePaymentTerms = document.getElementById(
+          "agree-payment-terms"
+        );
+        const agreeAutoRenewal = document.getElementById("agree-auto-renewal");
+
+        agreePaymentTerms.addEventListener("change", checkPaymentButtonStatus);
+        agreeAutoRenewal.addEventListener("change", checkPaymentButtonStatus);
+      }
+
+      // フォーム送信処理
+      function initPaymentForm() {
+        const form = document.getElementById("payment-form");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          // カードトークンが設定されているかチェック
+          const cardToken = document.getElementById("card-token").value;
+          if (!cardToken) {
+            showError("カード情報を入力してください。");
+            return;
+          }
+
+          // カード同意チェックボックスの確認
+          const agreePaymentTerms = document.getElementById(
+            "agree-payment-terms"
+          );
+          const agreeAutoRenewal =
+            document.getElementById("agree-auto-renewal");
+
+          if (!agreePaymentTerms.checked) {
+            showError("決済利用規約と返金ポリシーに同意してください。");
+            return;
+          }
+
+          if (!agreeAutoRenewal.checked) {
+            showError("自動更新についての同意が必要です。");
+            return;
+          }
+
+          // 決済処理開始
+          const btn = document.getElementById("payment-btn");
+          const btnText = document.getElementById("payment-btn-text");
+          const spinner = document.getElementById("payment-loading-spinner");
+
+          // エラー表示を隠す
+          hideError();
+
+          btn.disabled = true;
+          btnText.textContent = "登録完了中...";
+          spinner.classList.remove("hidden");
+
+          // 登録完了処理をシミュレート
+          setTimeout(() => {
+            // 全ての登録データを統合
+            const basicInfo = JSON.parse(
+              localStorage.getItem("signupBasicInfo") || "{}"
+            );
+            const planData = JSON.parse(
+              localStorage.getItem("selectedPlan") || "{}"
+            );
+
+            const completeSignupData = {
+              ...basicInfo,
+              plan: planData,
+              payment: {
+                cardToken: cardToken,
+                method: "credit_card",
+                authVeres: document.getElementById("auth-veres").value,
+                authPares: document.getElementById("auth-pares").value,
+              },
+              registrationComplete: true,
+              timestamp: new Date().toISOString(),
+            };
+
+            localStorage.setItem(
+              "signupComplete",
+              JSON.stringify(completeSignupData)
+            );
+
+            // 成功メッセージと遷移
+            spinner.classList.add("hidden");
+            btnText.textContent = "登録完了！";
+            alert(
+              "🎉 登録が完了しました！\\n月額課金の設定も完了し、Golf Salonへようこそ！"
+            );
+            // window.location.href = 'dashboard.html';
+          }, 2000);
+        });
+      }
+
+      // カード番号バリデーション（Luhnアルゴリズム）
+      function validateCardNumber(cardNumber) {
+        const cleanNumber = cardNumber.replace(/\s/g, "");
+        if (cleanNumber.length < 13 || cleanNumber.length > 19) return false;
+
+        let sum = 0;
+        let isEvenPosition = false;
+
+        for (let i = cleanNumber.length - 1; i >= 0; i--) {
+          let digit = parseInt(cleanNumber.charAt(i));
+
+          if (isEvenPosition) {
+            digit *= 2;
+            if (digit > 9) {
+              digit = Math.floor(digit / 10) + (digit % 10);
+            }
+          }
+
+          sum += digit;
+          isEvenPosition = !isEvenPosition;
+        }
+
+        return sum % 10 === 0;
+      }
+
+      // カード有効期限バリデーション
+      function validateExpiry(expiry) {
+        const match = expiry.match(/^(\d{2})\/(\d{2})$/);
+        if (!match) return false;
+
+        const month = parseInt(match[1]);
+        const year = parseInt("20" + match[2]);
+        const now = new Date();
+        const expDate = new Date(year, month - 1, 1);
+
+        return month >= 1 && month <= 12 && expDate > now;
+      }
+
+      // エラー表示
+      function showError(message) {
+        const errorDiv = document.getElementById("error-message");
+        const errorText = document.getElementById("error-text");
+        errorText.textContent = message;
+        errorDiv.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // エラー表示を隠す
+      function hideError() {
+        const errorDiv = document.getElementById("error-message");
+        errorDiv.classList.add("hidden");
+      }
+
+      // モーダル内エラー表示
+      function showModalError(message) {
+        const errorDiv = document.getElementById("modal-error-message");
+        const errorText = document.getElementById("modal-error-text");
+        const successDiv = document.getElementById("modal-success-message");
+
+        errorText.textContent = message;
+        errorDiv.classList.remove("hidden");
+        successDiv.classList.add("hidden");
+
+        // Lucideアイコンを再初期化
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+      }
+
+      // モーダル内エラー表示を隠す
+      function hideModalError() {
+        const errorDiv = document.getElementById("modal-error-message");
+        errorDiv.classList.add("hidden");
+      }
+
+      // モーダル内成功表示
+      function showModalSuccess(message) {
+        const successDiv = document.getElementById("modal-success-message");
+        const successText = document.getElementById("modal-success-text");
+        const errorDiv = document.getElementById("modal-error-message");
+
+        successText.textContent = message;
+        successDiv.classList.remove("hidden");
+        errorDiv.classList.add("hidden");
+
+        // Lucideアイコンを再初期化
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+      }
+
+      // 入力フィールドの状態表示
+      function setFieldStatus(fieldId, statusId, isValid) {
+        const field = document.getElementById(fieldId);
+        const status = document.getElementById(statusId);
+
+        if (isValid) {
+          field.classList.remove("border-red-300", "focus:ring-red-500");
+          field.classList.add("border-green-300", "focus:ring-green-500");
+          status.classList.remove("hidden", "text-red-500");
+          status.classList.add("text-green-500");
+          status.setAttribute("data-lucide", "check-circle");
+        } else {
+          field.classList.remove("border-green-300", "focus:ring-green-500");
+          field.classList.add("border-red-300", "focus:ring-red-500");
+          status.classList.remove("hidden", "text-green-500");
+          status.classList.add("text-red-500");
+          status.setAttribute("data-lucide", "x-circle");
+        }
+
+        // Lucideアイコンを再初期化
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+      }
+
+      // フィールド状態をリセット
+      function resetFieldStatus(fieldId, statusId) {
+        const field = document.getElementById(fieldId);
+        const status = document.getElementById(statusId);
+
+        field.classList.remove(
+          "border-red-300",
+          "border-green-300",
+          "focus:ring-red-500",
+          "focus:ring-green-500"
+        );
+        field.classList.add("border-gray-300");
+        status.classList.add("hidden");
+      }
+
+      // 全フィールドの検証状態をチェック
+      function checkAllFieldsValid() {
+        const cardNumber = document
+          .getElementById("modal-cardNumber")
+          .value.replace(/\s/g, "");
+        const expiryDate = document.getElementById("modal-expiryDate").value;
+        const cvv = document.getElementById("modal-cvv").value;
+        const cardHolder = document
+          .getElementById("modal-cardHolder")
+          .value.trim();
+
+        const cardValid =
+          cardNumber.length >= 13 && validateCardNumber(cardNumber);
+        const expiryValid =
+          expiryDate.length === 5 && validateExpiry(expiryDate);
+        const cvvValid = cvv.length >= 3 && cvv.length <= 4;
+        const holderValid =
+          cardHolder.length >= 2 && /^[A-Z\s]+$/.test(cardHolder);
+
+        // すべてのフィールドが有効な場合、エラーを隠す
+        if (cardValid && expiryValid && cvvValid && holderValid) {
+          hideModalError();
+        }
+
+        return cardValid && expiryValid && cvvValid && holderValid;
+      }
+
+      // カード入力モーダルの初期化
+      function initCardModal() {
+        const addCardBtn = document.getElementById("add-card-btn");
+        const modal = document.getElementById("card-input-modal");
+        const closeModalBtn = document.getElementById("close-modal-btn");
+        const cancelCardBtn = document.getElementById("cancel-card-btn");
+        const cardModalForm = document.getElementById("card-modal-form");
+
+        // モーダルを開く
+        addCardBtn.addEventListener("click", () => {
+          modal.classList.remove("hidden");
+          document.body.style.overflow = "hidden";
+          // フォームをリセット
+          cardModalForm.reset();
+          // エラー表示を隠す
+          hideError();
+          hideModalError();
+          // フィールド状態をリセット
+          resetFieldStatus("modal-cardNumber", "card-number-status");
+          resetFieldStatus("modal-expiryDate", "expiry-status");
+          resetFieldStatus("modal-cvv", "cvv-status");
+          resetFieldStatus("modal-cardHolder", "cardholder-status");
+          // 最初のフィールドにフォーカス
+          document.getElementById("modal-cardNumber").focus();
+          // Lucideアイコンを再初期化
+          if (window.lucide) {
+            lucide.createIcons();
+          }
+        });
+
+        // モーダルを閉じる
+        const closeModal = () => {
+          modal.classList.add("hidden");
+          document.body.style.overflow = "auto";
+        };
+
+        closeModalBtn.addEventListener("click", closeModal);
+        cancelCardBtn.addEventListener("click", closeModal);
+
+        // モーダル背景クリックで閉じる
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            closeModal();
+          }
+        });
+
+        // Escキーで閉じる
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+            closeModal();
+          }
+        });
+
+        // モーダル内のリアルタイム検証とフォーマット
+        const modalCardNumber = document.getElementById("modal-cardNumber");
+        const modalExpiryDate = document.getElementById("modal-expiryDate");
+        const modalCvv = document.getElementById("modal-cvv");
+        const modalCardHolder = document.getElementById("modal-cardHolder");
+
+        // カード番号のリアルタイム検証
+        modalCardNumber.addEventListener("input", (e) => {
+          let value = e.target.value.replace(/\s/g, "").replace(/\D/g, "");
+          value = value.replace(/(.{4})/g, "$1 ").trim();
+          if (value.length > 19) value = value.substring(0, 19);
+          e.target.value = value;
+
+          // リアルタイム検証
+          const cleanNumber = value.replace(/\s/g, "");
+          if (cleanNumber.length >= 13) {
+            const isValid = validateCardNumber(cleanNumber);
+            setFieldStatus("modal-cardNumber", "card-number-status", isValid);
+            if (!isValid && cleanNumber.length >= 16) {
+              showModalError("カード番号が正しくありません。");
+            } else {
+              // 全体的な検証状態をチェック
+              checkAllFieldsValid();
+            }
+          } else {
+            resetFieldStatus("modal-cardNumber", "card-number-status");
+            // 入力中はエラーを表示しない
+          }
+        });
+
+        // 有効期限のリアルタイム検証
+        modalExpiryDate.addEventListener("input", (e) => {
+          let value = e.target.value.replace(/\D/g, "");
+          if (value.length >= 2) {
+            value = value.substring(0, 2) + "/" + value.substring(2, 4);
+          }
+          e.target.value = value;
+
+          // リアルタイム検証
+          if (value.length === 5) {
+            const isValid = validateExpiry(value);
+            setFieldStatus("modal-expiryDate", "expiry-status", isValid);
+            if (!isValid) {
+              showModalError("有効期限が正しくありません。");
+            } else {
+              // 全体的な検証状態をチェック
+              checkAllFieldsValid();
+            }
+          } else {
+            resetFieldStatus("modal-expiryDate", "expiry-status");
+          }
+        });
+
+        // CVVのリアルタイム検証
+        modalCvv.addEventListener("input", (e) => {
+          let value = e.target.value.replace(/\D/g, "");
+          if (value.length > 4) value = value.substring(0, 4);
+          e.target.value = value;
+
+          // リアルタイム検証
+          if (value.length >= 3) {
+            const isValid = value.length >= 3 && value.length <= 4;
+            setFieldStatus("modal-cvv", "cvv-status", isValid);
+            if (isValid) {
+              // 全体的な検証状態をチェック
+              checkAllFieldsValid();
+            }
+          } else {
+            resetFieldStatus("modal-cvv", "cvv-status");
+          }
+        });
+
+        // カードホルダー名のリアルタイム検証
+        modalCardHolder.addEventListener("input", (e) => {
+          e.target.value = e.target.value.toUpperCase();
+
+          // リアルタイム検証
+          const value = e.target.value.trim();
+          if (value.length >= 2) {
+            const isValid = value.length >= 2 && /^[A-Z\s]+$/.test(value);
+            setFieldStatus("modal-cardHolder", "cardholder-status", isValid);
+            if (!isValid) {
+              showModalError("カード名義人は英字で入力してください。");
+            } else {
+              // 全体的な検証状態をチェック
+              checkAllFieldsValid();
+            }
+          } else {
+            resetFieldStatus("modal-cardHolder", "cardholder-status");
+          }
+        });
+
+        // カードフォーム送信処理
+        cardModalForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const cardNumber = modalCardNumber.value.replace(/\s/g, "");
+          const expiryDate = modalExpiryDate.value;
+          const cvv = document.getElementById("modal-cvv").value;
+          const cardHolder = modalCardHolder.value;
+
+          // バリデーション
+          if (!validateCardNumber(cardNumber)) {
+            showModalError("カード番号が正しくありません。");
+            return;
+          }
+
+          if (!validateExpiry(expiryDate)) {
+            showModalError("有効期限が正しくありません。");
+            return;
+          }
+
+          if (cvv.length < 3 || cvv.length > 4) {
+            showModalError("セキュリティコードが正しくありません。");
+            return;
+          }
+
+          if (!cardHolder.trim()) {
+            showModalError("カード名義人を入力してください。");
+            return;
+          }
+
+          // ボタンの状態変更
+          const saveBtn = document.getElementById("save-card-btn");
+          const saveBtnText = document.getElementById("save-card-btn-text");
+          const saveSpinner = document.getElementById(
+            "save-card-loading-spinner"
+          );
+
+          saveBtn.disabled = true;
+          saveBtnText.textContent = "トークン取得中...";
+          saveSpinner.classList.remove("hidden");
+
+          // モーダル内エラーを隠す
+          hideModalError();
+
+          // Billing-Roboトークン取得処理
+          processBillingRoboTokenFromModal(
+            cardNumber,
+            expiryDate,
+            cvv,
+            cardHolder,
+            () => {
+              // 成功時の処理
+              showModalSuccess("カード認証が完了しました！");
+              setTimeout(() => {
+                hideError(); // エラー表示を隠す
+                closeModal();
+                // カード登録完了表示に切り替え
+                showCardRegistered(cardNumber);
+              }, 1500);
+            },
+            (error) => {
+              // エラー時の処理
+              saveBtn.disabled = false;
+              saveBtnText.textContent = "カード登録";
+              saveSpinner.classList.add("hidden");
+              showModalError(
+                "カード情報の処理中にエラーが発生しました。カード情報を確認してください。"
+              );
+            }
+          );
+        });
+      }
+
+      // モーダルからのトークン取得処理
+      function processBillingRoboTokenFromModal(
+        cardNumber,
+        expiryDate,
+        cvv,
+        cardHolder,
+        onSuccess,
+        onError
+      ) {
+        try {
+          const expMonth = expiryDate.split("/")[0];
+          const expYear = expiryDate.split("/")[1];
+
+          // CPToken.TokenCreateを正しい形式で呼び出し
+          CPToken.TokenCreate(
+            {
+              aid: "132563", // 店舗ID
+              cn: cardNumber, // カード番号
+              ed: expYear + expMonth, // 有効期限（YYMM形式）
+              fn: cardHolder.split(" ")[0] || cardHolder, // 姓
+              ln: cardHolder.split(" ")[1] || "", // 名
+            },
+            function (resultCode, errMsg) {
+              // トークン作成後のコールバック
+              if (resultCode !== "Success") {
+                console.error("トークン作成エラー:", errMsg);
+                onError(errMsg);
+              } else {
+                console.log("トークン作成成功");
+                const token = document.getElementById("tkn").value; // tkn要素に自動でセットされる
+                document.getElementById("card-token").value = token; // 互換性のためにcard-tokenにもセット
+
+                // 3Dセキュア認証を実行
+                if (window.ThreeDSAdapter) {
+                  ThreeDSAdapter.authenticate(
+                    {
+                      tkn: token,
+                      aid: "132563",
+                      am: getCurrentPlanPrice(), // 決済金額
+                      tx: 0, // 税額
+                      sf: 0, // 送料
+                      em: getCustomerEmail(), // メールアドレス
+                      pn: "0000000000", // 電話番号（ダミー）
+                    },
+                    function (authResultCode, authErrMsg) {
+                      // 3Dセキュア認証後のコールバック
+                      if (authResultCode !== "Success") {
+                        console.error("3Dセキュア認証エラー:", authErrMsg);
+                        onError(authErrMsg);
+                      } else {
+                        console.log("3Dセキュア認証成功");
+
+                        // カード情報をクリア（セキュリティ）
+                        document.getElementById("modal-cardNumber").value = "";
+                        document.getElementById("modal-cvv").value = "";
+
+                        onSuccess(token);
+                      }
+                    }
+                  );
+                } else {
+                  // 3Dセキュアが無効な場合はそのまま成功
+                  console.log("3Dセキュア無効のため、トークン作成のみ完了");
+                  onSuccess(token);
+                }
+              }
+            }
+          );
+        } catch (error) {
+          console.error("CPToken呼び出しエラー:", error);
+          onError(error);
+        }
+      }
+
+      // プラン価格を取得
+      function getCurrentPlanPrice() {
+        const planData = JSON.parse(
+          localStorage.getItem("selectedPlan") || '{"price": 6600}'
+        );
+        return planData.price;
+      }
+
+      // 顧客メールアドレスを取得
+      function getCustomerEmail() {
+        const basicInfo = JSON.parse(
+          localStorage.getItem("signupBasicInfo") || "{}"
+        );
+        return (
+          basicInfo.email ||
+          localStorage.getItem("signupEmail") ||
+          "test@example.com"
+        );
+      }
+
+      // 決済ボタンの有効化チェック
+      function checkPaymentButtonStatus() {
+        const cardToken = document.getElementById("card-token").value;
+        const agreePaymentTerms = document.getElementById(
+          "agree-payment-terms"
+        ).checked;
+        const agreeAutoRenewal =
+          document.getElementById("agree-auto-renewal").checked;
+        const paymentBtn = document.getElementById("payment-btn");
+
+        // カードトークンとすべてのチェックボックスが完了している場合のみ有効化
+        if (cardToken && agreePaymentTerms && agreeAutoRenewal) {
+          paymentBtn.classList.remove("opacity-50", "cursor-not-allowed");
+          paymentBtn.disabled = false;
+        } else {
+          paymentBtn.classList.add("opacity-50", "cursor-not-allowed");
+          paymentBtn.disabled = true;
+        }
+      }
+
+      // カード登録完了表示
+      function showCardRegistered(cardNumber) {
+        const cardNotRegistered = document.getElementById(
+          "card-not-registered"
+        );
+        const cardRegistered = document.getElementById("card-registered");
+        const registeredCardInfo = document.getElementById(
+          "registered-card-info"
+        );
+
+        // カード番号の最後4桁を取得
+        const lastFour = cardNumber.slice(-4);
+
+        // カードブランドを推定
+        let cardBrand = "Card";
+        if (cardNumber.startsWith("4")) {
+          cardBrand = "Visa";
+        } else if (cardNumber.startsWith("5") || cardNumber.startsWith("2")) {
+          cardBrand = "Mastercard";
+        } else if (cardNumber.startsWith("35")) {
+          cardBrand = "JCB";
+        }
+
+        // カード情報を表示
+        registeredCardInfo.textContent = `**** **** **** ${lastFour} (${cardBrand})`;
+
+        // 表示を切り替え
+        cardNotRegistered.classList.add("hidden");
+        cardRegistered.classList.remove("hidden");
+
+        // 決済ボタンの状態をチェック
+        checkPaymentButtonStatus();
+      }
+    </script>
+  </body>
+</html>

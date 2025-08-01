@@ -34,6 +34,7 @@
         <div class="container">
             <nav class="legal-nav">
                 <a href="#tokusho" class="legal-tab active" onclick="showTab('tokusho')">特定商取引法</a>
+                <a href="#payment" class="legal-tab" onclick="showTab('payment')">決済利用規約</a>
                 <a href="#privacy" class="legal-tab" onclick="showTab('privacy')">プライバシーポリシー</a>
                 <a href="#terms" class="legal-tab" onclick="showTab('terms')">利用規約</a>
                 <a href="#gdpr" class="legal-tab" onclick="showTab('gdpr')">GDPR対応</a>
@@ -79,15 +80,15 @@
                     <h2>料金</h2>
                     <div class="price-table">
                         <div class="price-row">
-                            <span class="plan-name">サロン閲覧のみ</span>
+                            <span class="plan-name">スタンダードプラン</span>
                             <span class="plan-price">月額 2,200円（税込）</span>
                         </div>
                         <div class="price-row">
-                            <span class="plan-name">レッスン付き（月1回）</span>
+                            <span class="plan-name">ゴールドプラン</span>
                             <span class="plan-price">月額 6,600円（税込）</span>
                         </div>
                         <div class="price-row">
-                            <span class="plan-name">レッスン付き（月2回）</span>
+                            <span class="plan-name">プラチナプラン</span>
                             <span class="plan-price">月額 9,900円（税込）</span>
                         </div>
                     </div>
@@ -100,8 +101,8 @@
 
                 <div class="legal-section">
                     <h2>支払時期</h2>
-                    <p>月額課金：毎月の契約更新日に自動決済<br>
-                    初回決済：サービス申込み時に即時決済</p>
+                    <p>初回決済：会員登録完了日（当日）<br>
+                    継続課金：毎月同日に自動決済</p>
                 </div>
 
                 <div class="legal-section">
@@ -117,14 +118,31 @@
 
                 <div class="legal-section">
                     <h2>退会・解約</h2>
-                    <p>退会をご希望の場合は、前月10日までにマイページより退会申請を行ってください。<br>
-                    退会申請後、契約期間満了をもってサービス利用が停止されます。</p>
+                    <p>解約申請期限：<br>
+                    ・毎月10日まで → 当月末で解約<br>
+                    ・毎月11日以降 → 翌月末で解約<br>
+                    <br>
+                    解約後も契約期間満了日まではサービス利用可能です。<br>
+                    解約手続きはマイページより行ってください。</p>
                 </div>
 
                 <div class="legal-section">
                     <h2>返金・キャンセル</h2>
-                    <p>デジタルコンテンツの性質上、サービス開始後の返金・キャンセルは承っておりません。<br>
-                    ただし、決済エラーや当社都合による場合はこの限りではありません。</p>
+                    <p><strong>基本方針：</strong>原則として一度お支払いいただいた料金の返金は行いません。<br>
+                    <br>
+                    <strong>返金対象外：</strong><br>
+                    ・会員登録完了後のお客様都合によるキャンセル<br>
+                    ・サービス未利用期間がある場合の日割り返金<br>
+                    ・プラン変更時の料金差額<br>
+                    ・レッスン予約の変更・キャンセル<br>
+                    ・無断欠席があった場合<br>
+                    <br>
+                    <strong>例外的返金対応：</strong><br>
+                    ・当社都合によるサービス提供停止・中止<br>
+                    ・重大なシステム障害により7日以上継続してサービス利用不可<br>
+                    ・当社の債務不履行による契約解除<br>
+                    <br>
+                    返金が認められる場合、原則として決済手段と同じ方法で返金いたします（処理期間：1〜2ヶ月程度）。</p>
                 </div>
 
                 <div class="legal-section">
@@ -139,6 +157,77 @@
                     <h2>免責事項</h2>
                     <p>当社は、本サービスの利用により生じた損害について、法令上許される範囲で責任を負いません。<br>
                     また、通信環境やデバイスの不具合によりサービスを正常にご利用いただけない場合についても同様とします。</p>
+                </div>
+            </div>
+
+            <!-- 決済利用規約 -->
+            <div id="payment-content" class="legal-content">
+                <h1>決済利用規約</h1>
+                
+                <div class="legal-section">
+                    <h2>第1条（適用範囲）</h2>
+                    <p>本規約は、Golf Salon（以下「当サービス」）の有料会員サービスに関する決済条件を定めます。</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第2条（料金体系）</h2>
+                    <p>当サービスの月額基本料金は以下の通りです（すべて税込価格）：</p>
+                    <div class="price-table">
+                        <div class="price-row">
+                            <span class="plan-name">スタンダードプラン</span>
+                            <span class="plan-price">月額 2,200円</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="plan-name">ゴールドプラン</span>
+                            <span class="plan-price">月額 6,600円</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="plan-name">プラチナプラン</span>
+                            <span class="plan-price">月額 9,900円</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第3条（決済方法・請求）</h2>
+                    <p>1. 支払方法：クレジットカード決済のみ<br>
+                    2. 初回請求：会員登録完了日（決済日）<br>
+                    3. 継続請求：毎月同日に自動課金<br>
+                    4. 請求失敗時：7日以内に決済完了されない場合、会員資格を一時停止</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第4条（自動更新）</h2>
+                    <p>1. 有料会員は毎月自動更新されます<br>
+                    2. 解約手続きを行わない限り、継続して課金されます<br>
+                    3. 料金変更の場合は、30日前に事前通知いたします</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第5条（解約・退会）</h2>
+                    <p>1. 解約申請期限：<br>
+                    　・毎月10日まで → 当月末で解約<br>
+                    　・毎月11日以降 → 翌月末で解約<br>
+                    2. 解約後も契約期間満了日まではサービス利用可能<br>
+                    3. 解約手続きは会員ページから行ってください</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第6条（決済不能時の措置）</h2>
+                    <p>決済不能が連続2回発生した場合、自動的に会員資格を取り消します。<br>
+                    再度ご利用を希望される場合は、新規登録をお願いいたします。</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第7条（プラン変更）</h2>
+                    <p>プラン変更は次回請求日から適用されます。<br>
+                    変更前プランの料金差額の返金・追加請求は行いません。</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>第8条（規約の変更）</h2>
+                    <p>当社は、必要に応じて本規約を変更することができます。<br>
+                    変更の場合は、30日前にサービス内でお知らせいたします。</p>
                 </div>
             </div>
 
@@ -387,10 +476,39 @@
             // 選択されたタブを表示
             document.getElementById(tabName + '-content').classList.add('active');
             document.querySelector(`[onclick="showTab('${tabName}')"]`).classList.add('active');
+            
+            // URLハッシュを更新（履歴に残さない）
+            window.history.replaceState(null, null, '#' + tabName);
         }
 
-        // Lucide Icons初期化
-        lucide.createIcons();
+        // URLハッシュに基づいて初期タブを設定
+        function initTabFromHash() {
+            const hash = window.location.hash.substring(1); // #を除去
+            const validTabs = ['tokusho', 'payment', 'privacy', 'terms', 'gdpr'];
+            
+            if (hash && validTabs.includes(hash)) {
+                showTab(hash);
+            } else {
+                // デフォルトタブ（特定商取引法）を表示
+                showTab('tokusho');
+            }
+        }
+
+        // ページ読み込み時の初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            // URLハッシュに基づいてタブを設定
+            initTabFromHash();
+            
+            // Lucide Icons初期化
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        });
+
+        // ハッシュ変更時にタブを切り替え（ブラウザの戻る/進むボタン対応）
+        window.addEventListener('hashchange', function() {
+            initTabFromHash();
+        });
         
     </script>
 </body>

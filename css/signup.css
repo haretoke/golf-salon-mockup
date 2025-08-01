@@ -200,6 +200,15 @@
   width: 100%;
 }
 
+.form-group-split {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-field-half {
+  flex: 1;
+}
+
 .btn-full {
   width: 100%;
   margin-bottom: 1rem;

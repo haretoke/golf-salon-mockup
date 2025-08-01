@@ -104,10 +104,8 @@ function createUserRow(user) {
     platinum: { name: 'プラチナ', class: 'bg-purple-100 text-purple-800' }
   };
   
-  // ステータスの表示
-  const statusDisplay = user.subscription?.status === 'active' 
-    ? { name: 'アクティブ', class: 'bg-green-100 text-green-800' }
-    : { name: '非アクティブ', class: 'bg-gray-100 text-gray-800' };
+  // 統一ステータス判定ロジックを使用
+  const statusDisplay = UserStatusUtils.getDisplayStatus(user);
   
   // 決済ステータス
   const paymentStatusDisplay = user.lastPayment?.status === 'completed'
@@ -127,7 +125,7 @@ function createUserRow(user) {
           </div>
         </div>
         <div class="ml-4">
-          <div class="text-sm font-medium text-gray-900">${user.name || '名前未設定'}</div>
+          <div class="text-sm font-medium text-gray-900">${user.lastName && user.firstName ? `${user.lastName} ${user.firstName}` : (user.name || '名前未設定')}</div>
           <div class="text-sm text-gray-500">${user.email}</div>
         </div>
       </div>
@@ -152,10 +150,13 @@ function createUserRow(user) {
         : '<span class="text-gray-500">-</span>'
       }
     </td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      ${user.subscription?.status === 'withdrawal-pending' && user.subscription?.withdrawalEffectiveDate
+        ? formatDate(user.subscription.withdrawalEffectiveDate)
+        : '<span class="text-gray-400">-</span>'
+      }
+    </td>
     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-      <button class="text-primary-600 hover:text-primary-700 mr-3" onclick="viewUserDetails('${user.id}')">
-        <i data-lucide="eye" class="w-4 h-4"></i>
-      </button>
       <button class="text-gray-600 hover:text-gray-900" onclick="editUser('${user.id}')">
         <i data-lucide="edit" class="w-4 h-4"></i>
       </button>
@@ -261,7 +262,8 @@ async function handleSearch(event) {
   
   // フィルタリング
   const filteredUsers = users.filter(user => {
-    return user.name?.toLowerCase().includes(searchTerm) ||
+    const fullName = user.lastName && user.firstName ? `${user.lastName} ${user.firstName}` : (user.name || '');
+    return fullName.toLowerCase().includes(searchTerm) ||
            user.email?.toLowerCase().includes(searchTerm);
   });
   
@@ -284,8 +286,8 @@ async function handleFilterChange() {
   
   if (statusFilter !== 'all') {
     filteredUsers = filteredUsers.filter(user => {
-      const isActive = user.subscription?.status === 'active';
-      return statusFilter === 'active' ? isActive : !isActive;
+      const userStatusKey = UserStatusUtils.getStatusForFilter(user);
+      return userStatusKey === statusFilter;
     });
   }
   
@@ -305,17 +307,6 @@ async function handleFilterChange() {
   displayUsersTable(filteredUsers);
 }
 
-// ユーザー詳細表示
-async function viewUserDetails(userId) {
-  const loader = window.dataLoader;
-  const userDetails = await loader.loadUserWithDetails(userId);
-  
-  if (userDetails) {
-    console.log('User details:', userDetails);
-    // TODO: モーダル表示などの実装
-    alert(`ユーザー詳細: ${userDetails.name}\nEmail: ${userDetails.email}\nプラン: ${userDetails.subscription?.planId || 'なし'}`);
-  }
-}
 
 // ユーザー編集
 function editUser(userId) {
@@ -332,7 +323,7 @@ function showLoading() {
   if (tbody) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+        <td colspan="7" class="px-6 py-4 text-center text-gray-500">
           <div class="flex justify-center items-center">
             <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -357,7 +348,7 @@ function showError(message) {
   if (tbody) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="6" class="px-6 py-4 text-center text-red-600">
+        <td colspan="7" class="px-6 py-4 text-center text-red-600">
           <div class="flex justify-center items-center">
             <i data-lucide="alert-circle" class="w-5 h-5 mr-2"></i>
             ${message}
@@ -478,4 +469,12 @@ function goToUserNextPage() {
   if (userPagination.currentPage < totalPages) {
     goToUserPage(userPagination.currentPage + 1);
   }
+}
+
+// 検索クリア機能
+function clearSearch() {
+  const searchInput = document.getElementById("searchInput");
+  searchInput.value = "";
+  searchInput.focus();
+  handleSearch({ target: searchInput }); // 検索を再実行
 }

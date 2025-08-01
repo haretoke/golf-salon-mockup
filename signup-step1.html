@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>会員登録 - Step 1 | Golf Salon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+      // Tailwind v4 設定の動的読み込み
+      async function loadTailwindConfig() {
+        try {
+          const response = await fetch("css/tailwind-v4-config.css");
+          const cssContent = await response.text();
+
+          const styleElement = document.createElement("style");
+          styleElement.type = "text/tailwindcss";
+          styleElement.textContent = cssContent;
+
+          document.head.appendChild(styleElement);
+        } catch (error) {
+          console.error("Tailwind設定の読み込みに失敗しました:", error);
+        }
+      }
+
+      loadTailwindConfig();
+    </script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="js/utils/signup-flow.js"></script>
+  </head>
+  <body class="bg-gray-light min-h-screen">
+    <div
+      class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+    >
+      <div class="max-w-4xl w-full space-y-8">
+        <!-- ヘッダー -->
+        <div class="text-center">
+          <div
+            class="mx-auto h-12 w-12 bg-green-gradient rounded-full flex items-center justify-center"
+          >
+            <i data-lucide="golf-ball" class="w-6 h-6 text-white"></i>
+          </div>
+          <h1 class="mt-6 text-3xl font-bold text-gray-900">Golf Salon</h1>
+          <p class="mt-2 text-sm text-gray-600">プロから学ぶゴルフレッスン</p>
+        </div>
+
+        <!-- プログレスバー -->
+        <div class="flex items-center justify-center mb-8 px-2">
+          <div
+            class="flex items-center space-x-1 sm:space-x-2 overflow-x-auto max-w-full"
+          >
+            <!-- Step 1: Active -->
+            <div class="flex items-center">
+              <div
+                class="w-8 h-8 bg-primary-green text-white rounded-full flex items-center justify-center text-xs font-medium"
+              >
+                1
+              </div>
+              <span
+                class="ml-1 text-xs font-medium text-primary-600 hidden sm:inline"
+                >メール</span
+              >
+            </div>
+
+            <div class="w-10 h-1 bg-gray-200 rounded"></div>
+
+            <!-- Step 2: Inactive -->
+            <div class="flex items-center">
+              <div
+                class="w-8 h-8 bg-gray-200 text-gray-400 rounded-full flex items-center justify-center text-xs font-medium"
+              >
+                2
+              </div>
+              <span
+                class="ml-1 text-xs font-medium text-gray-400 hidden sm:inline"
+                >認証</span
+              >
+            </div>
+
+            <div class="w-10 h-1 bg-gray-200 rounded"></div>
+
+            <!-- Step 3: Inactive -->
+            <div class="flex items-center">
+              <div
+                class="w-8 h-8 bg-gray-200 text-gray-400 rounded-full flex items-center justify-center text-xs font-medium"
+              >
+                3
+              </div>
+              <span
+                class="ml-1 text-xs font-medium text-gray-400 hidden sm:inline"
+                >基本情報</span
+              >
+            </div>
+
+            <div class="w-10 h-1 bg-gray-200 rounded"></div>
+
+            <!-- Step 4: Inactive -->
+            <div class="flex items-center">
+              <div
+                class="w-8 h-8 bg-gray-200 text-gray-400 rounded-full flex items-center justify-center text-xs font-medium"
+              >
+                4
+              </div>
+              <span
+                class="ml-1 text-xs font-medium text-gray-400 hidden sm:inline"
+                >プラン</span
+              >
+            </div>
+
+            <div class="w-10 h-1 bg-gray-200 rounded"></div>
+
+            <!-- Step 5: Inactive -->
+            <div class="flex items-center">
+              <div
+                class="w-8 h-8 bg-gray-200 text-gray-400 rounded-full flex items-center justify-center text-xs font-medium"
+              >
+                5
+              </div>
+              <span
+                class="ml-1 text-xs font-medium text-gray-400 hidden sm:inline"
+                >支払い</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- メインフォーム -->
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <div class="space-y-6">
+            <div class="text-center">
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">
+                メールアドレスを入力
+              </h2>
+              <p class="text-sm text-gray-600">
+                認証コードを送信するため、正確に入力してください
+              </p>
+            </div>
+
+            <!-- エラー表示エリア -->
+            <div
+              id="error-message"
+              class="hidden bg-red-50 border border-red-200 rounded-lg p-4"
+            >
+              <div class="flex items-center">
+                <i
+                  data-lucide="alert-circle"
+                  class="w-5 h-5 text-red-600 mr-3"
+                ></i>
+                <div class="flex-1">
+                  <p class="text-sm text-red-800" id="error-text"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- メールアドレス入力フォーム -->
+            <form id="email-form" class="space-y-6">
+              <div>
+                <label
+                  for="email"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  メールアドレス
+                </label>
+                <div class="relative">
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="email"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                    placeholder="example@email.com"
+                  />
+                  <div
+                    id="email-validation"
+                    class="absolute right-3 top-3 hidden"
+                  >
+                    <i
+                      data-lucide="check-circle"
+                      class="w-5 h-5 text-green-600"
+                    ></i>
+                  </div>
+                </div>
+                <p class="mt-2 text-xs text-gray-500">
+                  ※ 使い捨てメールアドレスは使用できません
+                </p>
+              </div>
+
+              <!-- 重複チェック結果表示 -->
+              <div
+                id="duplicate-warning"
+                class="hidden bg-yellow-50 border border-yellow-200 rounded-lg p-4"
+              >
+                <div class="flex items-center">
+                  <i
+                    data-lucide="info"
+                    class="w-5 h-5 text-yellow-600 mr-3"
+                  ></i>
+                  <div class="flex-1">
+                    <h4 class="text-sm font-medium text-yellow-800">
+                      既に登録済みのメールアドレスです
+                    </h4>
+                    <p class="text-sm text-yellow-700 mt-1">
+                      ログインページからアカウントにアクセスしてください。
+                    </p>
+                    <a
+                      href="login.html"
+                      class="text-yellow-600 underline text-sm mt-2 inline-block"
+                    >
+                      ログインページへ →
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                id="continue-btn"
+                class="w-full bg-primary-green text-white py-3 px-4 rounded-lg font-medium hover:bg-primary-dark-green focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled
+              >
+                <span class="flex items-center justify-center">
+                  <span id="btn-text">認証コードを送信</span>
+                  <div id="loading-spinner" class="hidden ml-2">
+                    <svg
+                      class="animate-spin h-4 w-4 text-white"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        class="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        stroke-width="4"
+                      ></circle>
+                      <path
+                        class="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      ></path>
+                    </svg>
+                  </div>
+                </span>
+              </button>
+            </form>
+
+            <!-- 既存アカウントへのリンク -->
+            <div class="text-center">
+              <p class="text-sm text-gray-600">
+                既にアカウントをお持ちですか？
+                <a
+                  href="login.html"
+                  class="text-primary-600 hover:text-primary-700 font-medium"
+                >
+                  ログイン
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- フッター -->
+        <div class="text-center">
+          <p class="text-xs text-gray-500">
+            続行することで、
+            <a href="#" class="text-primary-600 hover:underline">利用規約</a>
+            および
+            <a href="#" class="text-primary-600 hover:underline"
+              >プライバシーポリシー</a
+            >
+            に同意したものとみなされます。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ページ読み込み時の初期化
+      document.addEventListener("DOMContentLoaded", () => {
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+
+        // メール入力フォームの初期化
+        if (window.SignupFlow) {
+          window.SignupFlow.initStep1();
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -150,44 +150,12 @@
             <div class="border-b border-gray-200">
               <nav class="flex space-x-8 overflow-x-auto" aria-label="Tabs">
                 <button
-                  onclick="showTab('basic')"
+                  onclick="showTab('site')"
                   class="settings-tab whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 border-primary-500 text-primary-600"
-                  data-tab="basic"
+                  data-tab="site"
                 >
-                  <i data-lucide="home" class="w-4 h-4"></i>
-                  基本設定
-                </button>
-                <button
-                  onclick="showTab('file')"
-                  class="settings-tab whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                  data-tab="file"
-                >
-                  <i data-lucide="file" class="w-4 h-4"></i>
-                  ファイル設定
-                </button>
-                <button
-                  onclick="showTab('email')"
-                  class="settings-tab whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                  data-tab="email"
-                >
-                  <i data-lucide="mail" class="w-4 h-4"></i>
-                  メール設定
-                </button>
-                <button
-                  onclick="showTab('payment')"
-                  class="settings-tab whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                  data-tab="payment"
-                >
-                  <i data-lucide="credit-card" class="w-4 h-4"></i>
-                  決済設定
-                </button>
-                <button
-                  onclick="showTab('security')"
-                  class="settings-tab whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                  data-tab="security"
-                >
-                  <i data-lucide="shield" class="w-4 h-4"></i>
-                  セキュリティ
+                  <i data-lucide="settings" class="w-4 h-4"></i>
+                  サイト設定
                 </button>
                 <button
                   onclick="showTab('maintenance')"
@@ -201,8 +169,8 @@
             </div>
           </div>
 
-          <!-- 基本設定 -->
-          <div id="basic-settings" class="settings-panel">
+          <!-- サイト設定 -->
+          <div id="site-settings" class="settings-panel">
             <div class="space-y-8">
               <!-- サイト基本情報 -->
               <div class="bg-white rounded-lg shadow p-6">
@@ -225,14 +193,14 @@
                   </div>
                   <div>
                     <label
-                      for="site-url"
+                      for="contact-email"
                       class="block text-sm font-medium text-gray-700 mb-2"
-                      >サイトURL</label
+                      >お問い合わせメール</label
                     >
                     <input
-                      type="url"
-                      id="site-url"
-                      value="https://example.com"
+                      type="email"
+                      id="contact-email"
+                      value="info@golfsalon.jp"
                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
                   </div>
@@ -246,20 +214,18 @@
                       id="site-description"
                       rows="3"
                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    >
-プロゴルファーによる本格的なゴルフレッスンサロン</textarea
-                    >
+                    >プロゴルファーによる本格的なゴルフレッスンサロン</textarea>
                   </div>
                   <div>
                     <label
-                      for="contact-email"
+                      for="from-name"
                       class="block text-sm font-medium text-gray-700 mb-2"
-                      >お問い合わせメール</label
+                      >メール送信元名</label
                     >
                     <input
-                      type="email"
-                      id="contact-email"
-                      value="info@example.com"
+                      type="text"
+                      id="from-name"
+                      value="Golf Salon"
                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
                   </div>
@@ -320,367 +286,67 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <!-- ファイル設定 -->
-          <div id="file-settings" class="settings-panel hidden">
-            <div class="space-y-8">
-              <!-- アップロード制限 -->
+              <!-- プラン料金設定 -->
               <div class="bg-white rounded-lg shadow p-6">
                 <h3 class="text-lg font-semibold text-dark-green mb-6">
-                  アップロード制限
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      for="max-video-size"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >動画ファイル最大サイズ（MB）</label
-                    >
-                    <input
-                      type="number"
-                      id="max-video-size"
-                      value="100"
-                      min="1"
-                      max="1000"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      for="max-image-size"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >画像ファイル最大サイズ（MB）</label
-                    >
-                    <input
-                      type="number"
-                      id="max-image-size"
-                      value="10"
-                      min="1"
-                      max="100"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      for="allowed-video-formats"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >許可する動画形式</label
-                    >
-                    <input
-                      type="text"
-                      id="allowed-video-formats"
-                      value="mp4,mov,avi,mkv"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      for="allowed-image-formats"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >許可する画像形式</label
-                    >
-                    <input
-                      type="text"
-                      id="allowed-image-formats"
-                      value="jpg,jpeg,png,webp"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <!-- ストレージ設定 -->
-              <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-dark-green mb-6">
-                  ストレージ設定
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      for="storage-provider"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >ストレージプロバイダー</label
-                    >
-                    <select
-                      id="storage-provider"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    >
-                      <option value="xserver" selected>Xserver</option>
-                      <option value="cloudflare-r2">Cloudflare R2</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      for="storage-quota"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >ストレージ容量（GB）</label
-                    >
-                    <input
-                      type="number"
-                      id="storage-quota"
-                      value="40"
-                      min="1"
-                      max="1000"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- メール設定 -->
-          <div id="email-settings" class="settings-panel hidden">
-            <div class="space-y-8">
-              <!-- 送信元設定 -->
-              <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-dark-green mb-6">
-                  送信元設定
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      for="from-email"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >送信元メールアドレス</label
-                    >
-                    <input
-                      type="email"
-                      id="from-email"
-                      value="noreply@example.com"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      for="from-name"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >送信元名前</label
-                    >
-                    <input
-                      type="text"
-                      id="from-name"
-                      value="Golf Salon"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      for="reply-to"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >返信先メールアドレス</label
-                    >
-                    <input
-                      type="email"
-                      id="reply-to"
-                      value="support@example.com"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <!-- Resend設定 -->
-              <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-dark-green mb-6">
-                  Resend設定
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      for="resend-api-key"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >Resend APIキー</label
-                    >
-                    <input
-                      type="password"
-                      id="resend-api-key"
-                      value="re_xxxxxxxxxx"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      for="webhook-secret"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >Webhook シークレット</label
-                    >
-                    <input
-                      type="password"
-                      id="webhook-secret"
-                      value="whsec_xxxxxxxxxx"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <!-- 配信制御 -->
-              <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-dark-green mb-6">
-                  配信制御
+                  プラン料金設定
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div>
                     <label
-                      for="retry-count"
+                      for="standard-price"
                       class="block text-sm font-medium text-gray-700 mb-2"
-                      >リトライ回数</label
+                      >スタンダードプラン（円/月）</label
                     >
                     <input
                       type="number"
-                      id="retry-count"
-                      value="3"
+                      id="standard-price"
+                      value="2200"
                       min="0"
-                      max="10"
+                      step="100"
                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
                   </div>
                   <div>
                     <label
-                      for="retry-delay"
+                      for="gold-price"
                       class="block text-sm font-medium text-gray-700 mb-2"
-                      >リトライ間隔（分）</label
+                      >ゴールドプラン（円/月）</label
                     >
                     <input
                       type="number"
-                      id="retry-delay"
-                      value="15"
-                      min="1"
-                      max="60"
+                      id="gold-price"
+                      value="6600"
+                      min="0"
+                      step="100"
                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
                   </div>
                   <div>
                     <label
-                      for="batch-size"
+                      for="platinum-price"
                       class="block text-sm font-medium text-gray-700 mb-2"
-                      >バッチサイズ</label
+                      >プラチナプラン（円/月）</label
                     >
                     <input
                       type="number"
-                      id="batch-size"
-                      value="100"
-                      min="1"
-                      max="1000"
+                      id="platinum-price"
+                      value="9900"
+                      min="0"
+                      step="100"
                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 決済設定 -->
-          <div id="payment-settings" class="settings-panel hidden">
-            <div class="space-y-8">
-              <!-- Robot Payment設定 -->
-              <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-dark-green mb-6">
-                  Robot Payment設定
-                </h3>
-                <div class="grid grid-cols-1 gap-6">
-                  <div>
-                    <label
-                      for="robot-payment-id"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >Robot Payment ID</label
-                    >
-                    <input
-                      type="text"
-                      id="robot-payment-id"
-                      value="rp_test_xxxxxxxxxx"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      for="robot-payment-key"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >Robot Payment APIキー</label
-                    >
-                    <input
-                      type="password"
-                      id="robot-payment-key"
-                      value="sk_test_xxxxxxxxxx"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      for="webhook-url"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >Webhook URL</label
-                    >
-                    <input
-                      type="url"
-                      id="webhook-url"
-                      value="https://example.com/webhook/payment"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <!-- 課金設定 -->
-              <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-dark-green mb-6">
-                  課金設定
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      for="currency"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >通貨</label
-                    >
-                    <select
-                      id="currency"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    >
-                      <option value="JPY" selected>日本円（JPY）</option>
-                      <option value="USD">米ドル（USD）</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      for="billing-cycle"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >請求サイクル</label
-                    >
-                    <select
-                      id="billing-cycle"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    >
-                      <option value="monthly" selected>月額</option>
-                      <option value="yearly">年額</option>
-                    </select>
-                  </div>
-                  <div class="md:col-span-2">
-                    <div class="flex items-center justify-between">
-                      <div>
-                        <h4 class="text-sm font-medium text-gray-900">
-                          決済失敗時の自動再試行
-                        </h4>
-                        <p class="text-sm text-gray-500">
-                          決済に失敗した場合、自動的に再試行します
-                        </p>
-                      </div>
-                      <label
-                        class="relative inline-flex items-center cursor-pointer"
-                      >
-                        <input
-                          type="checkbox"
-                          id="auto-retry"
-                          checked
-                          class="sr-only peer"
-                        />
-                        <div
-                          class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"
-                        ></div>
-                      </label>
+                <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                  <div class="flex items-start">
+                    <i data-lucide="info" class="w-5 h-5 text-blue-600 mr-2 mt-0.5"></i>
+                    <div>
+                      <h4 class="text-sm font-medium text-blue-900 mb-1">料金変更について</h4>
+                      <p class="text-sm text-blue-700">
+                        料金変更は新規登録ユーザーのみに適用されます。既存ユーザーの請求金額は変更されませんのでご注意ください。
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -688,177 +354,6 @@
             </div>
           </div>
 
-          <!-- セキュリティ設定 -->
-          <div id="security-settings" class="settings-panel hidden">
-            <div class="space-y-8">
-              <!-- 認証設定 -->
-              <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-dark-green mb-6">
-                  認証設定
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div>
-                    <label
-                      for="session-timeout"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >セッションタイムアウト（分）</label
-                    >
-                    <input
-                      type="number"
-                      id="session-timeout"
-                      value="30"
-                      min="5"
-                      max="1440"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      for="max-login-attempts"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >最大ログイン試行回数</label
-                    >
-                    <input
-                      type="number"
-                      id="max-login-attempts"
-                      value="5"
-                      min="1"
-                      max="20"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      for="lockout-duration"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >ロックアウト期間（分）</label
-                    >
-                    <input
-                      type="number"
-                      id="lockout-duration"
-                      value="15"
-                      min="1"
-                      max="60"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <!-- セキュリティ機能 -->
-              <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-dark-green mb-6">
-                  セキュリティ機能
-                </h3>
-                <div class="space-y-6">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <h4 class="text-sm font-medium text-gray-900">
-                        二要素認証を強制
-                      </h4>
-                      <p class="text-sm text-gray-500">
-                        すべてのユーザーに二要素認証を要求します
-                      </p>
-                    </div>
-                    <label
-                      class="relative inline-flex items-center cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        id="two-factor-auth"
-                        class="sr-only peer"
-                      />
-                      <div
-                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"
-                      ></div>
-                    </label>
-                  </div>
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <h4 class="text-sm font-medium text-gray-900">
-                        IP制限を有効化
-                      </h4>
-                      <p class="text-sm text-gray-500">
-                        特定のIPアドレスからのアクセスのみを許可します
-                      </p>
-                    </div>
-                    <label
-                      class="relative inline-flex items-center cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        id="ip-whitelist"
-                        class="sr-only peer"
-                      />
-                      <div
-                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"
-                      ></div>
-                    </label>
-                  </div>
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <h4 class="text-sm font-medium text-gray-900">
-                        アクセスログを記録
-                      </h4>
-                      <p class="text-sm text-gray-500">
-                        すべてのアクセスログを記録します
-                      </p>
-                    </div>
-                    <label
-                      class="relative inline-flex items-center cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        id="access-logging"
-                        checked
-                        class="sr-only peer"
-                      />
-                      <div
-                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"
-                      ></div>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <!-- API設定 -->
-              <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg semibold text-dark-green mb-6">API設定</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      for="api-rate-limit"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >API レート制限（回/分）</label
-                    >
-                    <input
-                      type="number"
-                      id="api-rate-limit"
-                      value="100"
-                      min="1"
-                      max="1000"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      for="api-key-expiry"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >APIキー有効期限（日）</label
-                    >
-                    <input
-                      type="number"
-                      id="api-key-expiry"
-                      value="90"
-                      min="1"
-                      max="365"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <!-- メンテナンス設定 -->
           <div id="maintenance-settings" class="settings-panel hidden">
@@ -866,16 +361,16 @@
               <!-- メンテナンスモード設定 -->
               <div class="bg-white rounded-lg shadow p-6">
                 <h3 class="text-lg font-semibold text-dark-green mb-6">
-                  メンテナンスモード設定
+                  メンテナンスモード
                 </h3>
                 <div class="space-y-6">
                   <!-- メンテナンスモード切り替え -->
-                  <div class="flex items-center justify-between">
+                  <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-200">
                     <div>
-                      <h4 class="text-sm font-medium text-gray-900">
+                      <h4 class="text-sm font-medium text-red-900">
                         メンテナンスモード
                       </h4>
-                      <p class="text-sm text-gray-500">
+                      <p class="text-sm text-red-700">
                         有効にするとサイトがメンテナンス画面になります
                       </p>
                     </div>
@@ -889,18 +384,18 @@
                         onchange="toggleMaintenanceMode()"
                       />
                       <div
-                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"
+                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"
                       ></div>
                     </label>
                   </div>
 
-                  <!-- メンテナンス基本情報 -->
+                  <!-- メンテナンス予定情報 -->
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label
                         for="maintenance-start-time"
                         class="block text-sm font-medium text-gray-700 mb-2"
-                        >開始時刻</label
+                        >予定開始時刻</label
                       >
                       <input
                         type="datetime-local"
@@ -912,7 +407,7 @@
                       <label
                         for="maintenance-end-time"
                         class="block text-sm font-medium text-gray-700 mb-2"
-                        >終了予定時刻</label
+                        >予定終了時刻</label
                       >
                       <input
                         type="datetime-local"
@@ -927,267 +422,28 @@
                     <label
                       for="maintenance-message"
                       class="block text-sm font-medium text-gray-700 mb-2"
-                      >メンテナンスメッセージ</label
+                      >ユーザー向けメッセージ</label
                     >
                     <textarea
                       id="maintenance-message"
-                      rows="3"
+                      rows="4"
                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                      placeholder="システムメンテナンス中です。ご迷惑をおかけしております。"
-                    ></textarea>
+                      placeholder="システムメンテナンスのため、一時的にサービスを停止しております。&#10;ご迷惑をおかけして申し訳ございません。&#10;復旧まで今しばらくお待ちください。"
+                    >システムメンテナンスのため、一時的にサービスを停止しております。
+ご迷惑をおかけして申し訳ございません。
+復旧まで今しばらくお待ちください。</textarea>
                   </div>
-                </div>
-              </div>
 
-              <!-- 段階的メンテナンス設定 -->
-              <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-dark-green mb-6">
-                  段階的メンテナンス設定
-                </h3>
-                <div class="space-y-4">
-                  <p class="text-sm text-gray-600 mb-4">
-                    特定の機能のみメンテナンスモードにすることができます
-                  </p>
-
-                  <!-- 全体メンテナンス -->
-                  <div class="flex items-center justify-between py-3 border-b">
-                    <div>
-                      <h4 class="text-sm font-medium text-gray-900">
-                        全体メンテナンス
-                      </h4>
-                      <p class="text-sm text-gray-500">
-                        サイト全体をメンテナンスモードにします
-                      </p>
+                  <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+                    <div class="flex items-start">
+                      <i data-lucide="alert-triangle" class="w-5 h-5 text-yellow-600 mr-2 mt-0.5"></i>
+                      <div>
+                        <h4 class="text-sm font-medium text-yellow-900 mb-1">メンテナンスモードについて</h4>
+                        <p class="text-sm text-yellow-700">
+                          メンテナンスモードを有効にすると、管理者以外のユーザーはサイトにアクセスできなくなります。作業前に必ずユーザーへの事前通知を行ってください。
+                        </p>
+                      </div>
                     </div>
-                    <label
-                      class="relative inline-flex items-center cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        id="maintenance-all"
-                        class="sr-only peer"
-                      />
-                      <div
-                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"
-                      ></div>
-                    </label>
-                  </div>
-
-                  <!-- 決済機能 -->
-                  <div class="flex items-center justify-between py-3 border-b">
-                    <div>
-                      <h4 class="text-sm font-medium text-gray-900">
-                        決済機能
-                      </h4>
-                      <p class="text-sm text-gray-500">
-                        決済・支払い関連の機能を停止します
-                      </p>
-                    </div>
-                    <label
-                      class="relative inline-flex items-center cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        id="maintenance-payment"
-                        class="sr-only peer"
-                      />
-                      <div
-                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"
-                      ></div>
-                    </label>
-                  </div>
-
-                  <!-- 新規登録 -->
-                  <div class="flex items-center justify-between py-3 border-b">
-                    <div>
-                      <h4 class="text-sm font-medium text-gray-900">
-                        新規登録
-                      </h4>
-                      <p class="text-sm text-gray-500">
-                        新規ユーザー登録を一時停止します
-                      </p>
-                    </div>
-                    <label
-                      class="relative inline-flex items-center cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        id="maintenance-registration"
-                        class="sr-only peer"
-                      />
-                      <div
-                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"
-                      ></div>
-                    </label>
-                  </div>
-
-                  <!-- コンテンツ閲覧 -->
-                  <div class="flex items-center justify-between py-3 border-b">
-                    <div>
-                      <h4 class="text-sm font-medium text-gray-900">
-                        コンテンツ閲覧
-                      </h4>
-                      <p class="text-sm text-gray-500">
-                        動画・画像などのコンテンツ閲覧を制限します
-                      </p>
-                    </div>
-                    <label
-                      class="relative inline-flex items-center cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        id="maintenance-content"
-                        class="sr-only peer"
-                      />
-                      <div
-                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"
-                      ></div>
-                    </label>
-                  </div>
-
-                  <!-- プロフィール編集 -->
-                  <div class="flex items-center justify-between py-3 border-b">
-                    <div>
-                      <h4 class="text-sm font-medium text-gray-900">
-                        プロフィール編集
-                      </h4>
-                      <p class="text-sm text-gray-500">
-                        ユーザープロフィールの編集機能を停止します
-                      </p>
-                    </div>
-                    <label
-                      class="relative inline-flex items-center cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        id="maintenance-profile"
-                        class="sr-only peer"
-                      />
-                      <div
-                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"
-                      ></div>
-                    </label>
-                  </div>
-
-                  <!-- ログイン -->
-                  <div class="flex items-center justify-between py-3">
-                    <div>
-                      <h4 class="text-sm font-medium text-gray-900">
-                        ログイン
-                      </h4>
-                      <p class="text-sm text-gray-500">
-                        ユーザーログインを制限します（管理者除く）
-                      </p>
-                    </div>
-                    <label
-                      class="relative inline-flex items-center cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        id="maintenance-login"
-                        class="sr-only peer"
-                      />
-                      <div
-                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"
-                      ></div>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <!-- アクセス許可設定 -->
-              <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-dark-green mb-6">
-                  アクセス許可設定
-                </h3>
-                <div class="space-y-6">
-                  <div>
-                    <label
-                      for="allowed-ips"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >許可IPアドレス（改行区切り）</label
-                    >
-                    <textarea
-                      id="allowed-ips"
-                      rows="5"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 font-mono text-sm"
-                      placeholder="192.168.1.1&#10;10.0.0.1"
-                    ></textarea>
-                    <p class="text-xs text-gray-500 mt-1">
-                      メンテナンス中でもアクセスを許可するIPアドレスを入力してください
-                    </p>
-                  </div>
-
-                  <div>
-                    <label
-                      for="allowed-roles"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >許可ロール</label
-                    >
-                    <div class="space-y-2">
-                      <label class="inline-flex items-center">
-                        <input
-                          type="checkbox"
-                          id="allow-super-admin"
-                          checked
-                          disabled
-                          class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                        />
-                        <span class="ml-2 text-sm text-gray-700"
-                          >スーパー管理者</span
-                        >
-                      </label>
-                      <br />
-                      <label class="inline-flex items-center">
-                        <input
-                          type="checkbox"
-                          id="allow-admin"
-                          checked
-                          class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                        />
-                        <span class="ml-2 text-sm text-gray-700">管理者</span>
-                      </label>
-                      <br />
-                      <label class="inline-flex items-center">
-                        <input
-                          type="checkbox"
-                          id="allow-editor"
-                          class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                        />
-                        <span class="ml-2 text-sm text-gray-700">編集者</span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 自動終了設定 -->
-              <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-dark-green mb-6">
-                  自動終了設定
-                </h3>
-                <div class="space-y-6">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <h4 class="text-sm font-medium text-gray-900">
-                        自動終了を有効化
-                      </h4>
-                      <p class="text-sm text-gray-500">
-                        終了予定時刻になったら自動的にメンテナンスモードを解除します
-                      </p>
-                    </div>
-                    <label
-                      class="relative inline-flex items-center cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        id="auto-end-enabled"
-                        class="sr-only peer"
-                      />
-                      <div
-                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"
-                      ></div>
-                    </label>
                   </div>
                 </div>
               </div>
@@ -1278,6 +534,11 @@
         });
       }
 
+      // 初期化時にデフォルトタブを表示
+      document.addEventListener('DOMContentLoaded', function() {
+        showTab('site');
+      });
+      
       lucide.createIcons();
     </script>
   </body>

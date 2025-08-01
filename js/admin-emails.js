@@ -18,7 +18,6 @@ window.addEventListener("resize", function () {
   }
 });
 
-
 // メール表示
 function viewEmail(emailId) {
   // メールデータを検索（原データから検索）
@@ -35,20 +34,19 @@ function viewEmail(emailId) {
 // メール詳細モーダル表示
 function showEmailDetailModal(email) {
   const modal = document.getElementById("emailDetailModal");
-  
+
   // データを設定
   populateEmailDetailModal(email);
 
   // モーダルを表示
   modal.classList.remove("hidden");
   document.body.classList.add("overflow-hidden");
-  
+
   // Lucideアイコンを再初期化
   if (window.lucide) {
     lucide.createIcons();
   }
 }
-
 
 // メール詳細モーダルにデータを設定
 function populateEmailDetailModal(email) {
@@ -304,7 +302,7 @@ function renderTemplateList() {
 // テンプレートアイテムの作成
 function createTemplateItem(templateKey, template) {
   const iconConfig = getTemplateIconConfig(templateKey);
-  
+
   return `
     <div class="template-item group flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer" onclick="previewTemplate('${templateKey}')">
       <div class="flex items-center gap-3">
@@ -447,7 +445,7 @@ function showTemplatePreviewModal(template) {
 
   // 現在のテンプレートを保存
   currentTemplateData = template;
-  
+
   // モーダルを表示
   modal.classList.remove("hidden");
   document.body.classList.add("overflow-hidden");
@@ -499,13 +497,12 @@ function populateTemplateModal(template) {
         '<span class="text-gray-500 text-sm">変数なし</span>';
     }
   }
-  
+
   // モーダルの変数ドロップダウンを更新
   updateModalVariableDropdown();
 
   // プレビューを更新
   updateTemplatePreview();
-
 
   // モバイル表示の初期状態を設定
   if (window.innerWidth < 768) {
@@ -652,10 +649,10 @@ function updateTemplatePreview() {
 
   // 本文のプレビュー（変数をハイライト）
   let previewContent = content;
-  
+
   // 変数をハイライト表示
   previewContent = highlightVariables(previewContent);
-  
+
   // 変数を実際の値に置換（オプション）
   if (currentTemplateData && currentTemplateData.variables) {
     currentTemplateData.variables.forEach((variable) => {
@@ -671,7 +668,7 @@ function updateTemplatePreview() {
   // HTMLとして表示（改行は<br>に変換）
   if (contentDisplayElement) {
     // 改行を<br>に変換してHTMLとして表示
-    contentDisplayElement.innerHTML = previewContent.replace(/\n/g, '<br>');
+    contentDisplayElement.innerHTML = previewContent.replace(/\n/g, "<br>");
   }
 }
 
@@ -698,13 +695,12 @@ function getSampleVariableValue(variable) {
   return samples[variable] || `{${variable}}`;
 }
 
-
 // プレビューモーダルの作成
 function createTemplatePreviewModal() {
   const modal = document.createElement("div");
   modal.id = "templatePreviewModal";
   modal.className =
-    "fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-2 md:p-4 hidden";
+    "fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-2 md:p-4 hidden";
 
   modal.innerHTML = `
           <div class="bg-white rounded-lg w-full h-full md:max-w-6xl md:w-full md:max-h-[90vh] flex flex-col overflow-hidden">
@@ -860,7 +856,7 @@ function closeTemplatePreviewModal() {
   }
   // リセット
   currentTemplateData = null;
-  }
+}
 
 // テンプレート保存
 function saveTemplateChanges() {
@@ -877,7 +873,6 @@ function saveTemplateChanges() {
 
   // 実際の保存処理はここに実装
   alert(`テンプレート "${name}" を保存しました（モックアップ）`);
-
 }
 
 // 変数をハイライト
@@ -889,46 +884,51 @@ function highlightVariables(content) {
 
 // モーダル用変数ドロップダウンをトグル
 function toggleModalVariableDropdown() {
-  const dropdown = document.getElementById('modal-var-dropdown');
-  dropdown.classList.toggle('hidden');
+  const dropdown = document.getElementById("modal-var-dropdown");
+  dropdown.classList.toggle("hidden");
 }
 
 // モーダル用変数ドロップダウンを更新
 function updateModalVariableDropdown() {
   if (!currentTemplateData || !currentTemplateData.variables) return;
-  
-  const dropdown = document.getElementById('modal-var-dropdown');
+
+  const dropdown = document.getElementById("modal-var-dropdown");
   if (dropdown) {
-    dropdown.innerHTML = currentTemplateData.variables.map(v => `
+    dropdown.innerHTML = currentTemplateData.variables
+      .map(
+        (v) => `
       <button
         onclick="insertModalVariable('${v}')"
         class="block w-full text-left px-3 py-2 text-sm hover:bg-gray-100"
       >
         {{${v}}}
       </button>
-    `).join('');
+    `
+      )
+      .join("");
   }
 }
 
 // モーダルに変数を挿入
 function insertModalVariable(variable) {
-  const textarea = document.getElementById('preview-template-content');
+  const textarea = document.getElementById("preview-template-content");
   const position = textarea.selectionStart;
   const content = textarea.value;
-  const newContent = 
-    content.slice(0, position) + 
-    `{{${variable}}}` + 
-    content.slice(position);
-  
+  const newContent =
+    content.slice(0, position) + `{{${variable}}}` + content.slice(position);
+
   textarea.value = newContent;
   textarea.focus();
-  textarea.setSelectionRange(position + variable.length + 4, position + variable.length + 4);
-  
+  textarea.setSelectionRange(
+    position + variable.length + 4,
+    position + variable.length + 4
+  );
+
   // プレビューを更新
   updateTemplatePreview();
-  
+
   // ドロップダウンを閉じる
-  document.getElementById('modal-var-dropdown').classList.add('hidden');
+  document.getElementById("modal-var-dropdown").classList.add("hidden");
 }
 
 // モバイル用タブ切り替え
@@ -975,14 +975,14 @@ function retryEmail(emailId) {
 function markFailedEmailAsAcknowledged(emailId) {
   const email = findEmailInFailedList(emailId);
   if (!email) {
-    alert('メール情報が見つかりません');
+    alert("メール情報が見つかりません");
     return;
   }
-  
+
   // ステータスを更新
-  email.failureStatus = 'acknowledged';
+  email.failureStatus = "acknowledged";
   email.acknowledgedAt = new Date().toISOString();
-  
+
   // UIを再描画
   renderFailedEmails(currentFailedEmails);
 }
@@ -994,144 +994,178 @@ function investigateFailedEmail(emailId) {
   // 詳細調査機能の実装
   const email = findEmailInFailedList(emailId);
   if (!email) {
-    alert('メール情報が見つかりません');
+    alert("メール情報が見つかりません");
     return;
   }
 
   // 現在のメール情報を保存
   currentInvestigatingEmail = email;
-  
+
   // モーダルに情報を表示
   showInvestigationModal(email);
 }
 
 // 調査モーダルを表示
 function showInvestigationModal(email) {
-  const modal = document.getElementById('investigationModal');
-  const overlay = document.getElementById('investigationModal');
-  
+  const modal = document.getElementById("investigationModal");
+  const overlay = document.getElementById("investigationModal");
+
   // エラー分析
   const errorAnalysis = analyzeEmailError(email);
   const recommendations = getErrorRecommendations(email);
-  
+
   // 基本情報を設定
-  document.getElementById('modal-investigation-email').textContent = email.toEmail;
-  document.getElementById('modal-investigation-error').textContent = email.error;
-  document.getElementById('modal-investigation-date').textContent = new Date(
+  document.getElementById("modal-investigation-email").textContent =
+    email.toEmail;
+  document.getElementById("modal-investigation-error").textContent =
+    email.error;
+  document.getElementById("modal-investigation-date").textContent = new Date(
     email.failedAt || email.bouncedAt || email.complainedAt || email.delayedAt
-  ).toLocaleString('ja-JP');
-  
+  ).toLocaleString("ja-JP");
+
   // エラー分析を設定
-  document.getElementById('modal-investigation-category').textContent = errorAnalysis.category;
-  const severityElement = document.getElementById('modal-investigation-severity');
+  document.getElementById("modal-investigation-category").textContent =
+    errorAnalysis.category;
+  const severityElement = document.getElementById(
+    "modal-investigation-severity"
+  );
   severityElement.textContent = errorAnalysis.severity;
   severityElement.className = `text-sm font-medium ${
-    errorAnalysis.severity === '高' ? 'text-red-600' :
-    errorAnalysis.severity === '中' ? 'text-amber-600' : 'text-blue-600'
+    errorAnalysis.severity === "高"
+      ? "text-red-600"
+      : errorAnalysis.severity === "中"
+      ? "text-amber-600"
+      : "text-blue-600"
   }`;
-  
+
   // 推奨対応を設定
-  const recommendationsContainer = document.getElementById('modal-investigation-recommendations');
-  recommendationsContainer.innerHTML = recommendations.map(rec => `
+  const recommendationsContainer = document.getElementById(
+    "modal-investigation-recommendations"
+  );
+  recommendationsContainer.innerHTML = recommendations
+    .map(
+      (rec) => `
     <div class="py-1">
       <p class="text-sm text-gray-700">${rec}</p>
     </div>
-  `).join('');
-  
+  `
+    )
+    .join("");
+
   // 技術詳細を設定
-  document.getElementById('modal-investigation-resend-id').textContent = email.resendEmailId || 'N/A';
-  document.getElementById('modal-investigation-webhook').textContent = email.webhookType || 'N/A';
-  
+  document.getElementById("modal-investigation-resend-id").textContent =
+    email.resendEmailId || "N/A";
+  document.getElementById("modal-investigation-webhook").textContent =
+    email.webhookType || "N/A";
+
   // 現在のステータスを選択
-  document.querySelectorAll('input[name="status"]').forEach(radio => {
+  document.querySelectorAll('input[name="status"]').forEach((radio) => {
     radio.checked = false;
   });
-  if (email.failureStatus === 'investigating') {
-    document.querySelector('input[name="status"][value="investigating"]').checked = true;
-  } else if (email.failureStatus === 'resolved') {
-    document.querySelector('input[name="status"][value="resolved"]').checked = true;
-  } else if (email.failureStatus === 'unresolvable') {
-    document.querySelector('input[name="status"][value="unresolvable"]').checked = true;
+  if (email.failureStatus === "investigating") {
+    document.querySelector(
+      'input[name="status"][value="investigating"]'
+    ).checked = true;
+  } else if (email.failureStatus === "resolved") {
+    document.querySelector(
+      'input[name="status"][value="resolved"]'
+    ).checked = true;
+  } else if (email.failureStatus === "unresolvable") {
+    document.querySelector(
+      'input[name="status"][value="unresolvable"]'
+    ).checked = true;
   }
-  
+
   // メモを設定
-  document.getElementById('investigationNotes').value = email.notes || '';
-  
+  document.getElementById("investigationNotes").value = email.notes || "";
+
   // 解決不可オプションを設定
   if (email.suppressed) {
-    document.getElementById('suppressFutureEmailsInv').checked = true;
-    document.getElementById('unresolvableReasonInv').value = email.suppressReason || '';
+    document.getElementById("suppressFutureEmailsInv").checked = true;
+    document.getElementById("unresolvableReasonInv").value =
+      email.suppressReason || "";
   } else {
-    document.getElementById('suppressFutureEmailsInv').checked = false;
-    document.getElementById('unresolvableReasonInv').value = '';
+    document.getElementById("suppressFutureEmailsInv").checked = false;
+    document.getElementById("unresolvableReasonInv").value = "";
   }
-  
+
   // 解決不可オプションの表示/非表示
-  const unresolvableOptions = document.getElementById('unresolvableOptionsInv');
-  if (email.failureStatus === 'unresolvable') {
-    unresolvableOptions.classList.remove('hidden');
+  const unresolvableOptions = document.getElementById("unresolvableOptionsInv");
+  if (email.failureStatus === "unresolvable") {
+    unresolvableOptions.classList.remove("hidden");
   } else {
-    unresolvableOptions.classList.add('hidden');
+    unresolvableOptions.classList.add("hidden");
   }
-  
+
   // 保存ボタンの状態
-  document.getElementById('modal-save-status-btn').disabled = !email.failureStatus || email.failureStatus === 'unresolved';
-  
+  document.getElementById("modal-save-status-btn").disabled =
+    !email.failureStatus || email.failureStatus === "unresolved";
+
   // モーダルを表示
-  modal.classList.remove('hidden');
-  
+  modal.classList.remove("hidden");
+
   // Lucideアイコンを再初期化
   lucide.createIcons();
 }
 
 // 調査モーダルを閉じる
 function closeInvestigationModal() {
-  const modal = document.getElementById('investigationModal');
-  modal.classList.add('hidden');
+  const modal = document.getElementById("investigationModal");
+  modal.classList.add("hidden");
   currentInvestigatingEmail = null;
 }
 
 // 失敗ステータスを保存
 function saveFailureStatus() {
   if (!currentInvestigatingEmail) return;
-  
+
   const selectedStatus = document.querySelector('input[name="status"]:checked');
   if (!selectedStatus) return;
-  
+
   const statusValue = selectedStatus.value;
-  const notes = document.getElementById('investigationNotes').value;
-  
+  const notes = document.getElementById("investigationNotes").value;
+
   // ステータスを更新
   currentInvestigatingEmail.failureStatus = statusValue;
   currentInvestigatingEmail.notes = notes;
-  
+
   // タイムスタンプを更新
-  if (statusValue === 'investigating' && !currentInvestigatingEmail.investigatingAt) {
+  if (
+    statusValue === "investigating" &&
+    !currentInvestigatingEmail.investigatingAt
+  ) {
     currentInvestigatingEmail.investigatingAt = new Date().toISOString();
-  } else if ((statusValue === 'resolved' || statusValue === 'unresolvable') && !currentInvestigatingEmail.resolvedAt) {
+  } else if (
+    (statusValue === "resolved" || statusValue === "unresolvable") &&
+    !currentInvestigatingEmail.resolvedAt
+  ) {
     currentInvestigatingEmail.resolvedAt = new Date().toISOString();
   }
-  
+
   // 解決不可の場合の追加処理
-  if (statusValue === 'unresolvable') {
-    if (document.getElementById('suppressFutureEmailsInv').checked) {
+  if (statusValue === "unresolvable") {
+    if (document.getElementById("suppressFutureEmailsInv").checked) {
       currentInvestigatingEmail.suppressed = true;
-      currentInvestigatingEmail.suppressReason = document.getElementById('unresolvableReasonInv').value;
+      currentInvestigatingEmail.suppressReason = document.getElementById(
+        "unresolvableReasonInv"
+      ).value;
     }
   }
-  
+
   // 元のデータも更新
-  const emailIndex = currentFailedEmails.findIndex(e => e.id === currentInvestigatingEmail.id);
+  const emailIndex = currentFailedEmails.findIndex(
+    (e) => e.id === currentInvestigatingEmail.id
+  );
   if (emailIndex !== -1) {
     currentFailedEmails[emailIndex] = currentInvestigatingEmail;
   }
-  
+
   // カードの表示を更新
   renderFailedEmails(currentFailedEmails);
-  
+
   // モーダルを閉じる
   closeInvestigationModal();
-  
+
   // 成功メッセージ（オプション）
   // alert('ステータスを更新しました。');
 }
@@ -1143,24 +1177,24 @@ let currentFailedEmails = [];
 function showResolutionModal(emailId) {
   const email = findEmailInFailedList(emailId);
   if (!email) {
-    alert('メール情報が見つかりません');
+    alert("メール情報が見つかりません");
     return;
   }
-  
+
   // 統合モーダルを開く
   showInvestigationModal(email);
 }
 
 // 失敗メールリストからメールを検索
 function findEmailInFailedList(emailId) {
-  return currentFailedEmails.find(email => email.id === emailId);
+  return currentFailedEmails.find((email) => email.id === emailId);
 }
 
 // 調査レポートの生成
 function generateInvestigationReport(email) {
   const errorAnalysis = analyzeEmailError(email);
   const recommendations = getErrorRecommendations(email);
-  
+
   return `【配信失敗詳細分析】
 宛先: ${email.toEmail}
 エラー: ${email.error}
@@ -1168,59 +1202,64 @@ function generateInvestigationReport(email) {
 重要度: ${errorAnalysis.severity}
 
 【推奨対応】
-${recommendations.join('\n')}
+${recommendations.join("\n")}
 
 【技術詳細】
-Resend ID: ${email.resendEmailId || 'N/A'}
-Webhook: ${email.webhookType || 'N/A'}
-発生日時: ${new Date(email.failedAt || email.complainedAt).toLocaleString('ja-JP')}`;
+Resend ID: ${email.resendEmailId || "N/A"}
+Webhook: ${email.webhookType || "N/A"}
+発生日時: ${new Date(email.failedAt || email.complainedAt).toLocaleString(
+    "ja-JP"
+  )}`;
 }
 
 // エラー分析
 function analyzeEmailError(email) {
   const errorPatterns = {
-    'Invalid email address': { category: 'フォーマット不正', severity: '高' },
-    'Domain not found': { category: 'ドメイン不正', severity: '高' },
-    'Mailbox full': { category: '一時的エラー', severity: '中' },
-    'marked sender as spam': { category: 'スパム判定', severity: '高' },
-    'suppression list': { category: '配信停止', severity: '中' },
-    'Server temporarily unavailable': { category: 'サーバー問題', severity: '低' }
+    "Invalid email address": { category: "フォーマット不正", severity: "高" },
+    "Domain not found": { category: "ドメイン不正", severity: "高" },
+    "Mailbox full": { category: "一時的エラー", severity: "中" },
+    "marked sender as spam": { category: "スパム判定", severity: "高" },
+    "suppression list": { category: "配信停止", severity: "中" },
+    "Server temporarily unavailable": {
+      category: "サーバー問題",
+      severity: "低",
+    },
   };
-  
+
   for (const [pattern, analysis] of Object.entries(errorPatterns)) {
     if (email.error.includes(pattern)) {
       return analysis;
     }
   }
-  
-  return { category: '不明', severity: '中' };
+
+  return { category: "不明", severity: "中" };
 }
 
 // 推奨対応の取得
 function getErrorRecommendations(email) {
   const recommendations = [];
-  
-  if (email.error.includes('Invalid email address')) {
-    recommendations.push('・ユーザーに正しいメールアドレスの再入力を依頼');
-    recommendations.push('・入力フォームのバリデーション強化を検討');
-  } else if (email.error.includes('Domain not found')) {
-    recommendations.push('・ユーザーにメールアドレスの確認を依頼');
-    recommendations.push('・typoの可能性を調査');
-  } else if (email.error.includes('Mailbox full')) {
-    recommendations.push('・数日後に自動再試行を実行');
-    recommendations.push('・ユーザーに容量不足の可能性を通知');
-  } else if (email.error.includes('spam')) {
-    recommendations.push('・送信内容とタイミングの見直し');
-    recommendations.push('・SPF/DKIM/DMARC設定の確認');
-    recommendations.push('・送信頻度の調整を検討');
-  } else if (email.error.includes('suppression')) {
-    recommendations.push('・抑制リストからの除外申請を検討');
-    recommendations.push('・ユーザーの配信停止意思を確認');
+
+  if (email.error.includes("Invalid email address")) {
+    recommendations.push("・ユーザーに正しいメールアドレスの再入力を依頼");
+    recommendations.push("・入力フォームのバリデーション強化を検討");
+  } else if (email.error.includes("Domain not found")) {
+    recommendations.push("・ユーザーにメールアドレスの確認を依頼");
+    recommendations.push("・typoの可能性を調査");
+  } else if (email.error.includes("Mailbox full")) {
+    recommendations.push("・数日後に自動再試行を実行");
+    recommendations.push("・ユーザーに容量不足の可能性を通知");
+  } else if (email.error.includes("spam")) {
+    recommendations.push("・送信内容とタイミングの見直し");
+    recommendations.push("・SPF/DKIM/DMARC設定の確認");
+    recommendations.push("・送信頻度の調整を検討");
+  } else if (email.error.includes("suppression")) {
+    recommendations.push("・抑制リストからの除外申請を検討");
+    recommendations.push("・ユーザーの配信停止意思を確認");
   }
-  
-  recommendations.push('・類似エラーの傾向分析を実施');
-  recommendations.push('・必要に応じてResendサポートに相談');
-  
+
+  recommendations.push("・類似エラーの傾向分析を実施");
+  recommendations.push("・必要に応じてResendサポートに相談");
+
   return recommendations;
 }
 
@@ -1598,16 +1637,16 @@ function getActionButton(email) {
 function renderFailedEmails(failedEmails) {
   const container = document.getElementById("failedEmailsList");
   const countElement = document.getElementById("failedEmailCount");
-  
+
   // グローバル変数に保存
   currentFailedEmails = failedEmails || [];
-  
+
   container.innerHTML = "";
 
   if (currentFailedEmails && currentFailedEmails.length > 0) {
     // 件数表示を更新
     countElement.textContent = `${currentFailedEmails.length}件`;
-    
+
     currentFailedEmails.forEach((email) => {
       const emailDiv = createFailedEmailCard(email);
       container.appendChild(emailDiv);
@@ -1615,11 +1654,11 @@ function renderFailedEmails(failedEmails) {
   } else {
     // 失敗メールがない場合
     countElement.textContent = "0件";
-    
+
     const emptyDiv = document.createElement("div");
     emptyDiv.className = "p-12 text-center text-gray-400";
     emptyDiv.innerHTML = `
-            <i data-lucide="check-circle" class="w-12 h-12 mx-auto mb-3 text-gray-300"></i>
+            <i data-lucide="check-circle" class="w-10 h-12 mx-auto mb-3 text-gray-300"></i>
             <p class="text-sm text-gray-500">配信失敗メールはありません</p>
           `;
     container.appendChild(emptyDiv);
@@ -1632,64 +1671,73 @@ function renderFailedEmails(failedEmails) {
 // 失敗メールカードの作成
 function createFailedEmailCard(email) {
   const div = document.createElement("div");
-  
+
   const failedDate = new Date(
     email.failedAt || email.bouncedAt || email.complainedAt || email.delayedAt
-  ).toLocaleString(
-    "ja-JP",
-    {
-      year: "numeric",
-      month: "2-digit", 
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit"
-    }
-  );
+  ).toLocaleString("ja-JP", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   // 配信失敗の種類を判定
-  const bounceType = email.bounceType || (email.status === "bounced" ? "hard" : "soft");
+  const bounceType =
+    email.bounceType || (email.status === "bounced" ? "hard" : "soft");
   const severityInfo = getBounceTypeInfo(bounceType);
-  
+
   // ステータス情報
   const statusInfo = getFailureStatusInfo(email.failureStatus);
 
   // 未対応の場合は背景色を付ける
-  const bgColor = email.failureStatus === 'unresolved' ? 'bg-red-50' : '';
-  const hoverColor = email.failureStatus === 'unresolved' ? 'hover:bg-red-100' : 'hover:bg-gray-50';
-  
+  const bgColor = email.failureStatus === "unresolved" ? "bg-red-50" : "";
+  const hoverColor =
+    email.failureStatus === "unresolved"
+      ? "hover:bg-red-100"
+      : "hover:bg-gray-50";
+
   div.className = `p-4 ${bgColor} ${hoverColor} transition-colors`;
-  div.setAttribute('data-email-id', email.id);
-  
+  div.setAttribute("data-email-id", email.id);
+
   div.innerHTML = `
           <div class="flex items-start gap-4">
             <!-- 左側：メイン情報 -->
             <div class="flex-1 min-w-0">
               <div class="flex items-start justify-between gap-2 mb-2">
-                <h4 class="font-medium text-gray-900 text-sm break-all">${email.toEmail}</h4>
+                <h4 class="font-medium text-gray-900 text-sm break-all">${
+                  email.toEmail
+                }</h4>
                 <div class="flex items-center gap-1 flex-shrink-0">
-                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${severityInfo.bgColor} ${severityInfo.textColor}">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                    severityInfo.bgColor
+                  } ${severityInfo.textColor}">
                     ${severityInfo.label}
                   </span>
-                  ${email.failureStatus !== 'unresolved' ? `
-                    <span 
+                  ${
+                    email.failureStatus !== "unresolved"
+                      ? `
+                    <span
                       onclick="showResolutionModal('${email.id}')"
                       class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${statusInfo.bgColor} ${statusInfo.textColor} cursor-pointer hover:opacity-80 transition-opacity">
                       ${statusInfo.label}
                     </span>
-                  ` : ''}
+                  `
+                      : ""
+                  }
                 </div>
               </div>
               <p class="text-sm text-gray-600 mb-1">${email.error}</p>
               <p class="text-xs text-gray-500">${failedDate}</p>
             </div>
-            
+
             <!-- 右側：アクション -->
             <div class="flex items-center gap-2 flex-shrink-0">
               ${
                 email.canRetry
                   ? `
-                <button 
-                  class="text-gray-400 hover:text-blue-600 transition-colors" 
+                <button
+                  class="text-gray-400 hover:text-blue-600 transition-colors"
                   onclick="retryEmail('${email.id}')"
                   title="再送信"
                 >
@@ -1699,10 +1747,10 @@ function createFailedEmailCard(email) {
                   : ""
               }
               ${
-                email.failureStatus === 'unresolved'
+                email.failureStatus === "unresolved"
                   ? `
-                <button 
-                  class="text-gray-400 hover:text-green-600 transition-colors" 
+                <button
+                  class="text-gray-400 hover:text-green-600 transition-colors"
                   onclick="markFailedEmailAsAcknowledged('${email.id}')"
                   title="確認済みにする"
                 >
@@ -1711,8 +1759,8 @@ function createFailedEmailCard(email) {
               `
                   : ""
               }
-              <button 
-                class="text-gray-400 hover:text-amber-600 transition-colors" 
+              <button
+                class="text-gray-400 hover:text-amber-600 transition-colors"
                 onclick="investigateFailedEmail('${email.id}')"
                 title="詳細調査"
               >
@@ -1734,27 +1782,29 @@ function getBounceTypeInfo(bounceType) {
       textColor: "text-red-800",
     },
     soft: {
-      label: "ソフトバウンス", 
+      label: "ソフトバウンス",
       bgColor: "bg-yellow-100",
       textColor: "text-yellow-800",
     },
     suppressed: {
       label: "抑制済み",
-      bgColor: "bg-gray-100", 
+      bgColor: "bg-gray-100",
       textColor: "text-gray-800",
     },
     complaint: {
       label: "苦情",
       bgColor: "bg-purple-100",
       textColor: "text-purple-800",
+    },
+  };
+
+  return (
+    typeMap[bounceType] || {
+      label: "不明",
+      bgColor: "bg-gray-100",
+      textColor: "text-gray-800",
     }
-  };
-  
-  return typeMap[bounceType] || {
-    label: "不明",
-    bgColor: "bg-gray-100",
-    textColor: "text-gray-800",
-  };
+  );
 }
 
 // 失敗ステータス情報を取得
@@ -1784,58 +1834,67 @@ function getFailureStatusInfo(failureStatus) {
       label: "解決不可",
       bgColor: "bg-gray-100",
       textColor: "text-gray-800",
-    }
+    },
   };
-  
-  return statusMap[failureStatus] || {
-    label: "未対応",
-    bgColor: "bg-red-100",
-    textColor: "text-gray-800",
-  };
-}
 
+  return (
+    statusMap[failureStatus] || {
+      label: "未対応",
+      bgColor: "bg-red-100",
+      textColor: "text-gray-800",
+    }
+  );
+}
 
 // Resend連携情報の描画
 function renderResendIntegration(integration) {
   if (!integration) {
-    console.warn('renderResendIntegration: integration data is missing');
+    console.warn("renderResendIntegration: integration data is missing");
     return;
   }
-  
+
   try {
     // 接続ステータス
-    const statusElement = document.querySelector('.resend-connection-status');
+    const statusElement = document.querySelector(".resend-connection-status");
     if (statusElement && integration.connection_status) {
-      statusElement.textContent = integration.connection_status === 'connected' ? '接続中' : '未接続';
-      statusElement.className = integration.connection_status === 'connected' 
-        ? 'text-sm font-medium text-green-600' 
-        : 'text-sm font-medium text-red-600';
+      statusElement.textContent =
+        integration.connection_status === "connected" ? "接続中" : "未接続";
+      statusElement.className =
+        integration.connection_status === "connected"
+          ? "text-sm font-medium text-green-600"
+          : "text-sm font-medium text-red-600";
     }
-    
+
     // 月次クォータ
-    const quotaElement = document.querySelector('.resend-quota');
-    if (quotaElement && integration.quota_used !== undefined && integration.quota_limit !== undefined) {
+    const quotaElement = document.querySelector(".resend-quota");
+    if (
+      quotaElement &&
+      integration.quota_used !== undefined &&
+      integration.quota_limit !== undefined
+    ) {
       quotaElement.textContent = `${integration.quota_used.toLocaleString()} / ${integration.quota_limit.toLocaleString()}`;
     }
-    
+
     // API成功率
-    const successRateElement = document.querySelector('.resend-success-rate');
+    const successRateElement = document.querySelector(".resend-success-rate");
     if (successRateElement && integration.success_rate !== undefined) {
       const rate = (integration.success_rate * 100).toFixed(1);
       successRateElement.textContent = `${rate}%`;
-      successRateElement.className = integration.success_rate >= 0.95 
-        ? 'text-sm font-medium text-green-600' 
-        : 'text-sm font-medium text-orange-600';
+      successRateElement.className =
+        integration.success_rate >= 0.95
+          ? "text-sm font-medium text-green-600"
+          : "text-sm font-medium text-orange-600";
     }
-    
+
     // 最終Webhook
-    const lastWebhookElement = document.querySelector('.resend-last-webhook');
+    const lastWebhookElement = document.querySelector(".resend-last-webhook");
     if (lastWebhookElement && integration.last_webhook_at) {
-      lastWebhookElement.textContent = formatDateTime(integration.last_webhook_at);
+      lastWebhookElement.textContent = formatDateTime(
+        integration.last_webhook_at
+      );
     }
-    
   } catch (error) {
-    console.error('Error updating Resend integration status:', error);
+    console.error("Error updating Resend integration status:", error);
   }
 }
 
@@ -1917,7 +1976,7 @@ document.getElementById("nextPageBtn").addEventListener("click", goToNextPage);
 document.addEventListener("DOMContentLoaded", async function () {
   await loadEmailData();
   await initializeTemplates();
-  
+
   // メール詳細モーダルのクリックイベントを設定
   const emailDetailModal = document.getElementById("emailDetailModal");
   if (emailDetailModal) {
@@ -1927,7 +1986,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     });
   }
-  
+
   // 調査モーダルのクリックイベントを設定
   const investigationModal = document.getElementById("investigationModal");
   if (investigationModal) {
@@ -1937,7 +1996,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     });
   }
-  
+
   // ESCキーでモーダルを閉じる
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
@@ -1946,33 +2005,41 @@ document.addEventListener("DOMContentLoaded", async function () {
         closeEmailDetailModal();
       }
       // 調査モーダルが開いている場合
-      if (investigationModal && !investigationModal.classList.contains("hidden")) {
+      if (
+        investigationModal &&
+        !investigationModal.classList.contains("hidden")
+      ) {
         closeInvestigationModal();
       }
     }
   });
-  
+
   // ドキュメントクリックで変数ドロップダウンを閉じる
   document.addEventListener("click", (e) => {
-    if (!e.target.closest('[id^="var-dropdown-"]') && !e.target.closest('button[onclick*="toggleVariableDropdown"]')) {
-      document.querySelectorAll('[id^="var-dropdown-"]').forEach(dropdown => {
-        dropdown.classList.add('hidden');
+    if (
+      !e.target.closest('[id^="var-dropdown-"]') &&
+      !e.target.closest('button[onclick*="toggleVariableDropdown"]')
+    ) {
+      document.querySelectorAll('[id^="var-dropdown-"]').forEach((dropdown) => {
+        dropdown.classList.add("hidden");
       });
     }
   });
-  
+
   // ステータス選択の監視
-  document.querySelectorAll('input[name="status"]').forEach(radio => {
-    radio.addEventListener('change', (e) => {
-      const saveBtn = document.getElementById('modal-save-status-btn');
+  document.querySelectorAll('input[name="status"]').forEach((radio) => {
+    radio.addEventListener("change", (e) => {
+      const saveBtn = document.getElementById("modal-save-status-btn");
       saveBtn.disabled = false;
-      
+
       // 解決不可を選択した場合、追加オプションを表示
-      const unresolvableOptions = document.getElementById('unresolvableOptionsInv');
-      if (e.target.value === 'unresolvable') {
-        unresolvableOptions.classList.remove('hidden');
+      const unresolvableOptions = document.getElementById(
+        "unresolvableOptionsInv"
+      );
+      if (e.target.value === "unresolvable") {
+        unresolvableOptions.classList.remove("hidden");
       } else {
-        unresolvableOptions.classList.add('hidden');
+        unresolvableOptions.classList.add("hidden");
       }
     });
   });

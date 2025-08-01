@@ -130,28 +130,10 @@ async function loadUserWithDetails(userId) {
 
 // ユーザー管理画面用のデータ取得
 async function loadUsersForAdmin() {
-  const [users, subscriptions, payments, plans] = await Promise.all([
-    loadUsers(),
-    loadSubscriptions(),
-    loadPayments(),
-    loadPlans()
-  ]);
-
-  // 各ユーザーに関連情報を付加
-  return users?.map(user => {
-    const userSubscription = subscriptions?.find(s => s.userId === user.id && s.status === 'active');
-    const userPayments = payments?.filter(p => p.userId === user.id) || [];
-    const lastPayment = userPayments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
-    const plan = userSubscription ? plans?.find(p => p.id === userSubscription.planId) : null;
-
-    return {
-      ...user,
-      subscription: userSubscription,
-      plan: plan,
-      lastPayment: lastPayment,
-      totalPayments: userPayments.filter(p => p.status === 'completed').length
-    };
-  }) || [];
+  const users = await loadUsers();
+  
+  // users.jsonに既にsubscription、plan、lastPaymentが含まれているので、そのまま返す
+  return users || [];
 }
 
 // コンテンツ管理画面用のデータ取得
