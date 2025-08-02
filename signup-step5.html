@@ -62,7 +62,9 @@
             <i data-lucide="golf-ball" class="w-6 h-6 text-white"></i>
           </div>
           <h1 class="mt-6 text-3xl font-bold text-gray-900">Golf Salon</h1>
-          <p class="mt-2 text-sm text-gray-600">プロから学ぶゴルフレッスン</p>
+          <p class="mt-2 text-sm text-gray-600">
+            ゴルフ上達のための特別な学習空間
+          </p>
         </div>
 
         <!-- プログレスバー -->
@@ -692,15 +694,7 @@
           "payment-btn-text"
         ).textContent = `¥${planData.price.toLocaleString()}で登録を完了する`;
 
-        // 請求先都道府県を基本情報から設定
-        if (basicInfo.prefecture) {
-          const prefectureSelect = document.getElementById("billingPrefecture");
-          const prefectureText =
-            prefectureSelect.querySelector(
-              `option[value="${basicInfo.prefecture}"]`
-            )?.textContent || basicInfo.prefecture;
-          prefectureSelect.value = prefectureText;
-        }
+        // 請求先都道府県の設定は不要（請求先住所セクション削除済み）
 
         // 初回請求日を設定（即時）
         const billingDate = new Date();
@@ -1036,22 +1030,44 @@
             setFieldStatus("modal-cardNumber", "card-number-status", isValid);
             if (!isValid && cleanNumber.length >= 16) {
               showModalError("カード番号が正しくありません。");
-            } else {
-              // 全体的な検証状態をチェック
+            } else if (isValid) {
+              // 有効な場合は全体的な検証状態をチェック
               checkAllFieldsValid();
             }
           } else {
             resetFieldStatus("modal-cardNumber", "card-number-status");
             // 入力中はエラーを表示しない
+            checkAllFieldsValid();
           }
         });
 
         // 有効期限のリアルタイム検証
         modalExpiryDate.addEventListener("input", (e) => {
-          let value = e.target.value.replace(/\D/g, "");
-          if (value.length >= 2) {
+          const currentValue = e.target.value;
+          let value = currentValue.replace(/\D/g, "");
+
+          // 1桁で2-9の場合は即座に補完
+          if (
+            value.length === 1 &&
+            parseInt(value) >= 2 &&
+            parseInt(value) <= 9
+          ) {
+            value = "0" + value;
+          }
+
+          // 3桁の場合（例：112 → 11/2）
+          if (value.length === 3) {
+            const firstTwo = value.substring(0, 2);
+            const month = parseInt(firstTwo);
+            if (month >= 1 && month <= 12) {
+              value = firstTwo + "/" + value.substring(2, 3);
+            }
+          }
+          // 2桁以上の場合は通常フォーマット
+          else if (value.length >= 2) {
             value = value.substring(0, 2) + "/" + value.substring(2, 4);
           }
+
           e.target.value = value;
 
           // リアルタイム検証
@@ -1061,11 +1077,34 @@
             if (!isValid) {
               showModalError("有効期限が正しくありません。");
             } else {
-              // 全体的な検証状態をチェック
+              // 有効な場合は全体的な検証状態をチェック
               checkAllFieldsValid();
             }
           } else {
             resetFieldStatus("modal-expiryDate", "expiry-status");
+            // 入力中の場合も全体チェック
+            checkAllFieldsValid();
+          }
+        });
+
+        // スラッシュキー入力時の特別処理
+        modalExpiryDate.addEventListener("keydown", (e) => {
+          if (e.key === "/") {
+            e.preventDefault();
+            const value = e.target.value.replace(/\D/g, "");
+
+            // 1のみの場合は01として解釈
+            if (value === "1") {
+              e.target.value = "01/";
+            }
+            // その他の1桁の場合はそのまま/を追加
+            else if (value.length === 1) {
+              e.target.value = "0" + value + "/";
+            }
+            // 2桁の場合は通常通り/を追加
+            else if (value.length === 2) {
+              e.target.value = value + "/";
+            }
           }
         });
 
@@ -1085,6 +1124,8 @@
             }
           } else {
             resetFieldStatus("modal-cvv", "cvv-status");
+            // 入力中の場合も全体チェック
+            checkAllFieldsValid();
           }
         });
 
@@ -1100,11 +1141,13 @@
             if (!isValid) {
               showModalError("カード名義人は英字で入力してください。");
             } else {
-              // 全体的な検証状態をチェック
+              // 有効な場合は全体的な検証状態をチェック
               checkAllFieldsValid();
             }
           } else {
             resetFieldStatus("modal-cardHolder", "cardholder-status");
+            // 入力中の場合も全体チェック
+            checkAllFieldsValid();
           }
         });
 
