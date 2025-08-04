@@ -148,7 +148,6 @@ async function loadContentsForAdmin() {
   // 各コンテンツに関連情報を付加
   return contents?.map(content => {
     const media = contentMedia?.filter(m => m.contentId === content.id) || [];
-    const category = categories?.find(c => c.id === content.categoryId);
     const views = contentViews?.filter(v => v.contentId === content.id) || [];
 
     // サムネイルURLの決定（優先順位: 既存のthumbnailUrl > メディアのthumbnail > 画像配列の最初の画像 > メディアの最初の画像）
@@ -168,7 +167,6 @@ async function loadContentsForAdmin() {
     return {
       ...content,
       media: media,
-      category: category,
       // 既存のviewCountを保持し、content_viewsの数は参考情報として追加
       actualViewCount: views.length,
       thumbnailUrl: thumbnailUrl

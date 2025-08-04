@@ -2359,15 +2359,6 @@
           <div
             class="filter-controls w-full sm:flex-wrap sm:gap-2 lg:w-auto lg:justify-start"
           >
-            <select class="filter-select w-full sm:flex-1" id="categoryFilter">
-              <option value="">カテゴリを選択</option>
-              <option value="スイング">スイング</option>
-              <option value="パッティング">パッティング</option>
-              <option value="アプローチ">アプローチ</option>
-              <option value="コースマネジメント">コースマネジメント</option>
-              <option value="メンタル">メンタル</option>
-              <option value="フィジカル">フィジカル</option>
-            </select>
 
             <select class="filter-select w-full sm:flex-1" id="statusFilter">
               <option value="">ステータス</option>
@@ -2569,7 +2560,6 @@
       <div class="edit-content">
         <!-- 隠しフィールド -->
         <input type="hidden" id="contentType" value="" />
-        <input type="hidden" id="contentCategory" value="" />
         <input type="hidden" id="contentTitle" value="" />
         <input type="hidden" id="contentDescription" value="" />
         <input type="hidden" id="publishStatus" value="" />
@@ -2696,15 +2686,6 @@
               <i data-lucide="chevron-right" class="settings-item-arrow"></i>
             </div>
 
-            <div class="settings-item" onclick="openSettingsDetail('category')">
-              <div class="settings-item-content">
-                <div class="settings-item-label">カテゴリ</div>
-                <div class="settings-item-value" id="categoryValue-video">
-                  スイング
-                </div>
-              </div>
-              <i data-lucide="chevron-right" class="settings-item-arrow"></i>
-            </div>
 
             <div class="settings-item" onclick="openSettingsDetail('publish')">
               <div class="settings-item-content">
@@ -2723,15 +2704,6 @@
             id="tweetSettingsList"
             style="display: none"
           >
-            <div class="settings-item" onclick="openSettingsDetail('category')">
-              <div class="settings-item-content">
-                <div class="settings-item-label">カテゴリ</div>
-                <div class="settings-item-value" id="tweetCategoryValue">
-                  スイング
-                </div>
-              </div>
-              <i data-lucide="chevron-right" class="settings-item-arrow"></i>
-            </div>
 
             <div class="settings-item" onclick="openSettingsDetail('publish')">
               <div class="settings-item-content">
@@ -2763,15 +2735,6 @@
               <i data-lucide="chevron-right" class="settings-item-arrow"></i>
             </div>
 
-            <div class="settings-item" onclick="openSettingsDetail('category')">
-              <div class="settings-item-content">
-                <div class="settings-item-label">カテゴリ</div>
-                <div class="settings-item-value" id="categoryValue-image">
-                  スイング
-                </div>
-              </div>
-              <i data-lucide="chevron-right" class="settings-item-arrow"></i>
-            </div>
 
             <div class="settings-item" onclick="openSettingsDetail('publish')">
               <div class="settings-item-content">
@@ -2797,17 +2760,6 @@
                 />
               </div>
 
-              <div class="form-group">
-                <label class="form-label">カテゴリ</label>
-                <select id="contentCategory" class="form-input">
-                  <option value="スイング">スイング</option>
-                  <option value="パッティング">パッティング</option>
-                  <option value="アプローチ">アプローチ</option>
-                  <option value="コースマネジメント">コースマネジメント</option>
-                  <option value="メンタル">メンタル</option>
-                  <option value="フィジカル">フィジカル</option>
-                </select>
-              </div>
 
               <div class="form-group" id="descriptionGroup">
                 <label class="form-label">説明</label>
@@ -3197,11 +3149,6 @@
               ...content,
               type: content.type,
               title: content.title,
-              category:
-                content.category?.displayName ||
-                content.category?.name ||
-                content.category ||
-                "その他",
               content: content.description || content.title,
               description: content.description,
               status: content.status,
@@ -3230,7 +3177,6 @@
             1: {
               type: "tweet",
               title: "",
-              category: "その他",
               content: "データの読み込みに失敗しました",
               status: "draft",
               date: new Date().toLocaleDateString("ja-JP"),
@@ -3338,19 +3284,13 @@
         tweetGrid.innerHTML = tweetData
           .map(
             ([id, item]) => `
-          <div class="content-card cursor-pointer" data-type="tweet" data-category="${
-            item.category
-          }" data-status="${
+          <div class="content-card cursor-pointer" data-type="tweet" data-status="${
               item.status
             }" data-card-id="${id}" onclick="handleEditContent('${id}')">
             <div class="card-content tweet-content">
               <p class="tweet-text">${item.content || item.title}</p>
               <div class="content-meta-row">
                 <div class="content-meta flex flex-wrap gap-2">
-                  <span class="meta-item">
-                    <i data-lucide="folder"></i>
-                    ${item.category}
-                  </span>
                   <span class="meta-item">
                     <i data-lucide="calendar"></i>
                     ${item.date}
@@ -3387,9 +3327,7 @@
                 : item.thumbnail || "images/sample1.jpg";
 
             return `
-            <div class="content-card cursor-pointer" data-type="image" data-category="${
-              item.category
-            }" data-status="${
+            <div class="content-card cursor-pointer" data-type="image" data-status="${
               item.status
             }" data-card-id="${id}" data-images='${JSON.stringify(
               item.images || []
@@ -3406,10 +3344,6 @@
                 <h3 class="content-title">${item.title}</h3>
                 <div class="content-meta-row">
                   <div class="content-meta flex flex-wrap gap-2">
-                    <span class="meta-item">
-                      <i data-lucide="folder"></i>
-                      ${item.category}
-                    </span>
                     <span class="meta-item">
                       <i data-lucide="calendar"></i>
                       ${item.date}
@@ -3440,9 +3374,7 @@
         videoGrid.innerHTML = videoData
           .map(
             ([id, item]) => `
-          <div class="content-card cursor-pointer" data-type="video" data-category="${
-            item.category
-          }" data-status="${
+          <div class="content-card cursor-pointer" data-type="video" data-status="${
               item.status
             }" data-card-id="${id}" onclick="handleEditContent('${id}')">
             <div class="card-thumbnail relative">
@@ -3455,10 +3387,6 @@
               <h3 class="content-title">${item.title}</h3>
               <div class="content-meta-row">
                 <div class="content-meta flex flex-wrap gap-2">
-                  <span class="meta-item">
-                    <i data-lucide="folder"></i>
-                    ${item.category}
-                  </span>
                   <span class="meta-item">
                     <i data-lucide="calendar"></i>
                     ${item.date}

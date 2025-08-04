@@ -375,25 +375,17 @@ function handleMouseEnd(e) {
 
 // フィルター機能（現在のタブ内のみ）
 document
-  .getElementById("categoryFilter")
-  .addEventListener("change", filterCurrentTabContent);
-document
   .getElementById("statusFilter")
   .addEventListener("change", filterCurrentTabContent);
 
 function filterCurrentTabContent() {
-  const category = document.getElementById("categoryFilter").value;
   const status = document.getElementById("statusFilter").value;
   const currentSection = document.querySelector(".content-section.active");
 
   currentSection.querySelectorAll(".content-card").forEach((card) => {
-    const cardCategory = card.dataset.category;
     const cardStatus = card.dataset.status;
-
-    const categoryMatch = !category || cardCategory === category;
     const statusMatch = !status || cardStatus === status;
-
-    card.style.display = categoryMatch && statusMatch ? "flex" : "none";
+    card.style.display = statusMatch ? "flex" : "none";
   });
 }
 
@@ -717,26 +709,21 @@ function setElementValue(elementId, value) {
 function resetSettingsForType(type) {
   const settings = {
     tweet: {
-      category: "tweetCategoryValue",
       publish: "tweetPublishValue",
-      defaults: { category: "スイング", publish: "下書き" },
+      defaults: { publish: "下書き" },
     },
     image: {
-      category: "categoryValue-image",
       description: "descriptionValue-image",
       publish: "publishValue-image",
       defaults: {
-        category: "スイング",
         description: "説明を追加...",
         publish: "下書き",
       },
     },
     video: {
-      category: "categoryValue-video",
       description: "descriptionValue-video",
       publish: "publishValue-video",
       defaults: {
-        category: "スイング",
         description: "説明を追加...",
         publish: "下書き",
       },
@@ -752,13 +739,9 @@ function resetSettingsForType(type) {
   }
 
   // フォーム要素も初期値にリセット
-  const contentCategory = document.getElementById("contentCategory");
   const publishStatus = document.getElementById("publishStatus");
   const scheduleDate = document.getElementById("scheduleDate");
   
-  if (contentCategory) {
-    contentCategory.value = "";
-  }
   if (publishStatus) {
     publishStatus.value = "draft";
   }
@@ -856,7 +839,6 @@ function resetAllEditSections() {
   const traditionalInputs = [
     "contentTitle",
     "contentDescription", 
-    "contentCategory",
     "publishStatus",
     "scheduleDate"
   ];
@@ -1030,7 +1012,6 @@ async function loadContentData(id) {
     }
 
     document.getElementById("contentType").value = data.type;
-    document.getElementById("contentCategory").value = data.category || "";
     document.getElementById("contentTitle").value = data.title || "";
     document.getElementById("contentDescription").value = data.description || "";
     document.getElementById("publishStatus").value = data.status || "draft";
@@ -1046,7 +1027,6 @@ async function loadContentData(id) {
 
     // タイプ別の設定値を適用
     if (data.type === "tweet") {
-      setElementText("tweetCategoryValue", data.category);
       setElementText("tweetPublishValue", getStatusText(data.status));
 
       // つぶやき内容を設定
@@ -1061,7 +1041,6 @@ async function loadContentData(id) {
       if (inlineTitle) {
         inlineTitle.textContent = data.title || "";
       }
-      setElementText("categoryValue-image", data.category);
       setElementText(
         "descriptionValue-image",
         data.description || "説明を追加..."
@@ -1092,7 +1071,6 @@ async function loadContentData(id) {
         "descriptionValue-video",
         data.description || "説明を追加..."
       );
-      setElementText("categoryValue-video", data.category);
 
       let displayText = getStatusText(data.status);
 
@@ -1387,37 +1365,6 @@ function openSettingsDetail(type) {
             `;
       break;
 
-    case "category":
-      titleElement.textContent = "カテゴリ";
-      const currentCategory =
-        document.getElementById("contentCategory").value || "スイング";
-      contentElement.innerHTML = `
-              <div class="settings-form-group">
-                <label class="settings-form-label">カテゴリを選択</label>
-                <select id="videoCategory" class="settings-select" onchange="updateCategorySetting(this.value)">
-                  <option value="スイング" ${
-                    currentCategory === "スイング" ? "selected" : ""
-                  }>スイング</option>
-                  <option value="パッティング" ${
-                    currentCategory === "パッティング" ? "selected" : ""
-                  }>パッティング</option>
-                  <option value="アプローチ" ${
-                    currentCategory === "アプローチ" ? "selected" : ""
-                  }>アプローチ</option>
-                  <option value="コースマネジメント" ${
-                    currentCategory === "コースマネジメント" ? "selected" : ""
-                  }>コースマネジメント</option>
-                  <option value="メンタル" ${
-                    currentCategory === "メンタル" ? "selected" : ""
-                  }>メンタル</option>
-                  <option value="フィジカル" ${
-                    currentCategory === "フィジカル" ? "selected" : ""
-                  }>フィジカル</option>
-                </select>
-              </div>
-            `;
-      break;
-
     case "publish":
       titleElement.textContent = "公開設定";
       const currentStatus =
@@ -1552,24 +1499,7 @@ function updateDescriptionSetting(description) {
   markAsChanged();
 }
 
-function updateCategorySetting(category) {
-  const contentType = document.getElementById("contentType").value;
 
-  document.getElementById("contentCategory").value = category;
-
-  // タイプごとに適切な表示要素を更新
-  let categoryElement;
-  if (contentType === "tweet") {
-    categoryElement = document.getElementById("tweetCategoryValue");
-  } else {
-    categoryElement = document.getElementById(`categoryValue-${contentType}`);
-  }
-
-  if (categoryElement) {
-    categoryElement.textContent = category;
-  }
-  markAsChanged();
-}
 
 // 変更追跡システム
 let hasChanges = false;

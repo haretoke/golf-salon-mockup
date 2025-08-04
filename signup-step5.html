@@ -32,7 +32,7 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="js/utils/signup-flow.js"></script>
 
-    <!-- Billing-Robo JavaScript Libraries -->
+    <!-- Robot Payment JavaScript Libraries -->
     <script
       type="text/javascript"
       src="https://credit.j-payment.co.jp/gateway/js/jquery.js"
@@ -441,7 +441,7 @@
 
             <!-- 支払いフォーム -->
             <form id="payment-form" class="space-y-8">
-              <!-- Billing-Robo Token Fields (Hidden) -->
+              <!-- Robot Payment Token Fields (Hidden) -->
               <input type="hidden" id="tkn" name="tkn" value="" />
               <input type="hidden" id="card-token" name="cardToken" />
               <input type="hidden" id="auth-veres" name="authVeres" />
@@ -536,13 +536,13 @@
                 <div class="flex items-start">
                   <input
                     type="checkbox"
-                    id="agree-payment-terms"
-                    name="agreePaymentTerms"
+                    id="agree-combined-terms"
+                    name="agreeCombinedTerms"
                     required
                     class="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-green border-gray-300 rounded"
                   />
                   <label
-                    for="agree-payment-terms"
+                    for="agree-combined-terms"
                     class="ml-3 text-sm text-gray-700"
                   >
                     <a
@@ -555,22 +555,7 @@
                       class="text-primary-600 hover:underline"
                       target="_blank"
                       >返金ポリシー</a
-                    >に同意します
-                  </label>
-                </div>
-                <div class="flex items-start">
-                  <input
-                    type="checkbox"
-                    id="agree-auto-renewal"
-                    name="agreeAutoRenewal"
-                    required
-                    class="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-green border-gray-300 rounded"
-                  />
-                  <label
-                    for="agree-auto-renewal"
-                    class="ml-3 text-sm text-gray-700"
-                  >
-                    毎月自動更新される月額プランであることを理解し、同意します
+                    >、毎月自動更新される月額プランであることを理解し同意します。
                   </label>
                 </div>
               </div>
@@ -711,13 +696,11 @@
 
       // チェックボックスのイベントリスナー初期化
       function initCheckboxListeners() {
-        const agreePaymentTerms = document.getElementById(
-          "agree-payment-terms"
+        const agreeCombinedTerms = document.getElementById(
+          "agree-combined-terms"
         );
-        const agreeAutoRenewal = document.getElementById("agree-auto-renewal");
 
-        agreePaymentTerms.addEventListener("change", checkPaymentButtonStatus);
-        agreeAutoRenewal.addEventListener("change", checkPaymentButtonStatus);
+        agreeCombinedTerms.addEventListener("change", checkPaymentButtonStatus);
       }
 
       // フォーム送信処理
@@ -734,19 +717,12 @@
           }
 
           // カード同意チェックボックスの確認
-          const agreePaymentTerms = document.getElementById(
-            "agree-payment-terms"
+          const agreeCombinedTerms = document.getElementById(
+            "agree-combined-terms"
           );
-          const agreeAutoRenewal =
-            document.getElementById("agree-auto-renewal");
 
-          if (!agreePaymentTerms.checked) {
-            showError("決済利用規約と返金ポリシーに同意してください。");
-            return;
-          }
-
-          if (!agreeAutoRenewal.checked) {
-            showError("自動更新についての同意が必要です。");
+          if (!agreeCombinedTerms.checked) {
+            showError("決済利用規約および返金ポリシー、月額プランについて同意してください。");
             return;
           }
 
@@ -1197,7 +1173,7 @@
           // モーダル内エラーを隠す
           hideModalError();
 
-          // Billing-Roboトークン取得処理
+          // Robot Paymentトークン取得処理
           processBillingRoboTokenFromModal(
             cardNumber,
             expiryDate,
@@ -1323,15 +1299,13 @@
       // 決済ボタンの有効化チェック
       function checkPaymentButtonStatus() {
         const cardToken = document.getElementById("card-token").value;
-        const agreePaymentTerms = document.getElementById(
-          "agree-payment-terms"
+        const agreeCombinedTerms = document.getElementById(
+          "agree-combined-terms"
         ).checked;
-        const agreeAutoRenewal =
-          document.getElementById("agree-auto-renewal").checked;
         const paymentBtn = document.getElementById("payment-btn");
 
-        // カードトークンとすべてのチェックボックスが完了している場合のみ有効化
-        if (cardToken && agreePaymentTerms && agreeAutoRenewal) {
+        // カードトークンとチェックボックスが完了している場合のみ有効化
+        if (cardToken && agreeCombinedTerms) {
           paymentBtn.classList.remove("opacity-50", "cursor-not-allowed");
           paymentBtn.disabled = false;
         } else {
